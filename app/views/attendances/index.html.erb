@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Hours</th>
       <th>Start</th>
       <th>End</th>
@@ -14,7 +15,10 @@
 
   <tbody>
     <% @attendances.each do |attendance| %>
+      
       <tr>
+        <td><%=Event.where(id: Shift.where(id: attendance.Shift_id).last.Event_id).last.Name %></td>
+        <td>
         <td><%= attendance.Hours %></td>
         <td><%= attendance.Start %></td>
         <td><%= attendance.End %></td>
