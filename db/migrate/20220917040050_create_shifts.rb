@@ -4,7 +4,7 @@ class CreateShifts < ActiveRecord::Migration[6.1]
       t.datetime :Start
       t.datetime :End
       t.integer :Shift_Cap
-
+      t.belongs_to :Event
       t.timestamps
     end
   end
