@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(version: 2022_09_17_161400) do
   end
 
   create_table "shifts", force: :cascade do |t|
+    t.bigint "Event_id"
     t.datetime "Start"
     t.datetime "End"
     t.integer "Shift_Cap"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["Event_id"], name: "index_shifts_on_Event_id"
   end
 
 end
