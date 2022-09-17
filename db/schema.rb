@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_17_161400) do
+ActiveRecord::Schema.define(version: 2022_09_17_202248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2022_09_17_161400) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["Member_id"], name: "index_attendances_on_Member_id"
     t.index ["Shift_id"], name: "index_attendances_on_Shift_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.decimal "Total_amount", precision: 8, scale: 2
+    t.date "Date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -57,6 +64,15 @@ ActiveRecord::Schema.define(version: 2022_09_17_161400) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["Event_id"], name: "index_shifts_on_Event_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.bigint "Budget_id"
+    t.decimal "Amount", precision: 8, scale: 2
+    t.date "Date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["Budget_id"], name: "index_transactions_on_Budget_id"
   end
 
 end

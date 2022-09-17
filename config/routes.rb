@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :transactions
+  resources :budgets
   resources :events
   resources :shifts
   resources :attendances
