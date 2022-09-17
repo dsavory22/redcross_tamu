@@ -10,6 +10,10 @@
       </ul>
     </div>
   <% end %>
+  <div class="field">
+    <%= form.label :Event_id %>
+    <%= form.select :Event_id, Event.order(:Name).map{|event| [event.Name, event.id]}, include_blank: true, id: "id of event" %>
+  </div>
 
   <div class="field">
     <%= form.label :Start %>
