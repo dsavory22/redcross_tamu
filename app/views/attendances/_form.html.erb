@@ -17,7 +17,7 @@
 
   <div class="field">
     <%= form.label :Shift_id %>
-    <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Shift_Cap, shift.id]}, include_blank: true, id: "id of shift" %>
+    <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start, shift.id]}, include_blank: true, id: "id of shift" %>
   </div>
 
 
