@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Start: 2022-09-17 04:00:50
+  End: 2022-09-17 04:00:50
+  Shift_Cap: 1
+
+two:
+  Start: 2022-09-17 04:00:50
+  End: 2022-09-17 04:00:50
+  Shift_Cap: 1

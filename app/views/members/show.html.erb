@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @member.First_Name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @member.Last_Name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @member.Email %>
+</p>
+
+<p>
+  <strong>Fall dues:</strong>
+  <%= @member.Fall_Dues %>
+</p>
+
+<p>
+  <strong>Spring dues:</strong>
+  <%= @member.Spring_Dues %>
+</p>
+
+<p>
+  <strong>Shirt size:</strong>
+  <%= @member.Shirt_Size %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @member.year %>
+</p>
+
+<%= link_to 'Edit', edit_member_path(@member) %> |
+<%= link_to 'Back', members_path %>
