@@ -2,7 +2,7 @@ class Member < ApplicationRecord
     has_many :Attendances
     has_many :Shifts, through: :Attendances
 
-#Validations for member input fields
+#Validations for member form input fields
 =begin
 	needs first name
 	needs last name
