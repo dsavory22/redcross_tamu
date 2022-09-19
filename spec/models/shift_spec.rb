@@ -6,4 +6,5 @@ RSpec.describe Shift, type: :model do
       shift = Shift.new()
       expect(shift.valid?).to eq(false)
     end
-  endend
+  end
+end
