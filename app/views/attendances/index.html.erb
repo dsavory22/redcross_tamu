@@ -36,6 +36,7 @@
 <table>
   <thead>
     <tr>
+      <th>Member</th>
       <th>Name</th>
       <th>Hours</th>
       <th>Start</th>
@@ -48,8 +49,8 @@
     <% @attendances.each do |attendance| %>
       
       <tr>
+        <td><%=Member.where(id: attendance.Member_id).last.First_Name %></td>
         <td><%=Event.where(id: Shift.where(id: attendance.Shift_id).last.Event_id).last.Name %></td>
-        <td>
         <td><%= attendance.Hours %></td>
         <td><%= attendance.Start %></td>
         <td><%= attendance.End %></td>
