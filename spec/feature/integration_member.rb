@@ -4,16 +4,16 @@ require 'rails_helper'
 RSpec.describe 'Creating a member', type: :feature do
   scenario 'valid first name' do
     visit new_member_path
-    fill_in 'First_Name', with: 'Aaron'
-    fill_in 'Last_Name', with: 'Calderon'
+    fill_in "First name", with: 'Aaron'
+    fill_in 'Last name', with: 'Calderon'
     fill_in 'Email', with: "Aaron54637@tamu.edu"
-    fill_in 'Fall_Dues', with: 'False'
-    fill_in 'Spring_Dues', with: 'False'
-    fill_in 'Shirt_Size', with: 'M'
-    fill_in 'year', with: 2023
-    click_on 'New Member'
+    # fill_in 'Fall dues', with: "False"
+    # fill_in 'Spring dues', with: 'False'
+    fill_in 'Shirt size', with: 'M'
+    fill_in 'Year', with: 2023
+    click_on 'Create Member'
     visit members_path
-    expect(page).to have_content('Aaron')
+    expect(page).to have_content('Aaron54637@tamu.edu')
   end
 
   scenario 'valid last name' do
