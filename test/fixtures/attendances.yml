@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Hours: 1
+  Start: 2022-09-17 04:00:38
+  End: 2022-09-17 04:00:38
+
+two:
+  Hours: 1
+  Start: 2022-09-17 04:00:38
+  End: 2022-09-17 04:00:38

@@ -1,0 +1,42 @@
+<%= form_with(model: attendance) do |form| %>
+  <% if attendance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+
+      <ul>
+        <% attendance.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= form.label :Member_id %>
+    <%= form.select :Member_id, Member.order(:First_Name).map{|member| [member.First_Name, member.id]}, include_blank: true, id: "id of member" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Shift_id %>
+    <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start, shift.id]}, include_blank: true, id: "id of shift" %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :Hours %>
+    <%= form.number_field :Hours %>
+  </div>
+
+  <div class="field">
+    <%= form.label :Start %>
+    <%= form.time_select :Start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :End %>
+    <%= form.time_select :End %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

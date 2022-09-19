@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Red Cross</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Members', members_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Attendance', attendances_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" <%= link_to 'Shifts', shifts_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Events', events_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Transactions', transactions_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Budget', budgets_path %></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Shifts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>End</th>
+      <th>Shift cap</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shifts.each do |shift| %>
+      <tr>
+        <td><%= shift.Start %></td>
+        <td><%= shift.End %></td>
+        <td><%= shift.Shift_Cap %></td>
+        <td><%= link_to 'Show', shift %></td>
+        <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
+        <td><%= link_to 'Destroy', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shift', new_shift_path %>
+<%= link_to 'attendance_path', attendances_path %>
+<%= link_to 'member_path', members_path %>
