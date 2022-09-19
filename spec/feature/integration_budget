@@ -1,0 +1,18 @@
+RSpec.describe 'Creating a budget', type: :feature do
+  scenario 'valid amount' do
+    visit new_shift_path
+    fill_in 'Total_amount', with: 20
+    click_on 'New Budget'
+    visit shift_path
+    expect(page).to have_content(20)
+  end
+
+  scenario 'valid Date' do
+    visit new_budget_path
+    fill_in 'Total_amount', with: 20
+    click_on 'New Budget'
+    visit budget_path
+    expect(page).to have_content(2022)
+  end
+
+end
