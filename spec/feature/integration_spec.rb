@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a member', type: :feature do
   scenario 'valid first name' do
-    visit new_member_path
+    visit members_path
     fill_in 'First_Name', with: 'Aaron'
     fill_in 'Last_Name', with: 'Calderon'
     fill_in 'Email', with: "Aaron54637@tamu.edu"

@@ -34,8 +34,11 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> b452366f6963fd6b524b502727958ed83a38c6ac
 
 /public/packs
 /public/packs-test
@@ -43,6 +46,7 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+<<<<<<< HEAD
 
 /public/packs
 /public/packs-test
@@ -51,3 +55,5 @@ yarn-debug.log*
 yarn-debug.log*
 .yarn-integrity
 >>>>>>> Stashed changes
+=======
+>>>>>>> b452366f6963fd6b524b502727958ed83a38c6ac

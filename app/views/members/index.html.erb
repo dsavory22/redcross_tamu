@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Red Cross</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" <%= link_to 'Members', members_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Attendance', attendances_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Shifts', shifts_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Events', events_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Transactions', transactions_path %></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" <%= link_to 'Budget', budgets_path %></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>Fall dues</th>
+      <th>Spring dues</th>
+      <th>Shirt size</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @members.each do |member| %>
+      <tr>
+        <td><%= member.First_Name %></td>
+        <td><%= member.Last_Name %></td>
+        <td><%= member.Email %></td>
+        <td><%= member.Fall_Dues %></td>
+        <td><%= member.Spring_Dues %></td>
+        <td><%= member.Shirt_Size %></td>
+        <td><%= member.year %></td>
+        <td><%= link_to 'Show', member %></td>
+        <td><%= link_to 'Edit', edit_member_path(member) %></td>
+        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Member', new_member_path %>
