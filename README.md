@@ -43,8 +43,11 @@ docker run --rm -it --volume "${PWD}:/csce431" -e DATABASE_USER=test_app -e DATA
 To run this project, install it locally, navigate to the /csce431/redcross_tamu directory inside the Docker image, and run the following commands:
 ```
 bundle install
+rails webpacker:install
 rails db:create
 rails db:migrate
+```
+```
 rails server --binding=0.0.0.0
 ```
 
