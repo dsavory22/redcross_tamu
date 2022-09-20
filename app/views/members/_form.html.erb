@@ -11,42 +11,45 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :First_Name %>
-    <%= form.text_field :First_Name %>
-  </div>
+  <div class="d-grid gap-3">
+    <div class="field">
+      <%= form.label :First_Name %>
+      <%= form.text_field :First_Name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Last_Name %>
-    <%= form.text_field :Last_Name %>
-  </div>
+    <div class="field">
+      <%= form.label :Last_Name %>
+      <%= form.text_field :Last_Name %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Email %>
-    <%= form.text_field :Email %>
-  </div>
+    <div class="field">
+      <%= form.label :Email %>
+      <%= form.text_field :Email %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Fall_Dues %>
-    <%= form.check_box :Fall_Dues %>
-  </div>
+    <div class="field">
+      <%= form.label :Fall_Dues %>
+      <%= form.check_box :Fall_Dues %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Spring_Dues %>
-    <%= form.check_box :Spring_Dues %>
-  </div>
+    <div class="field">
+      <%= form.label :Spring_Dues %>
+      <%= form.check_box :Spring_Dues %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Shirt_Size %>
-    <%= form.text_field :Shirt_Size %>
-  </div>
+    <div class="field">
+      <%= form.label :Shirt_Size %>
+      <%= form.text_field :Shirt_Size %>
+    </div>
 
-  <div class="field">
-    <%= form.label :year %>
-    <%= form.number_field :year %>
-  </div>
+    <div class="field">
+      <%= form.label :year %>
+      <%= form.number_field :year %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+    
   </div>
 <% end %>
