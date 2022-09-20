@@ -11,17 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :Total_amount %>
-    <%= form.text_field :Total_amount %>
-  </div>
+  <div class="d-grid gap-3">
+    <div class="field">
+      <%= form.label :Total_amount %>
+      <%= form.text_field :Total_amount %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Date %>
-    <%= form.date_select :Date %>
-  </div>
+    <div class="field">
+      <%= form.label :Date %>
+      <%= form.date_select :Date %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+      
   </div>
 <% end %>

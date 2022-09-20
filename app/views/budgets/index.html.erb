@@ -2,10 +2,10 @@
 
 <h1>Budgets</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Total amount</th>
+      <th>Total Amount</th>
       <th>Date</th>
       <th colspan="3"></th>
     </tr>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Budget', new_budget_path %>
+<a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Budget', new_budget_path %></a>

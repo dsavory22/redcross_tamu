@@ -11,34 +11,36 @@
     </div>
   <% end %>
 
+  <div class="d-grid gap-3">
+    <div class="field">
+      <%= form.label :Type %>
+      <%= form.number_field :Type %>
+    </div>
 
+    <div class="field">
+      <%= form.label :Date %>
+      <%= form.date_select :Date %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Type %>
-    <%= form.number_field :Type %>
+    <div class="field">
+      <%= form.label :Name %>
+      <%= form.text_field :Name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :Start %>
+      <%= form.time_select :Start %>
+    </div>
+
+    <div class="field">
+      <%= form.label :End %>
+      <%= form.time_select :End %>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+      
   </div>
-
-  <div class="field">
-    <%= form.label :Date %>
-    <%= form.date_select :Date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :Name %>
-    <%= form.text_field :Name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :Start %>
-    <%= form.time_select :Start %>
-  </div>
-
-  <div class="field">
-    <%= form.label :End %>
-    <%= form.time_select :End %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  
 <% end %>

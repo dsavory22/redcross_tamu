@@ -10,27 +10,31 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    <%= form.label :Event_id %>
-    <%= form.select :Event_id, Event.order(:Name).map{|event| [event.Name, event.id]}, include_blank: true, id: "id of event" %>
-  </div>
 
-  <div class="field">
-    <%= form.label :Start %>
-    <%= form.datetime_select :Start %>
-  </div>
+  <div class="d-grid gap-3">
+    <div class="field">
+      <%= form.label :Event_id %>
+      <%= form.select :Event_id, Event.order(:Name).map{|event| [event.Name, event.id]}, include_blank: true, id: "id of event" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :End %>
-    <%= form.datetime_select :End %>
-  </div>
+    <div class="field">
+      <%= form.label :Start %>
+      <%= form.datetime_select :Start %>
+    </div>
 
-  <div class="field">
-    <%= form.label :Shift_Cap %>
-    <%= form.number_field :Shift_Cap %>
-  </div>
+    <div class="field">
+      <%= form.label :End %>
+      <%= form.datetime_select :End %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :Shift_Cap %>
+      <%= form.number_field :Shift_Cap %>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
+      
   </div>
 <% end %>
