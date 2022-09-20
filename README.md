@@ -30,6 +30,8 @@ Download and run the docker image:
 docker pull dmartinez05/ruby_rails_postgresql:latest
 mkdir csce431
 cd csce431
+```
+```
 docker run --rm -it --volume "$(pwd):/csce431" -e DATABASE_USER=test_app -e DATABASE_PASSWORD=test_password -p 3000:3000 dmartinez05/ruby_rails_postgresql:latest
 ```
 For windows replace (pwd) -> {PWD}
@@ -49,7 +51,11 @@ rails server --binding=0.0.0.0
 Now you can open the application in your [browser](http://127.0.0.1:3000/).
 
 ## Testing
-* How to run the test suite
+This project was tested using rspec for unit and integration testing as well as SimpleCov to determine code coverage.
+
+To run the test suite, run ```rspec .``` in the root directory of the project.
 
 ## Deployment
-* Deployment instructions
+A production application has been deployed to Heroku using a pipeline that automatically deploys from our main and test branch after each merge.
+* [Staging App](https://redcross-tam-test-jv2srj3tckia.herokuapp.com/)
+* [Production App](https://stage-test-redcross.herokuapp.com/)
