@@ -11,10 +11,13 @@
     </div>
   <% end %>
 
+  
   <div class="d-grid gap-3">
+
+    <%# drop down menu to chose between a meeting and volunteer event %>
     <div class="field">
       <%= form.label :Type %>
-      <%= form.number_field :Type %>
+      <%= form.select(:Type, options_for_select([['Meeting', 0], ['Volunteer Event', 1]]))  %>
     </div>
 
     <div class="field">
