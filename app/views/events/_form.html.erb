@@ -17,7 +17,13 @@
     <%# drop down menu to chose between a meeting and volunteer event %>
     <div class="field">
       <%= form.label :Type %>
-      <%= form.select(:Type, options_for_select([['Meeting', 0], ['Volunteer Event', 1]]))  %>
+      <%= form.select(:Type, options_for_select([['Club Meeting', 0], ['Volunteer Event', 1]]))  %>
+    </div>
+
+
+    <div class="field">
+      <%= form.label :Name %>
+      <%= form.text_field :Name %>
     </div>
 
     <div class="field">
@@ -26,18 +32,13 @@
     </div>
 
     <div class="field">
-      <%= form.label :Name %>
-      <%= form.text_field :Name %>
-    </div>
-
-    <div class="field">
       <%= form.label :Start %>
-      <%= form.time_select :Start %>
+      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div class="field">
       <%= form.label :End %>
-      <%= form.time_select :End %>
+      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div>
