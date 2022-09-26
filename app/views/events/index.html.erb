@@ -34,7 +34,7 @@
         <td><%= event.End.strftime("%I:%M %p") %></td>
         <td><%= link_to 'Details', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
@@ -72,7 +72,7 @@
         <td><%= event.End.strftime("%I:%M %p") %></td>
         <td><%= link_to 'Details', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
