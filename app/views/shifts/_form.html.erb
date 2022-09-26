@@ -19,16 +19,16 @@
 
     <div class="field">
       <%= form.label :Start %>
-      <%= form.datetime_select :Start %>
+      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div class="field">
       <%= form.label :End %>
-      <%= form.datetime_select :End %>
+      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div class="field">
-      <%= form.label :Shift_Cap %>
+      <%= form.label :Volunteer_Capacity %>
       <%= form.number_field :Shift_Cap %>
     </div>
 
