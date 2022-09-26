@@ -29,22 +29,22 @@
 
     <div class="field">
       <%= form.label :Fall_Dues %>
-      <%= form.check_box :Fall_Dues %>
+      <%= form.select(:Fall_Dues, options_for_select([['Unpaid', 0], ['Paid', 1]]))  %>
     </div>
 
     <div class="field">
       <%= form.label :Spring_Dues %>
-      <%= form.check_box :Spring_Dues %>
+      <%= form.select(:Spring_Dues, options_for_select([['Unpaid', 0], ['Paid', 1]]))  %>
     </div>
 
     <div class="field">
       <%= form.label :Shirt_Size %>
-      <%= form.text_field :Shirt_Size %>
+      <%= form.select(:Shirt_Size, options_for_select([['N/A', 0], ['XXS', 1], ['XS', 2], ['S', 3], ['M', 4], ['L', 5], ['XL', 5], ['XXL', 5]]))  %>
     </div>
-
+    
     <div class="field">
       <%= form.label :year %>
-      <%= form.number_field :year %>
+      <%= form.select(:year, options_for_select([['Freshman', 1], ['Sophmore', 2], ['Junior', 3], ['Senior', 4], ['Alumni', 5]]))  %>
     </div>
 
     <div>
