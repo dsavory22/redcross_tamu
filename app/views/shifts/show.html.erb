@@ -1,17 +1,27 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Start:</strong>
-  <%= @shift.Start %>
+  <strong>Event:</strong>
+  <%= @shift.Event_id %>
 </p>
 
 <p>
-  <strong>End:</strong>
-  <%= @shift.End %>
+  <strong>Title:</strong>
+  Shift Title
 </p>
 
 <p>
-  <strong>Shift cap:</strong>
+  <strong>Start Time:</strong>
+  <%= @shift.Start.strftime("%I:%M %p") %>
+</p>
+
+<p>
+  <strong>End Time:</strong>
+  <%= @shift.End.strftime("%I:%M %p") %>
+</p>
+
+<p>
+  <strong>Volunteer Capacity:</strong>
   <%= @shift.Shift_Cap %>
 </p>
 
