@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Member.create(First_Name: 'Gracie', Last_Name: 'Woodland', Email: nil, Fall_Dues: true, Spring_Dues: true, Shirt_Size: nil, year: nil)
+member1 = Member.create(First_Name: 'Gracie', Last_Name: 'Woodland', Email: nil, Fall_Dues: true, Spring_Dues: true, Shirt_Size: nil, year: nil)
 
 Member.create(First_Name: 'Alyssa', Last_Name: 'Earle', Email: nil, Fall_Dues: true, Spring_Dues: true, Shirt_Size: nil, year: nil)
 
@@ -66,3 +66,7 @@ Event.create(Type: 1, Date:"2021-10-28", Name: "Study Social", Start:"12:00", En
 Event.create(Type: 1, Date:"2021-09-25", Name: "Boba Social", Start:"12:00", End: "14:00")
 
 Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", End: "16:00")
+
+shift1 = Shift.create(Event_id: 1, Start: "12:00:00", End: "13:00:00", Shift_Cap: 10 )
+
+Attendance.create(Member_id: member1.id, Shift_id: shift1.id, Hours: 2, Start: "12:00:00", End: "13:00:00") 

@@ -8,6 +8,10 @@ class MembersController < ApplicationController
 
   # GET /members/1 or /members/1.json
   def show
+  #todo: make sure to change params to proper sql query
+
+    @MemberAttendances = Attendance.where(Member_id: params[:id])
+    
   end
 
   # GET /members/new
