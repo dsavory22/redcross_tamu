@@ -19,15 +19,24 @@
       </div>    
      -->
 
+    <div class="field">
+      <%= form.label :Purpose %>
+      <%= form.text_field :Purpose %>
+    </div>
 
     <div class="field">
       <%= form.label :Amount %>
-      <%= form.text_field :Amount %>
+      <%= form.number_field :Amount %>
     </div>
 
     <div class="field">
       <%= form.label :Date %>
       <%= form.date_select :Date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :Officer %>
+      <%= form.text_field :Officer %>
     </div>
 
     <div>

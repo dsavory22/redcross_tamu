@@ -2,6 +2,9 @@
 
 
 <h1>Balance:</h1>
+<% @budgets.each do |budget| %>
+  <td><%= budget.Total_amount %></td>
+<% end %>
 <br>
 <h3>Transactions</h3>
 

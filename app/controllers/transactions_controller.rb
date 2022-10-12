@@ -1,9 +1,11 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
 
+
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
+    @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
