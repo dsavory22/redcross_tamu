@@ -13,9 +13,9 @@
 
   <div class="d-grid gap-3">
 
-      <div class="field">
+      <div class="field" style="display:none">
         <%= form.label :Budget_id %>
-        <%= form.select :Budget_id, Budget.order(:Total_amount).map{|budget| [budget.Total_amount, budget.id]}, include_blank: true, id: "id of event" %>
+        <%= form.select :Budget_id, selected: 1 , id: "id of event" %>
       </div>    
 
     <div class="field">
