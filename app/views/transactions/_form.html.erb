@@ -12,12 +12,11 @@
   <% end %>
 
   <div class="d-grid gap-3">
-    <!--
+
       <div class="field">
         <%= form.label :Budget_id %>
         <%= form.select :Budget_id, Budget.order(:Total_amount).map{|budget| [budget.Total_amount, budget.id]}, include_blank: true, id: "id of event" %>
       </div>    
-     -->
 
     <div class="field">
       <%= form.label :Purpose %>

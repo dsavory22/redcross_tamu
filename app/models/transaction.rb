@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
-    # belongs_to :Budget
+    belongs_to :Budget
 
 #validations for transaction form
 =begin
