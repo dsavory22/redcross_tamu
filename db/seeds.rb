@@ -70,3 +70,5 @@ Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", En
 shift1 = Shift.create(Event_id: 1, Start: "12:00:00", End: "13:00:00", Shift_Cap: 10 )
 
 Attendance.create(Member_id: member1.id, Shift_id: shift1.id, Hours: 2, Start: "12:00:00", End: "13:00:00") 
+
+Budget.create(Total_amount: 0)
