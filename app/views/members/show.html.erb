@@ -52,6 +52,13 @@
       <td>Alumni</td>
     <%end%>
 </p>
+<p>
+  <div> 
+    <Strong> Total Hours: <Strong> 
+    <Strong> <%= @hours %> <Strong>
+  <div>
+<p>
+
 
 <p>
 <div>
@@ -59,14 +66,12 @@
   <ul>
     <% @MemberAttendances.each do |att|  %>
         <li> <%= att.Shift.Event.Name  %> </li>
-        <li> <%= att.Shift. %>
-    <%end%>
 
+    <%end%>
   </ul>
 </div>
-  
-  
 </p>
+  
 
 
 

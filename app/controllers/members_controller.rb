@@ -9,8 +9,12 @@ class MembersController < ApplicationController
   # GET /members/1 or /members/1.json
   def show
   #todo: make sure to change params to proper sql query
-
     @MemberAttendances = Attendance.where(Member_id: params[:id]) 
+    @hours = 0
+    @MemberAttendances.each do |single|
+      @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
+    end
+    
   end
 
   # GET /members/new
@@ -25,7 +29,6 @@ class MembersController < ApplicationController
   # POST /members or /members.json
   def create
     @member = Member.new(member_params)
-
     respond_to do |format|
       if @member.save
         format.html { redirect_to member_url(@member), notice: "Member was successfully created." }
