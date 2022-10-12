@@ -58,9 +58,8 @@
   <strong> Their events attended <strong>
   <ul>
     <% @MemberAttendances.each do |att|  %>
-      <% Shift.where(id: att.Shift_id).each do |shi| %>
-        <li> <%= Event.where(id: shi.Event_id).last.Name  %> </li>
-      <%end%>
+        <li> <%= att.Shift.Event.Name  %> </li>
+        <li> <%= att.Shift. %>
     <%end%>
 
   </ul>
@@ -68,6 +67,8 @@
   
   
 </p>
+
+
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

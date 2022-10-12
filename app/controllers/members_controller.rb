@@ -10,8 +10,7 @@ class MembersController < ApplicationController
   def show
   #todo: make sure to change params to proper sql query
 
-    @MemberAttendances = Attendance.where(Member_id: params[:id])
-    
+    @MemberAttendances = Attendance.where(Member_id: params[:id]) 
   end
 
   # GET /members/new
