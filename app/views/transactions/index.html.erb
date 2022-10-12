@@ -2,6 +2,9 @@
 
 
 <h1>Balance:</h1>
+<% @budgets.each do |budget| %>
+  <td><%= budget.Total_amount %></td>
+<% end %>
 <br>
 <h3>Transactions</h3>
 
@@ -22,8 +25,10 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
+        <td><%= transaction.Purpose %></td>
         <td><%= transaction.Amount %></td>
         <td><%= transaction.Date %></td>
+        <td><%= transaction.Officer %></td>
         <td><%= link_to 'Details', transaction %></td>
         <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
         <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>

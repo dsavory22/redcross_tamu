@@ -1,9 +1,11 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
 
+
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
+    @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -65,6 +67,6 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:Budget_id, :Amount, :Date)
+      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer)
     end
 end
