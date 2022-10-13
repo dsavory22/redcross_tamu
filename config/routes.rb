@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'login/index'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
   resources :transactions
   resources :budgets
   resources :events
