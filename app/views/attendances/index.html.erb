@@ -5,7 +5,8 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Event</th>
+      <th>Member</th>
       <th>Hours</th>
       <th>Start</th>
       <th>End</th>
@@ -17,14 +18,14 @@
     <% @attendances.each do |attendance| %>
       
       <tr>
-        <td><%=Event.where(id: Shift.where(id: attendance.Shift_id).last.Event_id).last.Name %></td>
-        <td>
+        <td>Event Name</td>
+        <td>Member Name</td>
         <td><%= attendance.Hours %></td>
-        <td><%= attendance.Start %></td>
-        <td><%= attendance.End %></td>
+        <td><%= attendance.Start.strftime("%I:%M %p") %></td>
+        <td><%= attendance.End.strftime("%I:%M %p") %></td>
         <td><%= link_to 'Show', attendance %></td>
         <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-        <td><%= link_to 'Destroy', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get 'login/index'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions: 'user/sessions',
+    sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
   resources :transactions
@@ -10,6 +11,6 @@ Rails.application.routes.draw do
   resources :shifts
   resources :attendances
   resources :members
-  root 'members#index'
+  root 'login#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
