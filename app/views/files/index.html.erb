@@ -1,0 +1,173 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+  body {
+      font-family: 'Noto Sans KR', sans-serif;
+      margin: 0px;
+      text-align: center;
+  }
+
+  .header {
+      background-color: rgb(224, 224, 224, 0.5);
+      padding: 0px 150px;
+      line-height: 80px;
+      height: 80px;
+      border-bottom: 1px solid rgb(224, 224, 224, 0.6);
+  }
+
+  .title {
+      font-weight: 700;
+      font-size: 30px;
+      float: left;
+      color: #3c84f8;
+  }
+
+  .auth-buttons {
+      float: right;
+  }
+
+  .signin,
+  .signout {
+      border: 0px;
+      padding: 10px 70px;
+      background-color: #3c84f8;
+      color: white;
+      outline: none;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: none;
+  }
+
+  .actions {
+      padding: 0px 300px;
+  }
+
+  textarea {
+      width: calc(100% - 40px);
+      height: 450px;
+      margin: 20px auto;
+      background-color: rgb(224, 224, 224, 0.2);
+      border: 2px solid rgb(224, 224, 224, 1);
+      outline: none;
+      padding: 10px 20px;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 18px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+
+  .upload {
+      border: 0px;
+      outline: none;
+      padding: 8px 30px;
+      display: block;
+      font-size: large;
+      border: 2px solid rgb(224, 224, 224, 1);
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      float: right;
+      color: #3c84f8;
+  }
+</style>
+
+
+<div class="header">
+  <div class="title">Backup To Google Drive</div>
+  <div class="auth-buttons">
+      <button class="signin">Sign In</button>
+      <button class="signout">Sign Out</button>
+  </div>
+</div>
+<div class="actions">
+  <textarea placeholder="Enter text here ..."></textarea>
+  <button class="upload" onclick="upload()">Backup</button>
+</div>
+
+
+<!--
+  # Working iframe for google sheets
+  # <iframe width="600" height="600" src="https://docs.google.com/spreadsheets/d/1SOtYfLj0uWjz8_DsWqLFHYgHbX16BaEhmuXIQNpYZTs/edit#gid=0"></iframe>
+
+  # I want to get the files and stuff from the drive and know if folder/doc/spreadsheet and open with iframe when clicked on
+-->
+
+
+<script>
+  // this source code used updated google sign in options 
+  // after the previous button is deprecated
+  window.onload = () => {
+      gapiLoaded();
+      gisLoaded()
+  }
+
+  var CLIENT_ID = '237318742655-hju7he3fh9pro6ff4oi29rl5ekktphfl.apps.googleusercontent.com';
+  var API_KEY = 'AIzaSyCX-H2clXd7eI6V1kWMpqv1qG_NqICAwPU';
+  var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
+  var SCOPES = 'https://www.googleapis.com/auth/drive';
+  var signinButton = document.getElementsByClassName('signin')[0];
+  var signoutButton = document.getElementsByClassName('signout')[0];
+  let tokenClient;
+  let gapiInited = false;
+  let gisInited = false;
+
+  function gapiLoaded() {
+      gapi.load('client', initializeGapiClient);
+  }
+
+  async function initializeGapiClient() {
+      await gapi.client.init({
+          apiKey: API_KEY,
+          discoveryDocs: DISCOVERY_DOCS,
+      });
+      gapiInited = true;
+      maybeEnableButtons();
+  }
+
+  function gisLoaded() {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+          client_id: CLIENT_ID,
+          scope: SCOPES,
+          callback: ''
+      });
+      gisInited = true;
+      maybeEnableButtons();
+  }
+
+  function maybeEnableButtons() {
+      if (gapiInited && gisInited) {
+          signinButton.style.display = 'block'
+      }
+  }
+
+  signinButton.onclick = () => handleAuthClick()
+  function handleAuthClick() {
+      tokenClient.callback = async (resp) => {
+          if (resp.error !== undefined) {
+              throw (resp);
+          }
+          signinButton.style.display = 'none'
+          signoutButton.style.display = 'block'
+          checkFolder()
+      };
+
+      if (gapi.client.getToken() === null) {
+          tokenClient.requestAccessToken({ prompt: 'consent' });
+      } else {
+          tokenClient.requestAccessToken({ prompt: '' });
+      }
+  }
+
+  signoutButton.onclick = () => handleSignoutClick()
+  function handleSignoutClick() {
+      const token = gapi.client.getToken();
+      if (token !== null) {
+          google.accounts.oauth2.revoke(token.access_token);
+          gapi.client.setToken('');
+          signinButton.style.display = 'block'
+          signoutButton.style.display = 'none'
+      }
+  }
+  
+
+</script>

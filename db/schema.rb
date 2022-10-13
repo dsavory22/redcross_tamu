@@ -68,9 +68,7 @@ ActiveRecord::Schema.define(version: 2022_10_05_225622) do
 
   create_table "transactions", force: :cascade do |t|
     t.bigint "Budget_id"
-    t.string "Purpose"
     t.decimal "Amount", precision: 8, scale: 2
-    t.string "Officer"
     t.date "Date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
