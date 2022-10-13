@@ -17,12 +17,20 @@
 
 <p>
   <strong>Fall dues:</strong>
-  <%= @member.Fall_Dues %>
+        <%if @member.Fall_Dues == 1 %>
+          <td>Paid</td>
+        <%else%>
+          <td>Unpaid</td>
+        <%end%>
 </p>
 
 <p>
   <strong>Spring dues:</strong>
-  <%= @member.Spring_Dues %>
+        <%if @member.Spring_Dues == 1 %>
+          <td>Paid</td>
+        <%else%>
+          <td>Unpaid</td>
+        <%end%>
 </p>
 
 <p>
@@ -32,8 +40,40 @@
 
 <p>
   <strong>Year:</strong>
-  <%= @member.year %>
+    <%if @member.year == 1 %>
+      <td>Freshman</td>
+    <%elsif  @member.year == 2 %>
+      <td>Sophmore</td>
+    <%elsif  @member.year == 3 %>
+      <td>Juinior</td>
+    <%elsif  @member.year == 4 %>
+      <td>Senior</td>
+    <%elsif  @member.year == 5 %>
+      <td>Alumni</td>
+    <%end%>
 </p>
+<p>
+  <div> 
+    <Strong> Total Hours: <Strong> 
+    <Strong> <%= @hours %> <Strong>
+  <div>
+<p>
+
+
+<p>
+<div>
+  <strong> Their events attended <strong>
+  <ul>
+    <% @MemberAttendances.each do |att|  %>
+        <li> <%= att.Shift.Event.Name  %> </li>
+
+    <%end%>
+  </ul>
+</div>
+</p>
+  
+
+
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

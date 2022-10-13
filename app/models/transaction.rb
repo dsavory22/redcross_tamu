@@ -8,6 +8,8 @@ New Transaction
 	needs amount
 	date defaults to todays date
 =end
-    validates :Budget_id, presence: true
+    # validates :Budget_id, presence: true
     validates :Amount, presence: true
+    # validates :Date, presence: true
+    # validates :Officer, presence: true
 end
