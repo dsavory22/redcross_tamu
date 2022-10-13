@@ -31,6 +31,11 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
+# Google drive API
+gem 'google-apis-drive_v3', '~> 0.1'
+# Google drive attempt 2
+
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
