@@ -15,12 +15,12 @@
   
     <div class="field">
       <%= form.label :Member_id %>
-      <%= form.select :Member_id, Member.order(:First_Name).map{|member| [member.First_Name, member.id]}, include_blank: true, id: "id of member" %>
+      <%= form.select :Member_id, Member.order(:Last_Name).map{|member| [member.Last_Name, member.id]}, include_blank: true, id: "id of member" %>
     </div>
 
     <div class="field">
       <%= form.label :Shift_id %>
-      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start, shift.id]}, include_blank: true, id: "id of shift" %>
+      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start.strftime("%I:%M %p"), shift.id]}, include_blank: true, id: "id of shift" %>
     </div>
 
 
@@ -31,12 +31,12 @@
 
     <div class="field">
       <%= form.label :Start %>
-      <%= form.time_select :Start %>
+      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div class="field">
       <%= form.label :End %>
-      <%= form.time_select :End %>
+      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
     </div>
 
     <div>

@@ -1,9 +1,12 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+
 
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
+    @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -22,9 +25,9 @@ class TransactionsController < ApplicationController
   # POST /transactions or /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
     respond_to do |format|
       if @transaction.save
+        @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f) 
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -36,8 +39,10 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
+    beforeUpdate = @transaction.Amount
     respond_to do |format|
       if @transaction.update(transaction_params)
+        @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f + beforeUpdate.to_f ) 
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -49,6 +54,7 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
+    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|
@@ -65,6 +71,7 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:Budget_id, :Amount, :Date)
+      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer)
+      # params.require(:transaction).permit(:Purpose, :Amount, :Date, :Officer)
     end
 end

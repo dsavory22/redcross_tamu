@@ -1,15 +1,21 @@
+<%= stylesheet_link_tag 'events' %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Events</h1>
+<br>
 
+<h3> Previous </h3>
 <table class="table">
   <thead>
     <tr>
       <th>Type</th>
-      <th>Date</th>
       <th>Name</th>
-      <th>Start</th>
-      <th>End</th>
+      <th>Shifts</th>
+      <th>Attendance</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -19,45 +25,66 @@
      
       <% else %>
       <tr>
-        <td><%= event.Type %></td>
-        <td><%= event.Date %></td>
+        <%if event.Type == 0 %>
+          <td>Club Meeting</td>
+        <%else%>
+          <td>Volunteer Event</td>
+        <%end%>
         <td><%= event.Name %></td>
-        <td><%= event.Start %></td>
-        <td><%= event.End %></td>
-        <td><%= link_to 'Show', event %></td>
+        <td><%= event.generate_qr_shifts%></td>
+        <td><%= event.generate_qr_attendance%></td>
+        <td><%= event.Date %></td>
+        <td><%= event.Start.strftime("%I:%M %p") %></td>
+        <td><%= event.End.strftime("%I:%M %p") %></td>
+        <td><%= link_to 'Details', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
   </tbody>
-
-
-  
-
-
 </table>
-<h1> Past Events </h1>
+
+
+
+<h4> Upcoming </h4>
 <table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Shifts</th>
+      <th>Attendance</th>
+      <th>Date</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
   <tbody>
     <% @events.each do |event| %>
       <% if event.Date < Date.parse("2021-10-01") %>
      
       <% else %>
       <tr>
-        <td><%= event.Type %></td>
-        <td><%= event.Date %></td>
+        <%if event.Type == 0 %>
+          <td>Club Meeting</td>
+        <%else%>
+          <td>Volunteer Event</td>
+        <%end%>
         <td><%= event.Name %></td>
-        <td><%= event.Start %></td>
-        <td><%= event.End %></td>
-        <td><%= link_to 'Show', event %></td>
+        <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
+        <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
+        <td><%= event.Date %></td>
+        <td><%= event.Start.strftime("%I:%M %p") %></td>
+        <td><%= event.End.strftime("%I:%M %p") %></td>
+        <td><%= link_to 'Details', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
       <% end %>
     <% end %>
   </tbody>
-
 </table>
 
 <br>

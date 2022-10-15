@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<p>
 
 <p>
   <strong>Hours:</strong>
@@ -7,12 +8,12 @@
 
 <p>
   <strong>Start:</strong>
-  <%= @attendance.Start %>
+  <%= @attendance.Start.strftime("%I:%M %p") %>
 </p>
 
 <p>
   <strong>End:</strong>
-  <%= @attendance.End %>
+  <%= @attendance.End.strftime("%I:%M %p") %>
 </p>
 
 <%= link_to 'Edit', edit_attendance_path(@attendance) %> |
