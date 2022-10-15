@@ -11,6 +11,8 @@
     <tr>
       <th>Type</th>
       <th>Name</th>
+      <th>Shifts</th>
+      <th>Attendance</th>
       <th>Date</th>
       <th>Start Time</th>
       <th>End Time</th>
@@ -29,6 +31,8 @@
           <td>Volunteer Event</td>
         <%end%>
         <td><%= event.Name %></td>
+        <td><%= event.generate_qr_shifts%></td>
+        <td><%= event.generate_qr_attendance%></td>
         <td><%= event.Date %></td>
         <td><%= event.Start.strftime("%I:%M %p") %></td>
         <td><%= event.End.strftime("%I:%M %p") %></td>
@@ -49,6 +53,8 @@
     <tr>
       <th>Type</th>
       <th>Name</th>
+      <th>Shifts</th>
+      <th>Attendance</th>
       <th>Date</th>
       <th>Start Time</th>
       <th>End Time</th>
@@ -67,6 +73,8 @@
           <td>Volunteer Event</td>
         <%end%>
         <td><%= event.Name %></td>
+        <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
+        <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
         <td><%= event.Date %></td>
         <td><%= event.Start.strftime("%I:%M %p") %></td>
         <td><%= event.End.strftime("%I:%M %p") %></td>

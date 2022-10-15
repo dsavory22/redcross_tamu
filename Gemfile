@@ -32,7 +32,8 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml'
-
+gem "rqrcode"
+gem 'chunky_png'
 #for form validations
 gem 'validates_timeliness', '~> 6.0.0.beta2'
 

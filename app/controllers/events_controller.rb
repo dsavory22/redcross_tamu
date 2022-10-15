@@ -1,3 +1,4 @@
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
 
@@ -55,8 +56,20 @@ class EventsController < ApplicationController
       format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
 
+  def CreateQr
+    @qr = RQRCode::QRCode.new(@event.find(params[:id]))
+    puts qr.to_s
+
+    @svg = qr.as_svg(
+      color: "000",
+      shape_rendering: "crispEdges",
+      module_size: 11,
+      standalone: true,
+      use_path: true
+    )
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
