@@ -52,6 +52,28 @@
       <td>Alumni</td>
     <%end%>
 </p>
+<p>
+  <div> 
+    <Strong> Total Hours: <Strong> 
+    <Strong> <%= @hours %> <Strong>
+  <div>
+<p>
+
+
+<p>
+<div>
+  <strong> Their events attended <strong>
+  <ul>
+    <% @MemberAttendances.each do |att|  %>
+        <li> <%= att.Shift.Event.Name  %> </li>
+
+    <%end%>
+  </ul>
+</div>
+</p>
+  
+
+
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
