@@ -52,12 +52,12 @@
 
 <p>
   <strong>Sign Up:</strong>
-  <%= image_tag @event.qr_code_shift.variant(resize_to_limit: [2000, 2000]) %>
+  <%= image_tag(@event.qr_code_attendance) %>
 </p>
 
 <p>
   <strong>Sign In:</strong>
-  <%= image_tag @event.qr_code_attendance.variant(resize_to_limit: [2000, 2000], format: :jpeg, interlace: "JPEG") %>
+  <%= image_tag(@event.qr_code_shift)%>
 </p>
 
 <br>
