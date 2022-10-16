@@ -8,6 +8,7 @@ class CreateMembers < ActiveRecord::Migration[6.1]
       t.boolean :Spring_Dues
       t.string :Shirt_Size
       t.integer :year
+ #     t.integer :officer #2 is highest value, #1 regular event maker #0 for regular user
 
       t.timestamps
     end
