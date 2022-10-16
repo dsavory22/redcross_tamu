@@ -11,6 +11,7 @@ class EventsController < ApplicationController
   # GET /events/1 or /events/1.json
   def show
     @EventShifts = Shift.where(Event_id: params[:id])
+    # @EventAttendances = Attendance.joins(:event => :shift).where(:event => {:Event_id => params[:id]})
   end
 
   # GET /events/new
