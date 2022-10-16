@@ -1,4 +1,4 @@
-
+<%= stylesheet_link_tag 'events' %>
 
 <p id="notice"><%= notice %></p>
 
@@ -31,6 +31,65 @@
   <strong>End:</strong>
   <%= @event.End.strftime("%I:%M %p") %>
 </p>
+
+<p>
+<ul>
+  <% @event.qr_code_attendance do |file| %>
+    <li>
+      <% if file.representable? %>
+        <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+      <% else %>
+        <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+          <%= image_tag "placeholder.png", alt: "Download file" %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+</p>
+
+<br>
+
+<p>
+  <strong>Sign Up:</strong>
+  <%= image_tag @event.qr_code_shift.variant(resize_to_limit: [2000, 2000]) %>
+</p>
+
+<p>
+  <strong>Sign In:</strong>
+  <%= image_tag @event.qr_code_attendance.variant(resize_to_limit: [2000, 2000], format: :jpeg, interlace: "JPEG") %>
+</p>
+
+<br>
+
+<p>
+<strong>Shifts for this event:</strong>
+</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Maximum Volunteers</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @EventShifts.each do |shift| %>
+      <tr>
+        <td><%= shift.Start.strftime("%I:%M %p") %></td>
+        <td><%= shift.End.strftime("%I:%M %p") %></td>
+        <td><%= shift.Shift_Cap %></td>
+        <td><%= link_to 'Details', shift %></td>
+        <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
+        <td><%= link_to 'Delete', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

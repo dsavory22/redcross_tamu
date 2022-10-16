@@ -54,7 +54,8 @@ New Event
             size: 120
         )
         image_name_shift = SecureRandom.hex
-        IO.binwrite("tmp/#{image_name_shift}.png", png.to_s)
+        IO.binwrite("tmp/#{image_name_shift}.png", png.to_s) 
+        @filepath = "tmp/#{image_name_shift}.png"
         
         blob_shift = ActiveStorage::Blob.create_after_upload!(
             io: File.open("tmp/#{image_name_shift}.png"),
@@ -100,7 +101,6 @@ New Event
         self.qr_code_attendance.attach(blob)
    
     end
-
     
 
     def to_s
