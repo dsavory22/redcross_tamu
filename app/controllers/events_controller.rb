@@ -49,6 +49,13 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
+    Shift.where(Event_id: @event.id).each do |sh|
+      Attendance.where(Shift_id: sh.id).each do |at| 
+        at.destroy!
+      end
+      
+      sh.destroy!  
+    end  
     @event.destroy
 
     respond_to do |format|
