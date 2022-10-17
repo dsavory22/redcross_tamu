@@ -1,1 +1,1 @@
-json.array! @shifts, partial: "shifts/shift", as: :shift
+json.array!(@shifts, partial: 'shifts/shift', as: :shift)

@@ -41,34 +41,34 @@ Member.create(First_Name: 'Shoaib', Last_Name: 'Daudjee', Email: nil, Fall_Dues:
 
 Member.create(First_Name: 'Elizabeth', Last_Name: 'Sylla', Email: nil, Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil)
 
-Event.create(Type: 0, Date:"2021-09-25", Name: "Meeting 1")
+Event.create(Type: 0, Date: '2021-09-25', Name: 'Meeting 1')
 
-Event.create(Type: 0, Date:"2021-09-30", Name: "Meeting 2")
+Event.create(Type: 0, Date: '2021-09-30', Name: 'Meeting 2')
 
-Event.create(Type: 0, Date:"2021-10-23", Name: "Meeting 3")
+Event.create(Type: 0, Date: '2021-10-23', Name: 'Meeting 3')
 
-Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
+Event.create(Type: 0, Date: '2021-11-13', Name: 'Meeting 4')
 
-Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
+Event.create(Type: 0, Date: '2021-11-13', Name: 'Meeting 4')
 
-Event.create(Type: 1, Date:"2021-09-25", Name: "ReStore", Start:"12:00", End: "16:00")
+Event.create(Type: 1, Date: '2021-09-25', Name: 'ReStore', Start: '12:00', End: '16:00')
 
-Event.create(Type: 1, Date:"2021-09-30", Name: "Blood Drive", Start:"0:00", End: "12:00")
+Event.create(Type: 1, Date: '2021-09-30', Name: 'Blood Drive', Start: '0:00', End: '12:00')
 
-Event.create(Type: 1, Date:"2021-10-07", Name: "Skating Social", Start:"12:00", End: "14:00")
+Event.create(Type: 1, Date: '2021-10-07', Name: 'Skating Social', Start: '12:00', End: '14:00')
 
-Event.create(Type: 1, Date:"2021-10-16", Name: "ReStore", Start:"12:00", End: "14:00")
+Event.create(Type: 1, Date: '2021-10-16', Name: 'ReStore', Start: '12:00', End: '14:00')
 
-Event.create(Type: 1, Date:"2021-10-21", Name: "Missing Maps", Start:"12:00", End: "16:00")
+Event.create(Type: 1, Date: '2021-10-21', Name: 'Missing Maps', Start: '12:00', End: '16:00')
 
-Event.create(Type: 1, Date:"2021-10-28", Name: "Study Social", Start:"12:00", End: "16:00")
+Event.create(Type: 1, Date: '2021-10-28', Name: 'Study Social', Start: '12:00', End: '16:00')
 
-Event.create(Type: 1, Date:"2021-09-25", Name: "Boba Social", Start:"12:00", End: "14:00")
+Event.create(Type: 1, Date: '2021-09-25', Name: 'Boba Social', Start: '12:00', End: '14:00')
 
-Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", End: "16:00")
+Event.create(Type: 1, Date: '2021-11-13', Name: 'Missing Maps', Start: '12:00', End: '16:00')
 
-shift1 = Shift.create(Event_id: 1, Start: "12:00:00", End: "13:00:00", Shift_Cap: 10 )
+shift1 = Shift.create(Event_id: 1, Start: '12:00:00', End: '13:00:00', Shift_Cap: 10)
 
-Attendance.create(Member_id: member1.id, Shift_id: shift1.id, Hours: 2, Start: "12:00:00", End: "13:00:00") 
+Attendance.create(Member_id: member1.id, Shift_id: shift1.id, Hours: 2, Start: '12:00:00', End: '13:00:00')
 
 Budget.create(Total_amount: 0)
