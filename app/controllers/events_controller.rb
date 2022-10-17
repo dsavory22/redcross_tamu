@@ -8,6 +8,10 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def names
+    @names = Member.all
+  end
+
   # GET /events/1 or /events/1.json
   def show
   end

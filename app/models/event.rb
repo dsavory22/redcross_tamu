@@ -32,12 +32,8 @@ New Event
     require "rqrcode"
 
     def generate_qr_shifts
-        qr_url_shift = url_for(controller: 'events',
-        action: 'show',
-        id: self.id,
-        only_path: false,
-        host: '127.0.0.1',
-        source: 'from_qr_shifts')
+        event_id = '/?eventid=' + (self.id).to_s
+        qr_url_shift = new_attendance_path + event_id
 
         qrcode_shift = RQRCode::QRCode.new(qr_url_shift)
 
@@ -61,18 +57,16 @@ New Event
             filename: image_name_shift,
             content_type: 'png'
           )
-
+        
         self.qr_code_shift.attach(blob_shift)
+        
+
+          
    
     end
 
     def generate_qr_attendance
-        qr_url_attendance = url_for(controller: 'events',
-        action: 'show',
-        id: self.id,
-        only_path: false,
-        host: '127.0.0.1',
-        source: 'from_qr_attendance')
+        qr_url_attendance = new_attendance_path
 
         qrcode_attendance = RQRCode::QRCode.new(qr_url_attendance)
 
@@ -98,7 +92,6 @@ New Event
           )
 
         self.qr_code_attendance.attach(blob)
-   
     end
 
     
