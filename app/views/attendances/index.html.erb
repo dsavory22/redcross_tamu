@@ -18,8 +18,8 @@
     <% @attendances.each do |attendance| %>
       
       <tr>
-        <td>Event Name</td>
-        <td>Member Name</td>
+        <td><%= Event.find(Shift.find(attendance.Shift_id).Event_id).Name %></td>
+        <td><%=Member.find(attendance.Member_id).First_Name%> <%=Member.find(attendance.Member_id).Last_Name%></td>
         <td><%= attendance.Hours %></td>
         <td><%= attendance.Start.strftime("%I:%M %p") %></td>
         <td><%= attendance.End.strftime("%I:%M %p") %></td>

@@ -91,7 +91,17 @@
 
 <br>
 
+<p>
+<div>
+  <strong> Attendances for This Event <strong>
+  <ul>
+    <% @EventAttendances.each do |att|  %>
+        <li> <%= Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%></li>
 
+    <%end%>
+  </ul>
+</div>
+</p>
 
 <br>
 
