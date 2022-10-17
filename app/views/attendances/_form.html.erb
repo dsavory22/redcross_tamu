@@ -24,7 +24,7 @@
 
     <div class="field">
       <%= form.label :Shift_id %>
-      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start.strftime("%I:%M %p"), shift.id]}, include_blank: true, id: "id of shift" %>
+      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
     </div>
 
 
