@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Event</th>
-      <th>Shift Title</th>
       <th>Start Time</th>
       <th>End Time</th>
       <th>Maximum Volunteers</th>
@@ -17,8 +16,7 @@
   <tbody>
     <% @shifts.each do |shift| %>
       <tr>
-        <td><%= shift.Event_id %></td>
-        <td>Shift Title</td>
+        <td><%= Event.find(shift.Event_id).Name %></td>
         <td><%= shift.Start.strftime("%I:%M %p") %></td>
         <td><%= shift.End.strftime("%I:%M %p") %></td>
         <td><%= shift.Shift_Cap %></td>
