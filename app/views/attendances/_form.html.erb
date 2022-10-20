@@ -13,9 +13,7 @@
 
   <div class="d-grid gap-3">
   
-  <%= @path = (request.fullpath)[17..-1] %>
-  <%= @uri = CGI::parse(@path) %>
-  <%= @eventid = ((@uri["eventid"])[0]) %>
+
 
     <div class="field">
       <%= form.label :Member_id %>
