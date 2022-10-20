@@ -52,25 +52,28 @@
 
 <p>
   <strong>Sign Up:</strong>
-  <%= image_tag(@event.qr_code_attendance) %>
+  <%= image_tag(@event.qr_code_shift)%>
 </p>
 
 <p>
   <strong>Sign In:</strong>
-  <%= image_tag(@event.qr_code_shift)%>
+  <%= image_tag(@event.qr_code_attendance) %>
 </p>
 
 <br>
 
+
 <p>
 <strong>Shifts For This Event:</strong>
 </p>
+<a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Shift', new_shift_path %></a>
 <table class="table">
   <thead>
     <tr>
       <th>Start Time</th>
       <th>End Time</th>
-      <th>Maximum Volunteers</th>
+      <th>Max Volunteers</th>
+      <th>Remaining Spots</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -81,6 +84,7 @@
         <td><%= shift.Start.strftime("%I:%M %p") %></td>
         <td><%= shift.End.strftime("%I:%M %p") %></td>
         <td><%= shift.Shift_Cap %></td>
+        <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
         <td><%= link_to 'Details', shift %></td>
         <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
         <td><%= link_to 'Delete', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -90,10 +94,42 @@
 </table>
 
 <br>
+<br>
+
+<%if @event.Date > Date.parse("2021-10-01") %>
+<p>
+  <strong>Members Signed Up For This Event</strong>
+  </p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Member</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @EventAttendances.each do |att| %>
+        <tr>
+          <%if att.Hours == 0 %>
+            <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
+            <td><%= att.Start.strftime("%I:%M %p") %></td>
+            <td><%= att.End.strftime("%I:%M %p") %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
+
+<br>
+<br>
 
 <p>
 <strong>Attendances For This Event</strong>
 </p>
+<a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Attendance', new_attendance_path %></a>
 <table class="table">
   <thead>
     <tr>
@@ -107,13 +143,19 @@
   <tbody>
     <% @EventAttendances.each do |att| %>
       <tr>
-        <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
-        <td><%= att.Start.strftime("%I:%M %p") %></td>
-        <td><%= att.End.strftime("%I:%M %p") %></td>
+        <%if att.Hours > 0 %>
+          <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
+          <td><%= att.Start.strftime("%I:%M %p") %></td>
+          <td><%= att.End.strftime("%I:%M %p") %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+
+
+
 
 <br>
 
