@@ -27,7 +27,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'bcrypt', '~> 3.1.7'
 
 #for images
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 gem 'devise'
 gem 'omniauth'
