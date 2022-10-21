@@ -13,4 +13,38 @@
  */
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import "bootstrap";
+  @import "bootstrap";
+
+  // Change primary button color to red
+  $redcrossred: #ED1B2E;
+
+  .btn-primary {
+    background-color: #ED1B2E !important;
+    border: #ED1B2E !important;
+    color: #fff !important;
+  }
+
+  .btn-primary:hover {
+    background-color: darken($redcrossred, 15%) !important;
+    border: darken($redcrossred, 15%) !important;
+  }
+
+  .btn-primary:active, .btn-primary:focus {
+    border: darken($redcrossred, 20%);
+    box-shadow: none !important;
+  }
+
+  .btn-new {
+    padding: .25rem .5rem;
+    height: 2rem;
+    font-size: .975rem;
+  }
+
+  // Table name view
+  .name_links:hover {
+    color: #0000FF !important;
+  }
+
+  .name_links {
+    text-decoration: none;
+  }
