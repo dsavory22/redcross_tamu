@@ -26,10 +26,20 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+#for images
+gem 'rails_12factor', group: :production
+
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+# Google drive API
+gem 'google-apis-drive_v3', '~> 0.1'
+# Google drive attempt 2
+#gem 'google_drive'
+#gem 'faraday'
+
 gem 'cgi'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
