@@ -9,6 +9,7 @@
         <% end %>
       </ul>
     </div>
+  
   <% end %>
 
   <div class="d-grid gap-3">
@@ -20,9 +21,11 @@
       <%= form.select :Member_id, Member.order(:Last_Name).map{|member| [member.Last_Name, member.id]}, include_blank: true, id: "id of member" %>
     </div>
 
+
+
     <div class="field">
       <%= form.label :Shift_id %>
-      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
+      <%= form.select :Shift_id , @shift_options.map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
     </div>
 
 
