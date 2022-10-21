@@ -13,7 +13,12 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
+    path = (request.fullpath)[17..-1] 
+    uri = CGI::parse(path)
+    @eventid = ((uri["eventid"])[0])
+
     @attendance = Attendance.new
+    @shift_options = Shift.where(Event_id: @eventid)
   end
 
   # GET /attendances/1/edit
@@ -58,6 +63,7 @@ class AttendancesController < ApplicationController
     end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance

@@ -60,14 +60,13 @@ New Event
           )
         
         self.qr_code_shift.attach(blob_shift)
-        
 
-          
-   
     end
 
     def generate_qr_attendance
-        qr_url_attendance = new_attendance_path
+        
+        event_id = '/?eventid=' + (self.id).to_s
+        qr_url_attendance = new_attendance_path + event_id
 
         qrcode_attendance = RQRCode::QRCode.new(qr_url_attendance)
 
