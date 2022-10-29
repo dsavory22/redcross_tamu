@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  before_action :check 
   before_action :set_attendance, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
@@ -63,7 +64,6 @@ class AttendancesController < ApplicationController
     end
   end
 
-  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
@@ -74,4 +74,11 @@ class AttendancesController < ApplicationController
     def attendance_params
       params.require(:attendance).permit(:Member_id,:Shift_id,:Hours, :Start, :End)
     end
+
+    # def check
+    #   if User.where(email: current_user.email).first.authority_level == 0
+    #     redirect_to members_path
+    #   end
+    # end
+
 end

@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2022_10_12_040835) do
     t.string "uid"
     t.string "avatar_url"
     t.string "provider"
+    t.integer "authority_level", default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
