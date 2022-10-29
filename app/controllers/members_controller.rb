@@ -20,11 +20,13 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
+    check
     @member = Member.new
   end
 
   # GET /members/1/edit
   def edit
+    check
   end
 
   # POST /members or /members.json
@@ -72,6 +74,6 @@ class MembersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def member_params
-      params.require(:member).permit(:First_Name, :Last_Name, :Email, :Fall_Dues, :Spring_Dues, :Shirt_Size, :year)
+      params.require(:member).permit(:First_Name, :Last_Name, :Role,:Email, :Fall_Dues, :Spring_Dues, :Shirt_Size, :year)
     end
 end

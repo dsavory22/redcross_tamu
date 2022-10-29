@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  get 'files#index'
   resources :transactions
   resources :budgets
   resources :events

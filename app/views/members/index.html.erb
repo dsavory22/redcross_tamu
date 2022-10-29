@@ -11,6 +11,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Role</th>
       <th>Email</th>
       <th>Fall Dues</th>
       <th>Spring Dues</th>
@@ -24,6 +25,19 @@
     <% @members.each do |member| %>
       <tr>
         <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
+        
+        <%if member.Role == 0 %>
+          <td>Member</td>
+        <%elsif member.Role == 1 %>
+          <td>VP</td>
+        <%elsif member.Role == 2%>
+          <td>Treasurer</td>
+        <%elsif member.Role == 3%>
+          <td>President</td>
+        <%else%>
+          <td>Member</td>
+        <%end%>
+        
         <td><%= member.Email %></td>
 
         <%if member.Fall_Dues == 1 %>

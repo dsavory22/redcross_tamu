@@ -11,6 +11,20 @@
 </p>
 
 <p>
+<%if @member.Role == 0 %>
+<td>Member</td>
+<%elsif @member.Role == 1 %>
+  <td>VP</td>
+<%elsif @member.Role == 2%>
+  <td>Treasurer</td>
+<%elsif @member.Role == 3%>
+  <td>President</td>
+<%else%>
+  <td>Member</td>
+<%end%>
+</p>
+
+<p>
   <strong>Email:</strong>
   <%= @member.Email %>
 </p>
@@ -43,9 +57,9 @@
     <%if @member.year == 1 %>
       <td>Freshman</td>
     <%elsif  @member.year == 2 %>
-      <td>Sophmore</td>
+      <td>Sophomore</td>
     <%elsif  @member.year == 3 %>
-      <td>Juinior</td>
+      <td>Junior</td>
     <%elsif  @member.year == 4 %>
       <td>Senior</td>
     <%elsif  @member.year == 5 %>

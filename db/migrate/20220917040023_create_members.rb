@@ -3,6 +3,7 @@ class CreateMembers < ActiveRecord::Migration[6.1]
     create_table :members do |t|
       t.string :First_Name
       t.string :Last_Name
+      t.integer :Role, default: 0, null: false 
       t.string :Email
       t.boolean :Fall_Dues
       t.boolean :Spring_Dues

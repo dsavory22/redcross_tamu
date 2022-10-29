@@ -23,6 +23,11 @@
     </div>
 
     <div class="field">
+      <%= form.label :Last_Name %>
+      <%= form.select(:Role, options_for_select([['Member', 0], ['VP', 1],['Treasurer', 2], ['President', 3]])) %>
+    </div>
+
+    <div class="field">
       <%= form.label :Email %>
       <%= form.text_field :Email %>
     </div>
@@ -44,7 +49,7 @@
     
     <div class="field">
       <%= form.label :year %>
-      <%= form.select(:year, options_for_select([['Freshman', 1], ['Sophmore', 2], ['Junior', 3], ['Senior', 4], ['Alumni', 5]]))  %>
+      <%= form.select(:year, options_for_select([['Freshman', 1], ['Sophomore', 2], ['Junior', 3], ['Senior', 4], ['Alumni', 5]]))  %>
     </div>
 
     <div>

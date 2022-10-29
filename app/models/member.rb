@@ -12,4 +12,5 @@
 =end
     validates :First_Name, presence: true
     validates :Last_Name, presence: true
+	validates :Role, presence: true
 end
