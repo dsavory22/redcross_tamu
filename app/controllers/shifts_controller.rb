@@ -39,7 +39,7 @@ class ShiftsController < ApplicationController
   def update
     respond_to do |format|
       if @shift.update(shift_params)
-        format.html { redirect_to shift_url(@shift), notice: "Shift was successfully updated." }
+        format.html { redirect_to event_url(@shift.Event_id), notice: "Shift was successfully updated." }
         format.json { render :show, status: :ok, location: @shift }
       else
         format.html { render :edit, status: :unprocessable_entity }

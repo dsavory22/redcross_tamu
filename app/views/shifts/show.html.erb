@@ -2,12 +2,7 @@
 
 <p>
   <strong>Event:</strong>
-  <%= @shift.Event_id %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  Shift Title
+  <%= Event.find(@shift.Event_id).Name %>
 </p>
 
 <p>
@@ -25,5 +20,4 @@
   <%= @shift.Shift_Cap %>
 </p>
 
-<%= link_to 'Edit', edit_shift_path(@shift) %> |
-<%= link_to 'Back', events_path %>
+<%= link_to 'Back', :back %>
