@@ -5,7 +5,14 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
+    @TEST = request.base_url
     @events = Event.all
+    puts '\n'
+    puts @TEST
+    puts '\n'
+    if @TEST.nil?
+      puts 'EXISTS'
+    end
   end
 
   def names
@@ -21,6 +28,7 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
+    @TEST = request.orginal_url
     @event = Event.new
   end
 
