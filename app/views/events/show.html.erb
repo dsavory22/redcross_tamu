@@ -2,69 +2,74 @@
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Type:</strong>
-    <%if @event.Type == 0 %>
-      <td>Club Meeting</td>
-    <%else%>
-      <td>Volunteer Event</td>
-    <%end%>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.Date %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @event.Name %>
-</p>
 
 
-<p>
-  <strong>Start:</strong>
-  <%= @event.Start.strftime("%I:%M %p") %>
-</p>
 
-<p>
-  <strong>End:</strong>
-  <%= @event.End.strftime("%I:%M %p") %>
-</p>
 
-<p>
-<ul>
-  <% @event.qr_code_attendance do |file| %>
-    <li>
-      <% if file.representable? %>
-        <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
-      <% else %>
-        <%= link_to rails_blob_path(file, disposition: "attachment") do %>
-          <%= image_tag "placeholder.png", alt: "Download file" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <p>
+        <strong>Name:</strong>
+        <%= @event.Name %>
+      </p>
+
+      <p>
+        <strong>Type:</strong>
+          <%if @event.Type == 0 %>
+            <td>Club Meeting</td>
+          <%else%>
+            <td>Volunteer Event</td>
+          <%end%>
+      </p>
+
+      <p>
+        <strong>Date:</strong>
+        <%= @event.Date %>
+      </p>
+
+      <p>
+        <strong>Start:</strong>
+        <%= @event.Start.strftime("%I:%M %p") %>
+      </p>
+
+      <p>
+        <strong>End:</strong>
+        <%= @event.End.strftime("%I:%M %p") %>
+      </p>
+    </div>
+    <div class="col-sm">
+      <ul>
+        <% @event.qr_code_attendance do |file| %>
+          <li>
+            <% if file.representable? %>
+              <%= image_tag file.representation(resize_to_limit: [100, 100]) %>
+            <% else %>
+              <%= link_to rails_blob_path(file, disposition: "attachment") do %>
+                <%= image_tag "placeholder.png", alt: "Download file" %>
+              <% end %>
+            <% end %>
+          </li>
         <% end %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
-</p>
+      </ul>
 
+      <p><strong>Sign Up:</strong></p>
+      <p><%= image_tag(@event.qr_code_shift)%></p>
+
+    </div>
+    <div class="col-sm">
+      <p><strong>Sign In:</strong></p>
+      <p><%= image_tag(@event.qr_code_attendance) %></p>
+    </div>
+  </div>
+</div>
+
+<br>
 <br>
 
 <p>
-  <strong>Sign Up:</strong>
-  <%= image_tag(@event.qr_code_shift)%>
-</p>
-
-<p>
-  <strong>Sign In:</strong>
-  <%= image_tag(@event.qr_code_attendance) %>
-</p>
-
-<br>
-
-
-<p>
-<strong>Shifts For This Event:</strong>
+<strong>Shifts</strong>
 </p>
 <%= link_to 'New Shift', new_shift_path, :class => 'btn btn-primary' %>
 <table class="table">
@@ -85,7 +90,6 @@
         <td><%= shift.End.strftime("%I:%M %p") %></td>
         <td><%= shift.Shift_Cap %></td>
         <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
-        <td><%= link_to 'Details', shift %></td>
         <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
         <td><%= link_to 'Delete', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
@@ -98,7 +102,7 @@
 
 <%if @event.Date > Date.parse("2021-10-01") %>
 <p>
-  <strong>Members Signed Up For This Event</strong>
+  <strong>Sign Up</strong>
   </p>
   <table class="table">
     <thead>
@@ -127,7 +131,7 @@
 <br>
 
 <p>
-<strong>Attendances For This Event</strong>
+<strong>Attendance</strong>
 </p>
 <%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary' %>
 <table class="table">
