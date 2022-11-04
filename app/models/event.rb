@@ -64,9 +64,11 @@ New Event
     end
 
     def generate_qr_attendance
-        
+        req = ActionDispatch::Request.new 'HTTP_HOST'
+
         event_id = '/?eventid=' + (self.id).to_s
-        qr_url_attendance = new_attendance_path + event_id
+
+        qr_url_attendance = req.raw_host_with_port +'/' + new_attendance_path + event_id
 
         qrcode_attendance = RQRCode::QRCode.new(qr_url_attendance)
 

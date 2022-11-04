@@ -21,7 +21,7 @@
         <th>Action</th>
       </tr>
     </thead>
-
+    
     <tbody>
       <% @members.each do |member| %>
         <tr>
@@ -30,10 +30,16 @@
           <%if member.Role == 0 %>
             <td>Member</td>
           <%elsif member.Role == 1 %>
-            <td>VP</td>
+            <td>Technology Chair</td>
           <%elsif member.Role == 2%>
-            <td>Treasurer</td>
+            <td>Social Chair</td>
           <%elsif member.Role == 3%>
+            <td>Secretary</td>
+            <%elsif member.Role == 4 %>
+            <td>VP</td>
+          <%elsif member.Role == 5%>
+            <td>Treasurer</td>
+          <%elsif member.Role == 6%>
             <td>President</td>
           <%else%>
             <td>Member</td>
