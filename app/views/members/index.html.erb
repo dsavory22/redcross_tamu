@@ -26,19 +26,19 @@
       <tr>
         <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
         
-        <%if @member.Role == 0 %>
+        <%if member.Role == 0 %>
           <td>Member</td>
-        <%elsif @member.Role == 1 %>
+        <%elsif member.Role == 1 %>
           <td>Technology Chair</td>
-        <%elsif @member.Role == 2%>
+        <%elsif member.Role == 2%>
           <td>Social Chair</td>
-        <%elsif @member.Role == 3%>
+        <%elsif member.Role == 3%>
           <td>Secretary</td>
-          <%elsif @member.Role == 4 %>
+          <%elsif member.Role == 4 %>
           <td>VP</td>
-        <%elsif @member.Role == 5%>
+        <%elsif member.Role == 5%>
           <td>Treasurer</td>
-        <%elsif @member.Role == 6%>
+        <%elsif member.Role == 6%>
           <td>President</td>
         <%else%>
           <td>Member</td>

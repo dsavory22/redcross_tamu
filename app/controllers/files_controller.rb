@@ -2,7 +2,6 @@ require 'googleauth'
 require 'google/apis/drive_v3'
 
 class FilesController < ApplicationController
-  before_action :authenticate_user!
 
   def index
     #drive = Google::Apis::DriveV3::DriveService.new

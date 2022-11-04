@@ -41,7 +41,7 @@ Member.create(First_Name: 'Shoaib', Last_Name: 'Daudjee', Email: nil, Fall_Dues:
 
 Member.create(First_Name: 'Aaron', Last_Name: 'Calderon;', Role: 6 , Email: 'aaron54637@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
 Member.create(First_Name: 'Daniel', Last_Name: 'Savory;',Role: 6 , Email: 'daniel.savory@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
-Member.create(First_Name: 'Chase', Last_Name: 'Cason;',Role: 5 , Email: 'chasecason@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
+Member.create(First_Name: 'Chase', Last_Name: 'Cason;',Role: 6 , Email: 'chasecason@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
 Member.create(First_Name: 'Layla', Last_Name: 'Wilkinson;',Role: 6 , Email: 'leilaniwilkinson@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
 Member.create(First_Name: 'Dylan', Last_Name: 'Craven;',Role: 6 , Email: 'dylan.craven@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: nil )
 
