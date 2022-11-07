@@ -9,7 +9,8 @@
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Transactions</h1>
 
-  <%= link_to 'New Transaction', new_transaction_path, :class => 'btn btn-primary btn-new' %>
+  <%= link_to 'Desposit', new_transaction_path, :class => 'btn btn-primary btn-new', :ttype => 'deposit' %>
+  <%= link_to 'Withdraw', new_transaction_path, :class => 'btn btn-primary btn-new', :ttype => 'withdraw' %>
 </div>
 
 <table class="table">
@@ -31,8 +32,8 @@
         <td><%= transaction.Amount %></td>
         <td><%= transaction.Date %></td>
         <td><%= transaction.Officer %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_transaction_path(transaction) %>
+            <%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -25,6 +25,8 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
+    @ttype = params[:ttype]
+    puts @ttype
     @transaction = Transaction.new(transaction_params)
     respond_to do |format|
       if @transaction.save

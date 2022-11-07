@@ -20,13 +20,13 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    check
+    # check
     @member = Member.new
   end
 
   # GET /members/1/edit
   def edit
-    check
+    # check
   end
 
   # POST /members or /members.json

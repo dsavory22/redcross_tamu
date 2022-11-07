@@ -17,8 +17,9 @@
         <td><%= budget.Total_amount %></td>
         <td><%= budget.Date %></td>
         <td><%= link_to 'Details', budget %></td>
-        <td><%= link_to 'Edit', edit_budget_path(budget) %></td>
-        <td><%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_budget_path(budget) %>
+            <%= link_to 'Destroy', budget, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
