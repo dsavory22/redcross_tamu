@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/csce431/config/environment.rb": {
+      "/redcross_tamu/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -10,7 +10,7 @@
           1
         ]
       },
-      "/csce431/config/application.rb": {
+      "/redcross_tamu/config/application.rb": {
         "lines": [
           1,
           null,
@@ -36,7 +36,7 @@
           null
         ]
       },
-      "/csce431/config/boot.rb": {
+      "/redcross_tamu/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -44,7 +44,7 @@
           1
         ]
       },
-      "/csce431/config/environments/test.rb": {
+      "/redcross_tamu/config/environments/test.rb": {
         "lines": [
           1,
           null,
@@ -108,7 +108,7 @@
           null
         ]
       },
-      "/csce431/config/initializers/application_controller_renderer.rb": {
+      "/redcross_tamu/config/initializers/application_controller_renderer.rb": {
         "lines": [
           null,
           null,
@@ -120,7 +120,7 @@
           null
         ]
       },
-      "/csce431/config/initializers/assets.rb": {
+      "/redcross_tamu/config/initializers/assets.rb": {
         "lines": [
           null,
           1,
@@ -138,7 +138,7 @@
           null
         ]
       },
-      "/csce431/config/initializers/backtrace_silencers.rb": {
+      "/redcross_tamu/config/initializers/backtrace_silencers.rb": {
         "lines": [
           null,
           null,
@@ -150,7 +150,7 @@
           1
         ]
       },
-      "/csce431/config/initializers/content_security_policy.rb": {
+      "/redcross_tamu/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -184,7 +184,7 @@
           null
         ]
       },
-      "/csce431/config/initializers/cookies_serializer.rb": {
+      "/redcross_tamu/config/initializers/cookies_serializer.rb": {
         "lines": [
           null,
           null,
@@ -193,7 +193,7 @@
           1
         ]
       },
-      "/csce431/config/initializers/devise.rb": {
+      "/redcross_tamu/config/initializers/devise.rb": {
         "lines": [
           null,
           null,
@@ -511,7 +511,7 @@
           null
         ]
       },
-      "/csce431/config/initializers/filter_parameter_logging.rb": {
+      "/redcross_tamu/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -521,75 +521,8 @@
           null
         ]
       },
-      "/csce431/config/initializers/inflections.rb": {
+      "/redcross_tamu/config/initializers/inflections.rb": {
         "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/csce431/config/initializers/mime_types.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/csce431/config/initializers/permissions_policy.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      },
-      "/csce431/config/initializers/validates_timeliness.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           null,
           null,
@@ -608,16 +541,21 @@
           null
         ]
       },
-      "/csce431/config/initializers/wrap_parameters.rb": {
+      "/redcross_tamu/config/initializers/mime_types.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/config/initializers/permissions_policy.rb": {
         "lines": [
           null,
           null,
           null,
           null,
           null,
-          null,
-          1,
-          0,
           null,
           null,
           null,
@@ -626,7 +564,234 @@
           null
         ]
       },
-      "/csce431/config/routes.rb": {
+      "/redcross_tamu/config/initializers/validates_timeliness.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/config/initializers/wrap_parameters.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/config/routes.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/user.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/application_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/attendances_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/budgets_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/events_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/files_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/members_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/shifts_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/helpers/transactions_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/attendance_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/attendance.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/budget_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/budget.rb": {
         "lines": [
           1,
           1,
@@ -634,47 +799,355 @@
           null,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/event_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/event.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
           1,
           0,
           0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
           0,
           0,
           0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null,
           0,
           0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
           0,
           null,
           null
         ]
       },
-      "/csce431/app/models/user.rb": {
+      "/redcross_tamu/spec/models/member_spec.rb": {
         "lines": [
           1,
           null,
-          null,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
           null,
-          null,
           1,
-          0,
-          0,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           null,
           null
         ]
       },
-      "/csce431/app/models/application_record.rb": {
+      "/redcross_tamu/app/models/member.rb": {
         "lines": [
           1,
           1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/shift_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/shift.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/models/user_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/requests/files_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/spec/views/files/index.html.erb_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/redcross_tamu/app/controllers/files_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/redcross_tamu/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1667009379
+    "timestamp": 1667590340
   }
 }

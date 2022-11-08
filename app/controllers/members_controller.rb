@@ -1,6 +1,7 @@
 class MembersController < ApplicationController
   before_action :set_member, only: %i[ show edit update destroy ] 
   before_action :authenticate_user!
+  before_action :check_officer_privelege
 
   # GET /members or /members.json
   def index
@@ -20,13 +21,13 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    # check
+    check_admin_privelege
     @member = Member.new
   end
 
   # GET /members/1/edit
   def edit
-    # check
+    check_admin_privelege
   end
 
   # POST /members or /members.json

@@ -1,6 +1,7 @@
 class ShiftsController < ApplicationController
   before_action :set_shift, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :check_officer_privelege
 
   # GET /shifts or /shifts.json
   def index
