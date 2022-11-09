@@ -12,7 +12,7 @@
 
 <br>
 
-<%= line_chart Transaction.pluck(:Date, :Amount), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000
+<%= line_chart Transaction.pluck(:Date, :Total), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000
 ", "#FFFFFF"] %>
 
 <%= pie_chart Transaction.group(:Purpose).sum(:Amount), refresh: 5, title: "Amount Spent per Purpose", colors: ["#FF0000", "#d3d3d3", "#a9a9a9"] %>
@@ -26,27 +26,10 @@
   <%= link_to 'Withdraw', new_transaction_path(:ttype => 'withdraw'), :class => 'btn btn-primary btn-new' %>
 </div>
 
-<<<<<<< HEAD
-<table class="table">
-  <thead>
-    <tr>
-      <th>Purpose</th>
-      <th>Amount</th>
-      <th>Date</th>
-      <th>Member</th>
-      <th>Actions</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-
-  <tbody>
-    <% @transactions.each do |transaction| %>
-=======
 <div class="table-ruby table-responsive">
   <table class="table table-hover table-striped">
     <thead>
->>>>>>> dde3cf728bd1115dce42d78db671750e3530c0ab
       <tr>
         <th>Purpose</th>
         <th>Amount</th>
