@@ -71,7 +71,9 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
-    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + @transaction.Amount)
+    puts "TRANSACTION AMOUNT:\n"
+    puts @transaction.Amount
+    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|
