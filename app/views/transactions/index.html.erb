@@ -1,10 +1,15 @@
-<%= stylesheet_link_tag 'transactions' %>
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 
 <div class="d-flex align-items-center gap-3 mb-2">
-  <h1>Balance:</h1>
-    <td><%= Budget.first.Total_amount %></td> 
+  <h1 style="margin: 0">Balance </h1>
+    <h1 style="margin: 0; font-weight: 300;"><%= number_to_currency(Budget.first.Total_amount) %></h1>
 </div>
+
 <br>
 
 <%= line_chart Transaction.pluck(:Date, :Amount), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000
@@ -21,6 +26,7 @@
   <%= link_to 'Withdraw', new_transaction_path(:ttype => 'withdraw'), :class => 'btn btn-primary btn-new' %>
 </div>
 
+<<<<<<< HEAD
 <table class="table">
   <thead>
     <tr>
@@ -36,17 +42,38 @@
 
   <tbody>
     <% @transactions.each do |transaction| %>
+=======
+<div class="table-ruby table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+>>>>>>> dde3cf728bd1115dce42d78db671750e3530c0ab
       <tr>
-        <td><%= link_to transaction.Purpose, transaction, :class => 'name_links', :style => 'color: black'; %></td>
-        <td><%= transaction.Amount %></td>
-        <td><%= transaction.Date %></td>
-        <td><%= transaction.Officer %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %>
-            <%= link_to 'Delete', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Purpose</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Officer</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
+    <tbody>
+      <% @transactions.each do |transaction| %>
+        <tr>
+          <td><%= transaction.Purpose %></td>
+          <td><%= number_to_currency(transaction.Amount) %></td>
+          <td><%= transaction.Date.strftime("%m/%d/%Y") %></td>
+          <td><%= transaction.Officer %></td>
+          <td>
+            <%= link_to edit_transaction_path(transaction), :class => 'name_links' do %>
+              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+            &nbsp;
+            <%= link_to transaction, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
