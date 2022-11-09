@@ -17,7 +17,7 @@
       </div>
 
       <div class="col-md-6">
-        <%= form.number_field :Amount, :step=>"0.01" %>
+        <%= form.number_field :Amount, :step=>"0.01", prepend: "$" %>
       </div>
 
       <div class="col-md-6">
