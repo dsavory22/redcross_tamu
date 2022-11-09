@@ -17,7 +17,6 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     #My changes
-    #@transaction = Transaction.new(Date: Date.current)
     @transaction_type = params[:ttype]
     @transaction = Transaction.new(Date: Date.current)
   end
@@ -28,8 +27,18 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
+    puts "TEST 2"
+    puts transaction_params
     @t_type = params[:commit]
-    @transaction = Transaction.new(transaction_params)
+    create_params = transaction_params
+
+    if @t_type == 'withdraw'
+      create_params[:Amount] = -1 * create_params[:Amount].to_i
+      puts params[:Amount]
+    end
+      
+    @transaction = Transaction.new(create_params)
+
     respond_to do |format|
       if @transaction.save
         #My changes
@@ -52,7 +61,6 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
-    puts "TESTING 2"
     beforeUpdate = @transaction.Amount
     respond_to do |format|
       if @transaction.update(transaction_params)
@@ -71,7 +79,9 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
-    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + @transaction.Amount)
+    puts "TRANSACTION AMOUNT:\n"
+    puts @transaction.Amount
+    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|
