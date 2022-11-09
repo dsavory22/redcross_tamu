@@ -1,46 +1,39 @@
-<%= form_with(model: transaction) do |form| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+<div class="form">
+  <h1 class="form-title"><%= heading %></h1>
 
-      <ul>
-        <% transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= bootstrap_form_with(model: transaction) do |form| %>
+    <% if transaction.errors.any? %>
+      <%= form.alert_message "Please fix the errors below", error_summary: false %>
+    <% end %>
+
+    <div class="row">
+        <div class="col-md-12" style="display:none">
+          <%= form.label :Budget_id %>
+          <%= form.select :Budget_id, selected: 1 , id: "id of event" %>
+        </div>    
+
+      <div class="col-md-12">
+        <%= form.text_field :Purpose %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.number_field :Amount, :step=>"0.01" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.date_field :Date %>
+      </div>
+
+      <div class="col-md-12">
+        <%= form.text_field :Officer %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary btn-form" %> 
+      </div>
+        
     </div>
   <% end %>
 
-  <div class="d-grid gap-3">
-
-      <div class="field" style="display:none">
-        <%= form.label :Budget_id %>
-        <%= form.select :Budget_id, selected: 1 , id: "id of event" %>
-      </div>    
-
-    <div class="field">
-      <%= form.label :Purpose %>
-      <%= form.text_field :Purpose %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Amount %>
-      <%= form.number_field :Amount, :step=>"0.01" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Date %>
-      <%= form.date_select :Date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Officer %>
-      <%= form.text_field :Officer %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %> 
-    </div>
-      
-  </div>
-<% end %>
+  <%= link_to 'Back', transactions_path %>
+</div>

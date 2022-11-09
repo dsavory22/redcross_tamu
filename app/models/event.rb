@@ -13,6 +13,7 @@ New Event
 =end
     validates :Type, presence: true
     validates :Name, presence: true
+    validates :Date, presence: true
     validates :Start, presence: true
 
     validates_time :End, on_or_after: :Start, before_message: "End time must be on or after the start time"
@@ -68,7 +69,9 @@ New Event
 
         event_id = '/?eventid=' + (self.id).to_s
 
-        qr_url_attendance = req.raw_host_with_port +'/' + new_attendance_path + event_id
+        # Broken line
+        #qr_url_attendance = req.raw_host_with_port +'/' + new_attendance_path + event_id
+        qr_url_attendance = '/' + new_attendance_path + event_id
 
         qrcode_attendance = RQRCode::QRCode.new(qr_url_attendance)
 

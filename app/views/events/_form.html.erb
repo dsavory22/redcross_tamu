@@ -1,52 +1,48 @@
-<%= form_with(model: event) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<div class="form">
+  <h1 class="form-title"><%= heading %></h1>
 
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= bootstrap_form_with(model: event) do |form| %>
+    <% if event.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+        <ul>
+          <% event.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= form.text_field :Name %>
+      </div>
+
+      <%# drop down menu to chose between a meeting and volunteer event %>
+      <div class="col-md-6">
+        <%= form.select :Type, options_for_select([['Club Meeting', 0], ['Volunteer Event', 1]]) %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.date_field :Date %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Start, "Start Time", class: "form-label" %>
+        <%= form.time_select :Start, default: {hour: 12, min: 0}, :minute_step => 5, :twelve_hour => true, :ampm => true, hide_label: true %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :End, "End Time", class: "form-label" %>
+        <%= form.time_select :End, default: {hour: 12, min: 0}, :minute_step => 5, :twelve_hour => true, :ampm => true, hide_label: true %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary btn-form" %>
+      </div>
+        
     </div>
   <% end %>
-
-  
-  <div class="d-grid gap-3">
-
-    <%# drop down menu to chose between a meeting and volunteer event %>
-    <div class="field">
-      <%= form.label :Type %>
-      <%= form.select(:Type, options_for_select([['Club Meeting', 0], ['Volunteer Event', 1]]))  %>
-    </div>
-
-
-    <div class="field">
-      <%= form.label :Name %>
-      <%= form.text_field :Name %>
-    </div>
-
-
-
-    <div class="field">
-      <%= form.label :Date %>
-      <%= form.date_select :Date %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Start %>
-      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
-
-    <div class="field">
-      <%= form.label :End %>
-      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
-      
-  </div>
-  
-<% end %>
+  <%= link_to 'Back', events_path %>
+</div>

@@ -14,6 +14,7 @@
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
   @import "bootstrap";
+  @import "rails_bootstrap_forms";
 
   // Change primary button color to red
   $redcrossred: #ED1B2E;
@@ -74,4 +75,19 @@
 
   .btn-form {
     width: fill;
+    margin-top: 2rem;
+    padding: .5rem;
+  }
+
+  #hideMeAfter5Seconds {
+    animation: hideAnimation 0s ease-in 3s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes hideAnimation {
+    to {
+      visibility: hidden;
+      width: 0 !important;
+      height: 0 !important;
+    }
   }

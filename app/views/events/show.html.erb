@@ -1,11 +1,5 @@
-<%= stylesheet_link_tag 'events' %>
-
 <p id="notice"><%= notice %></p>
-
-
-
-
-
+<%= stylesheet_link_tag 'events' %>
 
 <div class="container">
   <div class="row">
@@ -68,49 +62,60 @@
 <br>
 <br>
 
-<p>
-<strong>Shifts</strong>
-</p>
-<%= link_to 'New Shift', new_shift_path, :class => 'btn btn-primary' %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Max Volunteers</th>
-      <th>Remaining Spots</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Shifts</h1>
 
-  <tbody>
-    <% @EventShifts.each do |shift| %>
+  <%= link_to 'New Shift', new_shift_path, :class => 'btn btn-primary btn-new' %>
+</div>
+
+<div class="table-ruby table-responsive"> 
+  <table class="table table-hover table-striped">
+    <thead>
       <tr>
-        <td><%= shift.Start.strftime("%I:%M %p") %></td>
-        <td><%= shift.End.strftime("%I:%M %p") %></td>
-        <td><%= shift.Shift_Cap %></td>
-        <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
-        <td><%= link_to 'Edit', edit_shift_path(shift) %></td>
-        <td><%= link_to 'Delete', shift, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Max Volunteers</th>
+        <th>Remaining Spots</th>
+        <th>Action</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @EventShifts.each do |shift| %>
+        <tr>
+          <td><%= shift.Start.strftime("%I:%M %p") %></td>
+          <td><%= shift.End.strftime("%I:%M %p") %></td>
+          <td><%= shift.Shift_Cap %></td>
+          <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
+          <td>
+            <%= link_to edit_shift_path(shift), :class => 'name_links' do %>
+              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+            &nbsp;
+            <%= link_to shift, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 <br>
 
 <%if @event.Date > Date.parse("2021-10-01") %>
-<p>
-  <strong>Sign Up</strong>
-  </p>
-  <table class="table">
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Sign Up</h1>
+</div>
+
+<div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+  <table class="table table-hover table-striped">
     <thead>
       <tr>
         <th>Member</th>
         <th>Start Time</th>
         <th>End Time</th>
-        <th colspan="3"></th>
       </tr>
     </thead>
     <tbody>
@@ -125,41 +130,40 @@
       <% end %>
     </tbody>
   </table>
+</div>
 <%end%>
 
 <br>
 <br>
 
-<p>
-<strong>Attendance</strong>
-</p>
-<%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary' %>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Member</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Attendance</h1>
 
-  <tbody>
-    <% @EventAttendances.each do |att| %>
+  <%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary btn-new' %>
+</div>
+<div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+  <table class="table">
+    <thead>
       <tr>
-        <%if att.Hours > 0 %>
-          <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
-          <td><%= att.Start.strftime("%I:%M %p") %></td>
-          <td><%= att.End.strftime("%I:%M %p") %></td>
-        <% end %>
+        <th>Member</th>
+        <th>Start Time</th>
+        <th>End Time</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-
-
-
+    <tbody>
+      <% @EventAttendances.each do |att| %>
+        <tr>
+          <%if att.Hours > 0 %>
+            <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
+            <td><%= att.Start.strftime("%I:%M %p") %></td>
+            <td><%= att.End.strftime("%I:%M %p") %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 

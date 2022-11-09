@@ -4,30 +4,34 @@ class MembersController < ApplicationController
   before_action :check_officer_privelege
 
   # GET /members or /members.json
+  # used same code from show, maybe make helper method to avoid redundancy
   def index
     @members = Member.all
-  end
-
-  # GET /members/1 or /members/1.json
-  def show
-  #todo: make sure to change params to proper sql query
     @MemberAttendances = Attendance.where(Member_id: params[:id]) 
     @hours = 0
     @MemberAttendances.each do |single|
       @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
     end
-    
+  end
+
+  # GET /members/1 or /members/1.json
+  def show
+  #todo: make sure to change params to proper sql query
+    # member attendances gets all attended shifts for a member
+    @MemberAttendances = Attendance.where(Member_id: params[:id]) 
+    @hours = 0
+    @MemberAttendances.each do |single|
+      @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
+    end
   end
 
   # GET /members/new
   def new
-    check_admin_privelege
     @member = Member.new
   end
 
   # GET /members/1/edit
   def edit
-    check_admin_privelege
   end
 
   # POST /members or /members.json
@@ -35,7 +39,7 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
     respond_to do |format|
       if @member.save
-        format.html { redirect_to member_url(@member), notice: "Member was successfully created." }
+        format.html { redirect_to members_url, notice: "Member was successfully created" }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,7 +52,7 @@ class MembersController < ApplicationController
   def update
     respond_to do |format|
       if @member.update(member_params)
-        format.html { redirect_to member_url(@member), notice: "Member was successfully updated." }
+        format.html { redirect_to members_url, notice: "Member was successfully updated" }
         format.json { render :show, status: :ok, location: @member }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -62,7 +66,7 @@ class MembersController < ApplicationController
     @member.destroy
 
     respond_to do |format|
-      format.html { redirect_to members_url, notice: "Member was successfully destroyed." }
+      format.html { redirect_to members_url, notice: "Member was successfully deleted" }
       format.json { head :no_content }
     end
   end
