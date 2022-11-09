@@ -33,10 +33,12 @@ class TransactionsController < ApplicationController
     puts transaction_params
     @t_type = params[:commit]
     create_params = transaction_params
+    notice_msg = "Deposit was successfully created"
 
     if @t_type == 'withdraw'
       create_params[:Amount] = -1 * create_params[:Amount].to_i
       puts params[:Amount]
+      notice_msg = "Withdraw was successfully created"
     end
       
     @transaction = Transaction.new(create_params)
@@ -48,7 +50,7 @@ class TransactionsController < ApplicationController
         #format.html { redirect_to transactions_url, notice: "Transaction was successfully created" }
         @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + create_params[:Amount].to_f) 
 
-        format.html { redirect_to transactions_url, notice: "Transaction was successfully created." }
+        format.html { redirect_to transactions_url, notice: notice_msg }
         format.json { render :show, status: :created, location: @transaction }
       else
         format.html { render :new, status: :unprocessable_entity }
