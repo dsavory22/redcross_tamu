@@ -33,8 +33,11 @@ New Event
     require "rqrcode"
 
     def generate_qr_shifts
+
+        req = @TEST
+
         event_id = '/?eventid=' + (self.id).to_s
-        qr_url_shift = new_attendance_path + event_id
+        qr_url_shift = req + '/' + new_attendance_path + event_id
 
         qrcode_shift = RQRCode::QRCode.new(qr_url_shift)
 
@@ -65,13 +68,11 @@ New Event
     end
 
     def generate_qr_attendance
-        req = ActionDispatch::Request.new 'HTTP_HOST'
+        req = @TEST
 
         event_id = '/?eventid=' + (self.id).to_s
 
-        # Broken line
-        #qr_url_attendance = req.raw_host_with_port +'/' + new_attendance_path + event_id
-        qr_url_attendance = '/' + new_attendance_path + event_id
+        qr_url_attendance = req +'/' + new_attendance_path + event_id
 
         qrcode_attendance = RQRCode::QRCode.new(qr_url_attendance)
 

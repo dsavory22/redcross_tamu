@@ -14,7 +14,8 @@
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Transactions</h1>
 
-  <%= link_to 'New Transaction', new_transaction_path, :class => 'btn btn-primary btn-new' %>
+  <%= link_to 'Desposit', new_transaction_path(:ttype => 'deposit'), :class => 'btn btn-primary btn-new' %>
+  <%= link_to 'Withdraw', new_transaction_path(:ttype => 'withdraw'), :class => 'btn btn-primary btn-new' %>
 </div>
 
 <div class="table-ruby table-responsive">

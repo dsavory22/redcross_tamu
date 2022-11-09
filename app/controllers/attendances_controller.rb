@@ -1,5 +1,4 @@
 class AttendancesController < ApplicationController
-  before_action :check 
   before_action :set_attendance, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
   before_action :check_officer_privelege
