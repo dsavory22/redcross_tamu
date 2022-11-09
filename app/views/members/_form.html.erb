@@ -1,60 +1,62 @@
-<%= form_with(model: member) do |form| %>
-  <% if member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(member.errors.count, "error") %> prohibited this member from being saved:</h2>
+<p id="notice"><%= notice %></p>
 
-      <ul>
-        <% member.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+<div class="form">
+  <h1 class="form-title"><%= heading %></h1>
+
+  <%= bootstrap_form_with(model: member) do |form| %>
+    <% if member.errors.any? %>
+      <%= form.alert_message "Please fix the errors below", error_summary: false %>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= form.label :First_Name, "First Name", class: "form-label" %>
+        <%= form.text_field :First_Name, hide_label: true %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Last_Name, "Last Name", class: "form-label" %>
+        <%= form.text_field :Last_Name, hide_label: true %>
+      </div>
+
+      <div class="col-md-12">
+        <%# use options_for_select([array of values], form.object.column || 'Default value') to use its current value or the default if new %>
+        <%if Member.where(Email: current_user.email).first.Role == 6 %>
+          <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member') %>
+        <%else%>
+          <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member'), {}, disabled: true %>
+        <%end%>
+      </div>
+
+      <div class="col-md-12">
+        <%= form.text_field :Email %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Fall_Dues, "Fall Dues", class: "form-label" %>
+        <%= form.select :Fall_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Fall_Dues || false), hide_label: true %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Spring_Dues, "Spring Dues", class: "form-label" %>
+        <%= form.select :Spring_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Spring_Dues || false), hide_label: true %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Shirt_Size, "Shirt Size", class: "form-label" %>
+        <%= form.select :Shirt_Size, options_for_select([['N/A', 'N/A'], ['XXS', 'XXS'], ['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L'], ['XL', 'XL'], ['XXL', 'XXl']], form.object.Shirt_Size || 'N/A'), hide_label: true  %>
+      </div>
+      
+      <div class="col-md-6">
+        <%= form.label :year, class: "form-label" %>
+        <%= form.select :year, options_for_select([['Freshman', 1], ['Sophomore', 2], ['Junior', 3], ['Senior', 4], ['Graduate', 5], ['Alumni', 6]], form.object.year || 1), hide_label: true  %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary btn-form" %>
+      </div>
+      
     </div>
   <% end %>
-
-  <div class="d-grid gap-3">
-    <div class="field">
-      <%= form.label :First_Name %>
-      <%= form.text_field :First_Name %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Last_Name %>
-      <%= form.text_field :Last_Name %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Last_Name %>
-      <%= form.select(:Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['VP', 4], ['Treasurer', 5], ['President', 6]])) %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Email %>
-      <%= form.text_field :Email %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Fall_Dues %>
-      <%= form.select(:Fall_Dues, options_for_select([['Unpaid', 0], ['Paid', 1]]))  %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Spring_Dues %>
-      <%= form.select(:Spring_Dues, options_for_select([['Unpaid', 0], ['Paid', 1]]))  %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Shirt_Size %>
-      <%= form.select(:Shirt_Size, options_for_select([['N/A', 'N/A'], ['XXS', 'XXS'], ['XS', 'XS'], ['S', 'S'], ['M', 'M'], ['L', 'L'], ['XL', 'XL'], ['XXL', 'XXl']]))  %>
-    </div>
-    
-    <div class="field">
-      <%= form.label :year %>
-      <%= form.select(:year, options_for_select([['Freshman', 1], ['Sophomore', 2], ['Junior', 3], ['Senior', 4], ['Alumni', 5]]))  %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
-    
-  </div>
-<% end %>
+  <%= link_to 'Back', members_path %>
+</div>

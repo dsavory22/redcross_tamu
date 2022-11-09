@@ -20,12 +20,12 @@ class ApplicationController < ActionController::Base
         if a == nil
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 1' }
             end
         elsif a.Role < 1
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 2' }
             end
         end
     end
@@ -35,12 +35,12 @@ class ApplicationController < ActionController::Base
         if a == nil
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 3' }
             end
         elsif a.Role != 4 && a.Role != 6
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 4' }
             end
         end
     end

@@ -1,40 +1,45 @@
-<%= form_with(model: shift) do |form| %>
-  <% if shift.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+<div class="form">
+  <h1 class="form-title"><%= heading %></h1>
 
-      <ul>
-        <% shift.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  <%= bootstrap_form_with(model: shift) do |form| %>
+    <% if shift.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(shift.errors.count, "error") %> prohibited this shift from being saved:</h2>
+
+        <ul>
+          <% shift.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <%# why is there a blank option? %>
+      <div class="col-md-12">
+        <%= form.select :Event_id, Event.order(:Name).map{|event| [event.Name, event.id]}, include_blank: true, id: "id of event" %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :Start, "Start Time", class: "form-label" %>
+        <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true, hide_label: true %>
+      </div>
+
+      <div class="col-md-6">
+        <%= form.label :End, "End Time", class: "form-label" %>
+        <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true, hide_label: true %>
+      </div>
+
+      <div class="field">
+        <%= form.label :Volunteer_Capacity, "Volunteer Capacity", class: "form-label" %>
+        <%= form.number_field :Shift_Cap, hide_label: true %>
+      </div>
+
+      <div>
+        <%= form.submit class: "btn btn-primary btn-form" %>
+      </div>
+        
     </div>
   <% end %>
-
-  <div class="d-grid gap-3">
-    <div class="field">
-      <%= form.label :Event_id %>
-      <%= form.select :Event_id, Event.order(:Name).map{|event| [event.Name, event.id]}, include_blank: true, id: "id of event" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Start %>
-      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
-
-    <div class="field">
-      <%= form.label :End %>
-      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Volunteer_Capacity %>
-      <%= form.number_field :Shift_Cap %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
-      
-  </div>
-<% end %>
+  <%= link_to 'Back', :back %>
+</div>

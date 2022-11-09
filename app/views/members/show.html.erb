@@ -1,99 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @member.First_Name %>
-</p>
+<h1><%= @member.First_Name %> <%= @member.Last_Name %>'s Attendance</h1>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @member.Last_Name %>
-</p>
+<div class="table-ruby table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Hours</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+    </thead>
 
-<p>
-<%if @member.Role == 0 %>
-<td>Member</td>
-<%elsif @member.Role == 1 %>
-  <td>Technology Chair</td>
-<%elsif @member.Role == 2%>
-  <td>Social Chair</td>
-<%elsif @member.Role == 3%>
-  <td>Secretary</td>
-  <%elsif @member.Role == 4 %>
-  <td>VP</td>
-<%elsif @member.Role == 5%>
-  <td>Treasurer</td>
-<%elsif @member.Role == 6%>
-  <td>President</td>
-<%else%>
-  <td>Member</td>
-<%end%>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @member.Email %>
-</p>
-
-<p>
-  <strong>Fall dues:</strong>
-        <%if @member.Fall_Dues == 1 %>
-          <td>Paid</td>
-        <%else%>
-          <td>Unpaid</td>
-        <%end%>
-</p>
-
-<p>
-  <strong>Spring dues:</strong>
-        <%if @member.Spring_Dues == 1 %>
-          <td>Paid</td>
-        <%else%>
-          <td>Unpaid</td>
-        <%end%>
-</p>
-
-<p>
-  <strong>Shirt size:</strong>
-  <%= @member.Shirt_Size %>
-</p>
-
-<p>
-  <strong>Year:</strong>
-    <%if @member.year == 1 %>
-      <td>Freshman</td>
-    <%elsif  @member.year == 2 %>
-      <td>Sophomore</td>
-    <%elsif  @member.year == 3 %>
-      <td>Junior</td>
-    <%elsif  @member.year == 4 %>
-      <td>Senior</td>
-    <%elsif  @member.year == 5 %>
-      <td>Alumni</td>
-    <%end%>
-</p>
-<p>
-  <div> 
-    <Strong> Total Hours: <Strong> 
-    <Strong> <%= @hours %> <Strong>
-  <div>
-<p>
-
-
-<p>
-<div>
-  <strong> Their events attended <strong>
-  <ul>
-    <% @MemberAttendances.each do |att|  %>
-        <li> <%= att.Shift.Event.Name  %> </li>
-
-    <%end%>
-  </ul>
+    <tbody>
+      <% @MemberAttendances.each do |att|  %>
+        <tr>
+          <td><%= att.Shift.Event.Name  %></th>
+          <td><%= att.Shift.Event.Date  %></th>
+          <td><%= att.Shift.Hours  %></th>
+          <td><%= att.Shift.Start  %></th>
+          <td><%= att.Shift.End  %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-</p>
-  
 
+<br>
 
-
-<%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

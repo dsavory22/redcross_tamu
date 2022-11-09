@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Use Bootstrap for styling
 gem 'bootstrap', '~> 5.2.0'
+# Bootstrap form
+gem "bootstrap_form", "~> 5.1"
 # Bootstrap JavaScript can optionally use jQuery
 gem 'jquery-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
