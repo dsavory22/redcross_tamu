@@ -26,29 +26,34 @@
     </thead>
     <tbody>
       <%# .. and ... is <= and < %>
-      <% @events.where.not(Date: ...Date.current).each do |event| %>
-        <tr>
-          <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
-          <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
-          <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
-          <%if event.Type == 0 %>
-            <td>Club Meeting</td>
-          <%else%>
-            <td>Volunteer Event</td>
-          <%end%>
-          <td><%= event.Date.strftime("%m/%d/%Y") %></td>
-          <td><%= event.Start.strftime("%I:%M %p") %></td>
-          <td><%= event.End.strftime("%I:%M %p") %></td>
-          <td>
-            <%= link_to edit_event_path(event), :class => 'name_links' do %>
-              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
-            <% end %>
-            &nbsp;
-            <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
-              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
-            <% end %>
-          </td>
-        </tr>
+      <%# @events.where.not(Date: ...Date.current).each do |event| %>
+      <% @events.each do |event| %>
+        <% if event.Date < Date.current %>
+      
+        <% else %>
+          <tr>
+            <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
+            <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
+            <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
+            <%if event.Type == 0 %>
+              <td>Club Meeting</td>
+            <%else%>
+              <td>Volunteer Event</td>
+            <%end%>
+            <td><%= event.Date.strftime("%m/%d/%Y") %></td>
+            <td><%= event.Start.strftime("%I:%M %p") %></td>
+            <td><%= event.End.strftime("%I:%M %p") %></td>
+            <td>
+              <%= link_to edit_event_path(event), :class => 'name_links' do %>
+                <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+              <% end %>
+              &nbsp;
+              <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
@@ -73,29 +78,33 @@
       </tr>
     </thead>
     <tbody>
-      <% @events.where(Date: ...Date.current).each do |event| %>
-        <tr>
-          <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
-          <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
-          <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
-          <%if event.Type == 0 %>
-            <td>Club Meeting</td>
-          <%else%>
-            <td>Volunteer Event</td>
-          <%end%>
-          <td><%= event.Date.strftime("%m/%d/%Y") %></td>
-          <td><%= event.Start.strftime("%I:%M %p") %></td>
-          <td><%= event.End.strftime("%I:%M %p") %></td>
-          <td>
-            <%= link_to edit_event_path(event), :class => 'name_links' do %>
-              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
-            <% end %>
-            &nbsp;
-            <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
-              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
-            <% end %>
-          </td>
-        </tr>
+      <% @events.each do |event| %>
+        <% if event.Date > Date.current %>
+      
+        <% else %>
+          <tr>
+            <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
+            <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
+            <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
+            <%if event.Type == 0 %>
+              <td>Club Meeting</td>
+            <%else%>
+              <td>Volunteer Event</td>
+            <%end%>
+            <td><%= event.Date.strftime("%m/%d/%Y") %></td>
+            <td><%= event.Start.strftime("%I:%M %p") %></td>
+            <td><%= event.End.strftime("%I:%M %p") %></td>
+            <td>
+              <%= link_to edit_event_path(event), :class => 'name_links' do %>
+                <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+              <% end %>
+              &nbsp;
+              <%= link_to event, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
