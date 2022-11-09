@@ -29,6 +29,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f) 
+        @transaction.Total = @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -44,6 +45,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update(transaction_params)
         @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f + beforeUpdate.to_f ) 
+        @transaction.Total = @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f + beforeUpdate.to_f
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -72,7 +74,7 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer)
+      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer, :Total)
       # params.require(:transaction).permit(:Purpose, :Amount, :Date, :Officer)
     end
 end
