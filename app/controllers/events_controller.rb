@@ -36,7 +36,6 @@ class EventsController < ApplicationController
   # POST /events or /events.json
   def create
     @event = Event.new(event_params)
-    @event.url = request.base_url + '/events/' # + params[:id] + '?att=1'
     
     respond_to do |format|
       if @event.save
