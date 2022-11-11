@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
 <div class="form">
   <h1 class="form-title"><%= heading %></h1>
@@ -19,28 +23,32 @@
         <%= form.text_field :Last_Name, hide_label: true %>
       </div>
 
-      <div class="col-md-12">
-        <%# use options_for_select([array of values], form.object.column || 'Default value') to use its current value or the default if new %>
-        <%if Member.where(Email: current_user.email).first.Role == 6 %>
-          <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member') %>
-        <%else%>
-          <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member'), {}, disabled: true %>
-        <%end%>
-      </div>
+      <% if form.object.year != 6 %>
+        <div class="col-md-12">
+          <%# use options_for_select([array of values], form.object.column || 'Default value') to use its current value or the default if new %>
+          <% if Member.where(Email: current_user.email).first.Role == 6 %>
+            <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member') %>
+          <% else %>
+            <%= form.select :Role, options_for_select([['Member', 0], ['Technology Chair', 1], ['Social Chair', 2], ['Secretary', 3], ['Treasurer', 5], ['VP', 4], ['President', 6]], form.object.Role || 'Member'), {}, disabled: true %>
+          <% end %>
+        </div>
+      <% end %>
 
       <div class="col-md-12">
         <%= form.text_field :Email %>
       </div>
 
-      <div class="col-md-6">
-        <%= form.label :Fall_Dues, "Fall Dues", class: "form-label" %>
-        <%= form.select :Fall_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Fall_Dues || false), hide_label: true %>
-      </div>
+      <% if form.object.year != 6 %>
+        <div class="col-md-6">
+          <%= form.label :Fall_Dues, "Fall Dues", class: "form-label" %>
+          <%= form.select :Fall_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Fall_Dues || false), hide_label: true %>
+        </div>
 
-      <div class="col-md-6">
-        <%= form.label :Spring_Dues, "Spring Dues", class: "form-label" %>
-        <%= form.select :Spring_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Spring_Dues || false), hide_label: true %>
-      </div>
+        <div class="col-md-6">
+          <%= form.label :Spring_Dues, "Spring Dues", class: "form-label" %>
+          <%= form.select :Spring_Dues, options_for_select([['Unpaid', false], ['Paid', true]], form.object.Spring_Dues || false), hide_label: true %>
+        </div>
+      <% end %>
 
       <div class="col-md-6">
         <%= form.label :Shirt_Size, "Shirt Size", class: "form-label" %>

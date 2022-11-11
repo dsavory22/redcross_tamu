@@ -6,12 +6,7 @@ class MembersController < ApplicationController
   # GET /members or /members.json
   # used same code from show, maybe make helper method to avoid redundancy
   def index
-    @members = Member.all
-    @MemberAttendances = Attendance.where(Member_id: params[:id]) 
-    @hours = 0
-    @MemberAttendances.each do |single|
-      @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
-    end
+    @members = Member.all.order(:Last_Name)
   end
 
   # GET /members/1 or /members/1.json
@@ -39,7 +34,7 @@ class MembersController < ApplicationController
     @member = Member.new(member_params)
     respond_to do |format|
       if @member.save
-        format.html { redirect_to members_url, notice: "Member was successfully created" }
+        format.html { redirect_to new_member_path, notice: "Member was successfully created" }
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new, status: :unprocessable_entity }

@@ -68,6 +68,8 @@ Event.create(Type: 1, Date:"2021-10-21", Name: "Missing Maps", Start:"12:00", En
 Event.create(Type: 1, Date:"2021-10-28", Name: "Study Social", Start:"12:00", End: "16:00")
 
 Event.create(Type: 1, Date:"2021-09-25", Name: "Boba Social", Start:"12:00", End: "14:00")
+Shift.create(Event_id: 7, Start:"12:00", End: "13:00", Shift_Cap: 5)
+Attendance.create(Member_id: 21, Shift_id: 1, Hours: 1, Start:"12:00", End: "13:00")
 
 Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", End: "16:00")
 

@@ -22,8 +22,8 @@ New Event
     has_one_attached :qr_code_shift
 
     
-    after_create :generate_qr_shifts
-    after_create :generate_qr_attendance
+    #after_create :generate_qr_shifts
+    #after_create :generate_qr_attendance
 
     
     #Ex:- :default =>''

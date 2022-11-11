@@ -5,12 +5,11 @@ class ApplicationController < ActionController::Base
         if a == nil
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to new_user_session_path, alert: 'Unauthorized to access website, please contact your administrator to gain priveleges.' }
             end
         elsif a.Role < 5
-            sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
+                format.html { redirect_to members_path, alert: 'Unauthorized to access budget, please contact your administrator to gain priveleges.' }
             end        
         end
     end
@@ -20,12 +19,12 @@ class ApplicationController < ActionController::Base
         if a == nil
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 1' }
+                format.html { redirect_to new_user_session_path, alert: 'Unauthorized to access website, please contact your administrator to gain priveleges.' }
             end
         elsif a.Role < 1
             sign_out_all_scopes
             respond_to do |format|
-                format.html { redirect_to new_user_session_path, notice: 'Unauthorized to perform this action, please contact your administrator to gain priveleges. 2' }
+                format.html { redirect_to new_user_session_path, alert: 'Unauthorized to perform this action, please contact your administrator to gain priveleges.' }
             end
         end
     end

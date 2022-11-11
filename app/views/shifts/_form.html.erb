@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <div class="form">
   <h1 class="form-title"><%= heading %></h1>
 
@@ -41,5 +47,5 @@
         
     </div>
   <% end %>
-  <%= link_to 'Back', :back %>
+  <%= link_to 'Back', events_path %>
 </div>
