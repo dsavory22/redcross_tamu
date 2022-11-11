@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :check_officer_privelege
   before_action :check_transaction_privelege
 
 
@@ -87,7 +88,7 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer, :transaction_type)
+      params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer, :transaction_type, :Total)
       # params.require(:transaction).permit(:Purpose, :Amount, :Date, :Officer)
     end
 end
