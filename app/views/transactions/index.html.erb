@@ -11,10 +11,11 @@
 
 <br>
 
-<%= line_chart Transaction.pluck(:Date, :Total), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000
-", "#FFFFFF"] %>
+<%= line_chart Transaction.pluck(:Date, :Total), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000", "#FFFFFF"] %>
 
-<%= pie_chart Transaction.group(:Purpose).sum(:Amount), refresh: 5, title: "Amount Spent per Purpose", colors: ["#FF0000", "#d3d3d3", "#a9a9a9"] %>
+<br>
+
+<%= pie_chart Transaction.where('"Amount" < 0').group(:Purpose).sum(:Amount), refresh: 5, title: "Amount Spent per Purpose", colors: ["#FF0000", "#d3d3d3", "#a9a9a9"] %>
 
 <br>
 

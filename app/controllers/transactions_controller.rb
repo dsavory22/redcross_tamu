@@ -43,6 +43,7 @@ class TransactionsController < ApplicationController
     end
       
     @transaction = Transaction.new(create_params)
+    @transaction.Total = Transaction.sum(:Amount) + @transaction.Amount
 
     respond_to do |format|
       if @transaction.save

@@ -380,7 +380,6 @@ DEPENDENCIES
   devise
   google-apis-drive_v3 (~> 0.1)
   groupdate (~> 6.1)
-  jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.3)
   omniauth
