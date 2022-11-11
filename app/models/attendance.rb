@@ -12,14 +12,10 @@ class Attendance < ApplicationRecord
 =end
     validates :Member_id, presence: true
     validates :Shift_id, presence: true
+    validates :Start, presence: true
+
+    validates_time :End, on_or_after: :Start, before_message: "End time must be on or after the start time"
 
     require 'uri'
     require 'cgi'
-
-    def changeHours
-        shift = Shift.where(id: self.Shift_id).first
-        self.Hours = ((shift.End - shift.Start)/3600).round
-        self.save
-    end
-
 end
