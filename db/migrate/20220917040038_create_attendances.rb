@@ -3,9 +3,7 @@ class CreateAttendances < ActiveRecord::Migration[6.1]
     create_table :attendances do |t|
       t.belongs_to :Member
       t.belongs_to :Shift
-      t.integer :Hours
-      t.time :Start
-      t.time :End
+      t.integer :Hours, default: 0
 
       t.timestamps
     end

@@ -2,6 +2,14 @@
 
 <p id="notice"><%= notice %></p>
 
+
+<strong> sign-up </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
+<strong> sign-in </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
+
+
+
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Events</h1>
 
@@ -17,8 +25,6 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Shifts</th>
-      <th>Attendance</th>
       <th>Type</th>
       <th>Date</th>
       <th>Start Time</th>
@@ -33,8 +39,6 @@
       <% else %>
       <tr>
         <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
-        <td><%= image_tag(event.qr_code_shift) if event.qr_code_shift.attached? %></td>
-        <td><%= image_tag(event.qr_code_attendance) if event.qr_code_attendance.attached? %></td>
         <%if event.Type == 0 %>
           <td>Club Meeting</td>
         <%else%>

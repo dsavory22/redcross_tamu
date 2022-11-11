@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
-    @budgets = Budget.all
+    # @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -30,12 +30,12 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     respond_to do |format|
       if @transaction.save
-        if @t_type == 'deposit'
-          @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + transaction_params[:Amount].to_f) 
-        end
-        if @t_type == 'withdraw'
-          @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f) 
-        end
+        # if @t_type == 'deposit'
+        #   @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + transaction_params[:Amount].to_f) 
+        # end
+        # if @t_type == 'withdraw'
+        #   @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f) 
+        # end
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -47,11 +47,11 @@ class TransactionsController < ApplicationController
 
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
-    puts "TESTING 2"
-    beforeUpdate = @transaction.Amount
+    # puts "TESTING 2"
+    # beforeUpdate = @transaction.Amount
     respond_to do |format|
       if @transaction.update(transaction_params)
-        @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + transaction_params[:Amount].to_f + beforeUpdate.to_f ) 
+        # @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + transaction_params[:Amount].to_f + beforeUpdate.to_f ) 
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -63,7 +63,7 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
-    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + @transaction.Amount)
+    # @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|

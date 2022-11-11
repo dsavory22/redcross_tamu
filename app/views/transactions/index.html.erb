@@ -2,7 +2,7 @@
 
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1>Balance:</h1>
-    <td><%= Budget.first.Total_amount %></td> 
+    <td><%= Transaction.sum(:Amount) %></td> 
 </div>
 <br>
 
