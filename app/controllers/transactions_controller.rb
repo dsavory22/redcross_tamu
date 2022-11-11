@@ -7,7 +7,7 @@ class TransactionsController < ApplicationController
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all
-    @budgets = Budget.all
+    # @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -45,11 +45,6 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        #My changes
-        #@updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - transaction_params[:Amount].to_f) 
-        #format.html { redirect_to transactions_url, notice: "Transaction was successfully created" }
-        @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + create_params[:Amount].to_f) 
-
         format.html { redirect_to transactions_url, notice: notice_msg }
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -76,9 +71,6 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
-    puts "TRANSACTION AMOUNT:\n"
-    puts @transaction.Amount
-    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|

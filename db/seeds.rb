@@ -45,30 +45,30 @@ Member.create(First_Name: 'Chase', Last_Name: 'Cason', Role: 6 , Email: 'chaseca
 Member.create(First_Name: 'Layla', Last_Name: 'Wilkinson', Role: 6 , Email: 'leilaniwilkinson@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: 4)
 Member.create(First_Name: 'Dylan', Last_Name: 'Craven', Role: 6 , Email: 'dylan.craven@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: 4)
 
-Event.create(Type: 0, Date:"2021-09-25", Name: "Meeting 1")
+# Event.create(Type: 0, Date:"2021-09-25", Name: "Meeting 1")
 
-Event.create(Type: 0, Date:"2021-09-30", Name: "Meeting 2")
+# Event.create(Type: 0, Date:"2021-09-30", Name: "Meeting 2")
 
-Event.create(Type: 0, Date:"2021-10-23", Name: "Meeting 3")
+# Event.create(Type: 0, Date:"2021-10-23", Name: "Meeting 3")
 
-Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
+# Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
 
-Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
+# Event.create(Type: 0, Date:"2021-11-13", Name: "Meeting 4")
 
-Event.create(Type: 1, Date:"2021-09-25", Name: "ReStore", Start:"12:00", End: "16:00")
+# Event.create(Type: 1, Date:"2021-09-25", Name: "ReStore", Start:"12:00", End: "16:00")
 
-Event.create(Type: 1, Date:"2021-09-30", Name: "Blood Drive", Start:"0:00", End: "12:00")
+# Event.create(Type: 1, Date:"2021-09-30", Name: "Blood Drive", Start:"0:00", End: "12:00")
 
-Event.create(Type: 1, Date:"2021-10-07", Name: "Skating Social", Start:"12:00", End: "14:00")
+# Event.create(Type: 1, Date:"2021-10-07", Name: "Skating Social", Start:"12:00", End: "14:00")
 
-Event.create(Type: 1, Date:"2021-10-16", Name: "ReStore", Start:"12:00", End: "14:00")
+# Event.create(Type: 1, Date:"2021-10-16", Name: "ReStore", Start:"12:00", End: "14:00")
 
-Event.create(Type: 1, Date:"2021-10-21", Name: "Missing Maps", Start:"12:00", End: "16:00")
+# Event.create(Type: 1, Date:"2021-10-21", Name: "Missing Maps", Start:"12:00", End: "16:00")
 
-Event.create(Type: 1, Date:"2021-10-28", Name: "Study Social", Start:"12:00", End: "16:00")
+# Event.create(Type: 1, Date:"2021-10-28", Name: "Study Social", Start:"12:00", End: "16:00")
 
-Event.create(Type: 1, Date:"2021-09-25", Name: "Boba Social", Start:"12:00", End: "14:00")
+# Event.create(Type: 1, Date:"2021-09-25", Name: "Boba Social", Start:"12:00", End: "14:00")
 
-Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", End: "16:00")
+# Event.create(Type: 1, Date:"2021-11-13", Name: "Missing Maps", Start:"12:00", End: "16:00")
 
 Budget.create(Total_amount: 0)
