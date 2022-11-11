@@ -1,10 +1,11 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
-  before_action :check_officer_privelege
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :check_officer_privelege, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances or /attendances.json
   def index
+    
     @attendances = Attendance.all
   end
 
@@ -14,9 +15,9 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
-    path = (request.fullpath)[17..-1] 
-    uri = CGI::parse(path)
-    @eventid = ((uri["eventid"])[0])
+    # path = (request.fullpath)[17..-1] 
+    # uri = CGI::parse(path)
+    # @eventid = ((uri["eventid"])[0])
 
     @attendance = Attendance.new
     @shift_options = Shift.where(Event_id: @eventid)
@@ -64,6 +65,16 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def sign_in
+
+    @att = Attendance.find(params[:at])
+    @att.changeHours
+    @att.save
+
+    redirect_to attendances_path, notice: "updated"
+  end
+    
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
@@ -75,10 +86,7 @@ class AttendancesController < ApplicationController
       params.require(:attendance).permit(:Member_id,:Shift_id,:Hours, :Start, :End)
     end
 
-    # def check
-    #   if User.where(email: current_user.email).first.authority_level == 0
-    #     redirect_to members_path
-    #   end
-    # end
+
+  
 
 end

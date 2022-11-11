@@ -8,14 +8,16 @@ Rails.application.routes.draw do
   }
 
  # get "files/index"
-
+  resources :members
+  root 'members#index'
   resources :transactions
   resources :budgets
   resources :events
   resources :shifts
   resources :attendances
-  resources :members
   resources :files
-  root 'members#index'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  put "sign_in" =>'attendances#sign_in'
 end
