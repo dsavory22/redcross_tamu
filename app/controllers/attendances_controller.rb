@@ -5,7 +5,6 @@ class AttendancesController < ApplicationController
 
   # GET /attendances or /attendances.json
   def index
-    
     @attendances = Attendance.all
   end
 
@@ -18,7 +17,6 @@ class AttendancesController < ApplicationController
     # path = (request.fullpath)[17..-1] 
     # uri = CGI::parse(path)
     # @eventid = ((uri["eventid"])[0])
-
     @attendance = Attendance.new
     @shift_options = Shift.where(Event_id: @eventid)
   end
@@ -30,7 +28,6 @@ class AttendancesController < ApplicationController
   # POST /attendances or /attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
-
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
@@ -58,7 +55,6 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1 or /attendances/1.json
   def destroy
     @attendance.destroy
-
     respond_to do |format|
       format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }
       format.json { head :no_content }
@@ -66,15 +62,12 @@ class AttendancesController < ApplicationController
   end
 
   def sign_in
-
     @att = Attendance.find(params[:at])
     @att.changeHours
     @att.save
-
     redirect_to attendances_path, notice: "updated"
   end
-    
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attendance
@@ -85,8 +78,4 @@ class AttendancesController < ApplicationController
     def attendance_params
       params.require(:attendance).permit(:Member_id,:Shift_id,:Hours, :Start, :End)
     end
-
-
-  
-
 end

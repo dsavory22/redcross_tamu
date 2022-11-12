@@ -4,6 +4,11 @@
     <%= flash[:notice] %>
   </div>
 <% end %>
+<% if flash[:alert] %>
+  <div class="alert alert-danger" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Members</h1>
@@ -15,15 +20,15 @@
   <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>Name <%= link_to "^", :sort => "Last_Name"%></th>
+        <th style="width: 16rem">Name <%= link_to "^", :sort => "Last_Name"%></th>
         <th>Role <%= link_to "^", :sort => "Role"%></th>
-        <th>Email <%= link_to "^", :sort => "Email"%></th>
+        <th style="width: 18rem">Email <%= link_to "^", :sort => "Email"%></th>
         <th>Fall Dues</th>
         <th>Spring Dues</th>
         <th>Shirt Size <%= link_to "^", :sort => "Shirt"%></th>
         <th>Year <%= link_to "^", :sort => "Year"%></th>
         <th>Total Hours</th>
-        <th>Action</th>
+        <th class="actions">Action</th>
       </tr>
     </thead>
     
@@ -81,9 +86,9 @@
               <td>Alumni</td>
             <%end%>
 
-            <td><%= @hours %></td>
+            <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
 
-            <td>
+            <td class="text-center">
               <%= link_to member_path(member), :class => 'name_links' do %>
                 <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
               <% end %>
@@ -113,11 +118,11 @@
   <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Shirt Size</th>
-        <th>Total Hours</th>
-        <th>Action</th>
+        <th style="width: 18.9375rem">Name</th>
+        <th style="width: 18.9375rem">Email</th>
+        <th style="width: 18.9375rem">Shirt Size</th>
+        <th style="width: 18.9375rem">Total Hours</th>
+        <th class="actions">Action</th>
       </tr>
     </thead>
     
@@ -127,8 +132,8 @@
             <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
             <td><%= member.Email %></td>
             <td><%= member.Shirt_Size %></td>
-            <td><%= @hours %></td>
-            <td>
+            <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
+            <td class="text-center">
               <%= link_to edit_member_path(member), :class => 'name_links' do %>
                 <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
               <% end %>

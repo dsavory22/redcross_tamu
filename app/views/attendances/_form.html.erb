@@ -1,5 +1,4 @@
 <%= form_with(model: attendance) do |form| %>
-
   <% if attendance.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
@@ -41,15 +40,11 @@
           <%= form.submit class: "btn btn-primary" %>
         </div>
     <%else%>
-
       <% Event.where('"Date" >= ?', Time.now.to_date).each do |event|  %>
         <%= link_to "#{event.Name}", url_for(:event => event.id) %>
         <br>
       <%end%>
-
     <%end%>
-
-
   <%else%>
     <%if Member.where(Email: current_user.email).first.Role > 0%>
       <div class="d-grid gap-3">
@@ -77,6 +72,4 @@
     <%end%>
     
   <%end%>
-
-
 <% end %>

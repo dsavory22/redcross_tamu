@@ -1,6 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @member.First_Name %> <%= @member.Last_Name %>'s Attendance</h1>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0"><%= @member.First_Name %> <%= @member.Last_Name %>'s Attendance</h1>
+</div>
 
 <div class="table-ruby table-responsive">
   <table class="table table-hover table-striped">
@@ -18,9 +20,10 @@
       <% @MemberAttendances.each do |att|  %>
         <tr>
           <td><%= att.Shift.Event.Name  %></th>
-          <td><%= att.Shift.Event.Date  %></th>
-          <td><%= att.Shift.Start  %></th>
-          <td><%= att.Shift.End  %></th>
+          <td><%= att.Shift.Event.Date.strftime("%m/%d/%Y")  %></th>
+          <td><%= att.Hours  %></th>
+          <td><%= att.Shift.Start.strftime("%I:%M %p")  %></th>
+          <td><%= att.Shift.End.strftime("%I:%M %p")  %></th>
         </tr>
       <% end %>
     </tbody>

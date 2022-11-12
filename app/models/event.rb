@@ -18,11 +18,6 @@ New Event
 
     validates_time :End, on_or_after: :Start, before_message: "End time must be on or after the start time"
 
-
-
-
-
-    
     def to_s
         title
     end
