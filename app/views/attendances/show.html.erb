@@ -6,15 +6,7 @@
   <%= @attendance.Hours %>
 </p>
 
-<p>
-  <strong>Start:</strong>
-  <%= @attendance.Start.strftime("%I:%M %p") %>
-</p>
 
-<p>
-  <strong>End:</strong>
-  <%= @attendance.End.strftime("%I:%M %p") %>
-</p>
 
 <%= link_to 'Edit', edit_attendance_path(@attendance) %> |
 <%= link_to 'Back', events_path %>

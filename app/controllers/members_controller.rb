@@ -6,7 +6,22 @@ class MembersController < ApplicationController
   # GET /members or /members.json
   # used same code from show, maybe make helper method to avoid redundancy
   def index
-    @members = Member.all
+    #@members = Member.all
+    if params[:sort] == "Last_Name"
+      @members = Member.order(:Last_Name)
+    elsif params[:sort] == "Last_Name_Desc"
+      @members = Member.order(Last_Name: :desc)
+    elsif params[:sort] == "Role"
+      @members = Member.order(:Role)
+    elsif params[:sort] == "Email"
+      @members = Member.order(:Email)
+    elsif params[:sort] == "Shirt"
+      @members = Member.order(:Shirt_Size)
+    elsif params[:sort] == "Year"
+      @members = Member.order(:year)
+    else  
+      @members = Member.all
+    end
     @MemberAttendances = Attendance.where(Member_id: params[:id]) 
     @hours = 0
     @MemberAttendances.each do |single|

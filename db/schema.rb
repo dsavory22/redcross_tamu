@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2022_10_12_040835) do
     t.string "Name"
     t.time "Start"
     t.time "End"
-    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
