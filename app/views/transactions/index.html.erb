@@ -11,12 +11,21 @@
 
 <br>
 
+<%= line_chart Transaction.pluck(:Date, :Total), refresh: 5, title: "Total Amount vs Time", xtitle: "Day", ytitle: "$", curve: false, colors: ["#FF0000", "#FFFFFF"] %>
+
+<br>
+
+<%= pie_chart Transaction.where('"Amount" < 0').group(:Purpose).sum(:Amount), refresh: 5, title: "Amount Spent per Purpose", colors: ["#FF0000", "#d3d3d3", "#a9a9a9"] %>
+
+<br>
+
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Transactions</h1>
 
   <%= link_to 'Desposit', new_transaction_path(:ttype => 'Deposit'), :class => 'btn btn-primary btn-new' %>
   <%= link_to 'Withdraw', new_transaction_path(:ttype => 'Withdraw'), :class => 'btn btn-primary btn-new' %>
 </div>
+
 
 <div class="table-ruby table-responsive">
   <table class="table table-hover table-striped">

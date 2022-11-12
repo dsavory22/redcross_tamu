@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2022_10_12_040835) do
     t.string "Name"
     t.time "Start"
     t.time "End"
-    t.string "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -99,6 +98,7 @@ ActiveRecord::Schema.define(version: 2022_10_12_040835) do
     t.string "Purpose"
     t.decimal "Amount", precision: 8, scale: 2
     t.string "Officer"
+    t.decimal "Total", precision: 8, scale: 2
     t.date "Date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
