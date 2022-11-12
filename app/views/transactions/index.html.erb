@@ -6,7 +6,7 @@
 
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Balance </h1>
-   <h1 style="margin: 0; font-weight: 300;"><%= number_to_currency(Transaction.sum(:Amount)) %></h1>
+    <h1 style="margin: 0; font-weight: 300;"><%= number_to_currency(Transaction.sum(:Amount)) %></h1>
 </div>
 
 <br>
@@ -14,8 +14,8 @@
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Transactions</h1>
 
-  <%= link_to 'Desposit', new_transaction_path(:ttype => 'deposit'), :class => 'btn btn-primary btn-new' %>
-  <%= link_to 'Withdraw', new_transaction_path(:ttype => 'withdraw'), :class => 'btn btn-primary btn-new' %>
+  <%= link_to 'Desposit', new_transaction_path(:ttype => 'Deposit'), :class => 'btn btn-primary btn-new' %>
+  <%= link_to 'Withdraw', new_transaction_path(:ttype => 'Withdraw'), :class => 'btn btn-primary btn-new' %>
 </div>
 
 <div class="table-ruby table-responsive">
@@ -26,7 +26,7 @@
         <th>Amount</th>
         <th>Date</th>
         <th>Officer</th>
-        <th>Actions</th>
+        <th class="actions">Actions</th>
       </tr>
     </thead>
 
@@ -37,7 +37,7 @@
           <td><%= number_to_currency(transaction.Amount) %></td>
           <td><%= transaction.Date.strftime("%m/%d/%Y") %></td>
           <td><%= transaction.Officer %></td>
-          <td>
+          <td class="text-center">
             <%= link_to edit_transaction_path(transaction), :class => 'name_links' do %>
               <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
             <% end %>

@@ -2,7 +2,6 @@
 <!-- if the current user is nil then someone is trying to sign in, and we know that that person has to be someone that has a shift, but we also know that the will have an attendance that has a value of 0-->
 <% if current_user.nil? %>
   <%if params.has_key?(:event) and params.has_key?(:member)%>
-
     <%Attendance.where(id: params[:attendance]).each do |att| %>
       <% Shift.where(id: att.Shift_id).each do |sht| %>
       <%puts att.id %>
@@ -12,25 +11,18 @@
       
 <!-- <%end%>-->
         
-
         <%end%>
       <%end%> 
-
   <%else%>
     <%Attendance.where(Hours: 0).each do |att| %>
       <% Shift.where(id: att.Shift_id).each do |sht| %>
         <% if Event.where(id: sht.Event_id).first.End <= Time.now%>
-
             <%= link_to "#{Event.where(id: sht.Event_id).first.Name} #{Member.where(id: att.Member_id).first.First_Name}", url_for(:event => sht.Event_id, :member =>att.Member_id, :attendance => att.id) %>
-
         <%end%>
       <%end%>
     <%end%>
-
   <%end%>
   
-
-
 <%else%>
       <h1>Attendances</h1>
           <table class="table">
@@ -63,5 +55,3 @@
           <a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Attendance', new_attendance_path %></a>
 
 <%end%>
-
-

@@ -1,3 +1,14 @@
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; top: 1rem; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="alert alert-danger" role="alert" id="hideMeAfter5Seconds" style="position: fixed; top: 1rem; right: 1rem;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div class="d-flex min-vh-100 w-100">
   <div class="d-flex flex-fill justify-content-center align-items-center" style="background: #FA071E;">
     <%= image_tag "login.png", style: 'height:45vw; width:45vw;' %>
@@ -5,7 +16,6 @@
   <div class="d-flex flex-column justify-content-center align-items-center" style="width: 50%">
     <h1>Login</h1>
     <p class="text-secondary mb-4">Officers use your google account to sign in</p>
-    <p class="text-secondary mb-4" id="notice"><%= notice %></p>
     <%= render "devise/shared/links" %>
   </div>
 </div>
