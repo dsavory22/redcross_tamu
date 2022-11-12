@@ -1,7 +1,7 @@
 class AttendancesController < ApplicationController
   before_action :set_attendance, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
-  before_action :check_officer_privelege
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :check_officer_privelege, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances or /attendances.json
   def index
@@ -14,10 +14,9 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
-    path = (request.fullpath)[17..-1] 
-    uri = CGI::parse(path)
-    @eventid = ((uri["eventid"])[0])
-
+    # path = (request.fullpath)[17..-1] 
+    # uri = CGI::parse(path)
+    # @eventid = ((uri["eventid"])[0])
     @attendance = Attendance.new
     @shift_options = Shift.where(Event_id: @eventid)
   end
@@ -29,7 +28,6 @@ class AttendancesController < ApplicationController
   # POST /attendances or /attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
-
     respond_to do |format|
       if @attendance.save
         format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
@@ -57,11 +55,17 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1 or /attendances/1.json
   def destroy
     @attendance.destroy
-
     respond_to do |format|
       format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def sign_in
+    @att = Attendance.find(params[:at])
+    @att.changeHours
+    @att.save
+    redirect_to attendances_path, notice: "updated"
   end
 
   private
@@ -74,11 +78,4 @@ class AttendancesController < ApplicationController
     def attendance_params
       params.require(:attendance).permit(:Member_id,:Shift_id,:Hours, :Start, :End)
     end
-
-    # def check
-    #   if User.where(email: current_user.email).first.authority_level == 0
-    #     redirect_to members_path
-    #   end
-    # end
-
 end

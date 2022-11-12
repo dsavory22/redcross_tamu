@@ -6,7 +6,7 @@ class TransactionsController < ApplicationController
   # GET /transactions or /transactions.json
   def index
     @transactions = Transaction.all.order(:Date).reverse_order
-    @budgets = Budget.all
+    # @budgets = Budget.all
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -15,7 +15,6 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    puts "TEST 1"
     @transaction_type = params[:ttype]
     @transaction = Transaction.new(Date: Date.current)
   end
@@ -26,8 +25,6 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    puts "TEST 2"
-    puts transaction_params
     @t_type = params[:commit]
     create_params = transaction_params
     notice_msg = "Deposit was successfully created"
@@ -42,7 +39,6 @@ class TransactionsController < ApplicationController
 
     respond_to do |format|
       if @transaction.save
-        @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + create_params[:Amount].to_f) 
         format.html { redirect_to transactions_url, notice: notice_msg }
         format.json { render :show, status: :created, location: @transaction }
       else
@@ -69,9 +65,7 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
-    puts "TRANSACTION AMOUNT:\n"
-    puts @transaction.Amount
-    @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
+    # @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|

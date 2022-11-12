@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
     def check_transaction_privelege
         a = Member.where(Email: current_user.email).first
         if a == nil

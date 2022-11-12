@@ -1,52 +1,75 @@
 <%= form_with(model: attendance) do |form| %>
   <% if attendance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
-
-      <ul>
-        <% attendance.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  
+      <div id="error_explanation">
+        <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+        <ul>
+          <% attendance.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    
   <% end %>
 
-  <div class="d-grid gap-3">
+
+<!-- If the user does not exsist then go into the case that someone is trying to sign-up -->
+  <%if current_user.nil? or Member.where(Email: current_user.email).first.Role == 0 %>
+  <!--param of event means that we know what event we are trying to get-->
+    <%if params.has_key?(:event) %>
+      <div class="d-grid gap-3">
+    
+        <div class="field">
+          <%= form.label :Member_id %>
+          <%= form.select :Member_id, Member.order(:Last_Name).map{|member| [member.Last_Name, member.id]}, include_blank: true, id: "id of member" %>
+        </div>
+
+        <div class="field" styple ="display:none">
+          <%= form.label :Shift_id %>
+          <%= form.select :Shift_id , Shift.where(Event_id: params[:event]).map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
   
 
-
-    <div class="field">
-      <%= form.label :Member_id %>
-      <%= form.select :Member_id, Member.order(:Last_Name).map{|member| [member.Last_Name, member.id]}, include_blank: true, id: "id of member" %>
-    </div>
+        </div>
 
 
+        <div class="field" style="display:none">
+          <%= form.label :Hours %>
+          <%= form.number_field :Hours, selected: 0 %>
+        </div>
 
-    <div class="field">
-      <%= form.label :Shift_id %>
-      <%= form.select :Shift_id , @shift_options.map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
-    </div>
+        <div>
+          <%= form.submit class: "btn btn-primary" %>
+        </div>
+    <%else%>
+      <% Event.where('"Date" >= ?', Time.now.to_date).each do |event|  %>
+        <%= link_to "#{event.Name}", url_for(:event => event.id) %>
+        <br>
+      <%end%>
+    <%end%>
+  <%else%>
+    <%if Member.where(Email: current_user.email).first.Role > 0%>
+      <div class="d-grid gap-3">
+    
+        <div class="field">
+          <%= form.label :Member_id %>
+          <%= form.select :Member_id, Member.order(:Last_Name).map{|member| [member.Last_Name, member.id]}, include_blank: true, id: "id of member" %>
+        </div>
+
+        <div class="field" styple ="display:none">
+          <%= form.label :Shift_id %>
+          <%= form.select :Shift_id , Shift.all.map{|shift| ["#{Event.find(shift.Event_id).Name}: #{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
+        </div>
 
 
-    <div class="field">
-      <%= form.label :Hours %>
-      <%= form.number_field :Hours %>
-    </div>
+        <div class="field">
+          <%= form.label :Hours %>
+          <%= form.number_field :Hours %>
+        </div>
 
-    <div class="field">
-      <%= form.label :Start %>
-      <%= form.time_select :Start, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
+      <div>
+        <%= form.submit class: "btn btn-primary" %>
+      </div>
 
-    <div class="field">
-      <%= form.label :End %>
-      <%= form.time_select :End, :minute_step => 5, :twelve_hour => true, :ampm => true %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
-      
-  </div>
+    <%end%>
+    
+  <%end%>
 <% end %>

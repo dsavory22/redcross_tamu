@@ -128,7 +128,7 @@
             <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
             <td><%= member.Email %></td>
             <td><%= member.Shirt_Size %></td>
-            <td><%= @hours %></td>
+            <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
             <td class="text-center">
               <%= link_to edit_member_path(member), :class => 'name_links' do %>
                 <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
