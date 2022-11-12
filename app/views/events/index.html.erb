@@ -30,6 +30,8 @@
         <th>End Time</th>
         <th>Action</th>
       </tr>
+    <%end%>
+    <%end%>
     </thead>
     <tbody>
       <%# .. and ... is <= and < %>
@@ -87,6 +89,10 @@
         <% else %>
           <tr>
             <td><%= link_to event.Name, event, :class => 'name_links', :style => 'color: black'; %></td>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> cb41fd24b5c7d7aa30971aa96902d8dd5dc3a1b9
             <%if event.Type == 0 %>
               <td>Club Meeting</td>
             <%else%>
