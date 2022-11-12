@@ -4,10 +4,9 @@ class TransactionsController < ApplicationController
   before_action :check_officer_privelege
   before_action :check_transaction_privelege
 
-
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.all.order(:Date).reverse_order
     # @budgets = Budget.all
   end
 
@@ -17,9 +16,6 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    #My changes
-    #@transaction = Transaction.new(Date: Date.current)
-    puts "TEST 1"
     @transaction_type = params[:ttype]
     @transaction = Transaction.new(Date: Date.current)
   end
@@ -30,13 +26,11 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    puts "TEST 2"
-    puts transaction_params
     @t_type = params[:commit]
     create_params = transaction_params
     notice_msg = "Deposit was successfully created"
 
-    if @t_type == 'withdraw'
+    if @t_type == 'Withdraw'
       create_params[:Amount] = -1 * create_params[:Amount].to_i
       puts params[:Amount]
       notice_msg = "Withdraw was successfully created"
@@ -62,7 +56,7 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.update(transaction_params)
         @updateBudget = @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f + transaction_params[:Amount].to_f - beforeUpdate.to_f ) 
-        format.html { redirect_to transactions_url, notice: "Transaction was successfully updated." }
+        format.html { redirect_to transactions_url, notice: "Transaction was successfully updated" }
         format.json { render :show, status: :ok, location: @transaction }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -73,10 +67,11 @@ class TransactionsController < ApplicationController
 
   # DELETE /transactions/1 or /transactions/1.json
   def destroy
+    # @transaction.Budget.update(Total_amount: @transaction.Budget.Total_amount.to_f - @transaction.Amount)
     @transaction.destroy
 
     respond_to do |format|
-      format.html { redirect_to transactions_url, notice: "Transaction was successfully destroyed" }
+      format.html { redirect_to transactions_url, notice: "Transaction was successfully deleted" }
       format.json { head :no_content }
     end
   end
@@ -90,6 +85,5 @@ class TransactionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def transaction_params
       params.require(:transaction).permit(:Budget_id, :Purpose, :Amount, :Date, :Officer, :transaction_type, :Total)
-      # params.require(:transaction).permit(:Purpose, :Amount, :Date, :Officer)
     end
 end

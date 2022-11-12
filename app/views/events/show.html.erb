@@ -132,14 +132,13 @@
         <% end %>
       </tr>
     </thead>
+    <% end %>
 
     <tbody>
       <% @EventAttendances.each do |att| %>
         <tr>
           <%if att.Hours > 0 %>
             <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
-            <td><%= att.Start.strftime("%I:%M %p") %></td>
-            <td><%= att.End.strftime("%I:%M %p") %></td>
           <% end %>
         </tr>
       <% end %>

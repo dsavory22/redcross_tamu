@@ -45,6 +45,16 @@
   .table-ruby {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  .actions {
+    width: 5.25rem;
+    text-align: center;
   }
 
   .table-hover tbody tr:hover td {
