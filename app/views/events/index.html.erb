@@ -5,23 +5,16 @@
   </div>
 <% end %>
 
+<strong> sign-up </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
+<strong> sign-in </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
 
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Events</h1>
+
   <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary btn-new' %>
-  <div style="padding-left: 45rem">
-  <strong> sign-up </strong>
-  <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
-  <strong> sign-in </strong>
-  <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
-  </div>
 </div>
-
-
-
-
-
-
 
 <br>
 
@@ -52,7 +45,7 @@
             <%else%>
               <td>Volunteer Event</td>
             <%end%>
-            <td><%= event.Date %></td>
+            <td><%= event.Date.strftime("%m/%d/%Y") %></td>
             <td><%= event.Start.strftime("%I:%M %p") %></td>
             <td><%= event.End.strftime("%I:%M %p") %></td>
             <td>
@@ -93,7 +86,7 @@
     </thead>
     <tbody>
       <% @events.each do |event| %>
-        <% if event.Date > Date.current %>
+        <% if event.Date >= Date.current %>
       
         <% else %>
           <tr>
@@ -125,4 +118,3 @@
     </tbody>
   </table>
 </div>
-<% end %>
