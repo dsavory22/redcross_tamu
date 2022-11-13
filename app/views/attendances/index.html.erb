@@ -4,11 +4,9 @@
   <%if params.has_key?(:event) and params.has_key?(:member)%>
     <%Attendance.where(id: params[:attendance]).each do |att| %>
       <% Shift.where(id: att.Shift_id).each do |sht| %>
-      <%puts att.id %>
  <!--       <%if sht.Start.to_time - 1.hours <= Time.now %> -->
           <%=button_to 'sign_in', "sign_in?at=#{att.id}", method: "put" %>
         
-      
 <!-- <%end%>-->
         
         <%end%>
@@ -16,9 +14,9 @@
   <%else%>
     <%Attendance.where(Hours: 0).each do |att| %>
       <% Shift.where(id: att.Shift_id).each do |sht| %>
-        <% if Event.where(id: sht.Event_id).first.End <= Time.now%>
+        <!--<% if Event.where(id: sht.Event_id).first.End <= Time.now%>-->
             <%= link_to "#{Event.where(id: sht.Event_id).first.Name} #{Member.where(id: att.Member_id).first.First_Name}", url_for(:event => sht.Event_id, :member =>att.Member_id, :attendance => att.id) %>
-        <%end%>
+        <!--<%end%>-->
       <%end%>
     <%end%>
   <%end%>
