@@ -117,7 +117,7 @@
                 <td>Alumni</td>
               <%end%>
 
-              <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
+              <td><%= Attendance.where(Member_id: member.id).where('"created_at" > ?', Budget.first.Date).sum(:Hours) %></td>
 
               <td class="text-center">
                 <%= link_to member_path(member), :class => 'name_links' do %>
