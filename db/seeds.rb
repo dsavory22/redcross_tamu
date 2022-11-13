@@ -45,4 +45,4 @@ Member.create(First_Name: 'Chase', Last_Name: 'Cason', Role: 6 , Email: 'chaseca
 Member.create(First_Name: 'Layla', Last_Name: 'Wilkinson', Role: 6 , Email: 'leilaniwilkinson@tamu.edu', Fall_Dues: true, Spring_Dues: true, Shirt_Size: nil, year: 4)
 Member.create(First_Name: 'Dylan', Last_Name: 'Craven', Role: 6 , Email: 'dylan.craven@tamu.edu', Fall_Dues: false, Spring_Dues: false, Shirt_Size: nil, year: 4)
 
-Budget.create(Date: '9/10/2022')
+Budget.create(Total_amount: 0, Date: '9/10/2022')
