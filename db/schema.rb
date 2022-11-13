@@ -46,7 +46,9 @@ ActiveRecord::Schema.define(version: 2022_10_12_040835) do
   create_table "attendances", force: :cascade do |t|
     t.bigint "Member_id"
     t.bigint "Shift_id"
-    t.integer "Hours", default: 0
+    t.integer "Hours"
+    t.time "Start"
+    t.time "End"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["Member_id"], name: "index_attendances_on_Member_id"

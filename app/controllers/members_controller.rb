@@ -6,7 +6,41 @@ class MembersController < ApplicationController
   # GET /members or /members.json
   # used same code from show, maybe make helper method to avoid redundancy
   def index
-    @members = Member.all.order(:Last_Name)
+    #@members = Member.all
+    if params[:sort] == "Last_Name"
+      @members = Member.order(:Last_Name)
+    elsif params[:sort] == "Last_Name_Desc"
+      @members = Member.order(Last_Name: :desc)
+    elsif params[:sort] == "Role"
+      @members = Member.order(:Role)
+    elsif params[:sort] == "Email"
+      @members = Member.order(:Email)
+    elsif params[:sort] == "Shirt"
+      @members = Member.order(:Shirt_Size)
+    elsif params[:sort] == "Year"
+      puts "HEYY"
+      @members = Member.order(:year)
+      puts @members
+    elsif params[:sort] == "Hours"
+      puts "HIHIHI"
+      hoursList = Attendance.group(:Member_id).sum(:Hours).sort_by{|e| -e[1]}.collect{|imd| imd[0]}
+      @members = Member.find(hoursList)+ Member.where.not(id: hoursList)
+      @members.each do |single|
+        puts single.First_Name
+      end
+      puts "HIHIHIDDDD"
+    else
+      puts "HEYY"
+      @members = Member.all
+      puts @members.where(year: 4)
+      puts "HEDDD"
+    end
+  #Attendance.select(:Hours, :Member_id).group(:Member_id).sum(:Hours)
+  @MemberAttendances = Attendance.where(Member_id: params[:id]) 
+    @hours = 0
+    @MemberAttendances.each do |single|
+      @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
+    end
   end
 
   # GET /members/1 or /members/1.json
