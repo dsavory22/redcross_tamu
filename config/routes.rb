@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   resources :shifts
   resources :attendances
   resources :files
-  
+
+  get 'admin', to: 'admin#index'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   put "sign_in" =>'attendances#sign_in'

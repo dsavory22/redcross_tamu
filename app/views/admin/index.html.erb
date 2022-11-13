@@ -1,0 +1,137 @@
+<h2> Admin Page <h2>
+
+<%= link_to 'Reset Dues', url_for(:param => 'Reset Dues'), data: { confirm: 'Are you sure you want to set all dues to Unpaid?' } %>
+<br>
+<%= link_to 'Reset Hours', url_for(:param => 'Reset Hours'), data: { confirm: 'Are you sure you want to reset current member hours to track from now?' } %>
+<br>
+<%= link_to 'Increase Grade', url_for(:param => 'Increase Grade'), data: { confirm: 'Are you sure you want to increase the grade level of all members?' } %>
+<br>
+<br>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Officers</h1>
+
+  <%= link_to "New Officer", new_member_path, class: "btn btn-primary btn-new" %>
+</div>
+
+<div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th style="width: 16rem">
+          Name 
+          <%= link_to members_path+"?sort=Last_Name", :class => 'name_links', :sort => "Last_Name" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th>
+          Role 
+          <%= link_to members_path+"?sort=Role", :class => 'name_links', :sort => "Role" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th style="width: 18rem">
+          Email 
+          <%= link_to members_path+"?sort=Email", :class => 'name_links', :sort => "Email" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th>Fall Dues</th>
+        <th>Spring Dues</th>
+        <th>
+          Shirt Size 
+          <%= link_to members_path+"?sort=Shirt", :class => 'name_links', :sort => "Shirt" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th>
+          Year 
+          <%= link_to members_path+"?sort=Year", :class => 'name_links', :sort => "Year" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th>
+          Total Hours 
+          <%= link_to members_path+"?sort=Hours", :class => 'name_links', :sort => "Hours" do %>
+            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+          <% end %>
+        </th>
+        <th class="actions">Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+    <%#delete where not statement to see seed values %>
+      <% Member.all.each do |member| %>
+          <% if member.Role > 0%>
+            <tr>
+              <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
+              
+              <%if member.Role == 0 %>
+                <td>Member</td>
+              <%elsif member.Role == 1 %>
+                <td>Technology Chair</td>
+              <%elsif member.Role == 2%>
+                <td>Social Chair</td>
+              <%elsif member.Role == 3%>
+                <td>Secretary</td>
+                <%elsif member.Role == 4 %>
+                <td>VP</td>
+              <%elsif member.Role == 5%>
+                <td>Treasurer</td>
+              <%elsif member.Role == 6%>
+                <td>President</td>
+              <%else%>
+                <td>Member</td>
+              <%end%>
+              
+              <td><%= member.Email %></td>
+
+              <%if member.Fall_Dues == true %>
+                <td>Paid</td>
+              <%else%>
+                <td>Unpaid</td>
+              <%end%>
+
+              <%if member.Spring_Dues == true %>
+                <td>Paid</td>
+              <%else%>
+                <td>Unpaid</td>
+              <%end%>
+
+              <td><%= member.Shirt_Size %></td>
+
+              <%if member.year == 1 %>
+                <td>Freshman</td>
+              <%elsif member.year == 2%>
+                <td>Sophmore</td>
+              <%elsif member.year == 3%>
+                <td>Junior</td>
+              <%elsif member.year == 4%>
+                <td>Senior</td>
+              <%elsif member.year == 5%>
+                <td>Graduate</td>
+              <%else%>
+                <td>Alumni</td>
+              <%end%>
+
+              <td><%= Attendance.where(Member_id: member.id).where('"created_at" > ?', Budget.first.Date).sum(:Hours) %></td>
+
+              <td class="text-center">
+                <%= link_to member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to edit_member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                  <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+              </td>
+            </tr>
+          <%end%>
+      <% end %>
+    </tbody>
+  </table>
+</div>
