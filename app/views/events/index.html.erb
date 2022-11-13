@@ -5,23 +5,16 @@
   </div>
 <% end %>
 
+<strong> sign-up </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
+<strong> sign-in </strong>
+<%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
 
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Events</h1>
+
   <%= link_to 'New Event', new_event_path, :class => 'btn btn-primary btn-new' %>
-  <div style="padding-left: 45rem">
-  <strong> sign-up </strong>
-  <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
-  <strong> sign-in </strong>
-  <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
-  </div>
 </div>
-
-
-
-
-
-
 
 <br>
 
@@ -52,14 +45,10 @@
             <%else%>
               <td>Volunteer Event</td>
             <%end%>
-            <td><%= event.Date %></td>
+            <td><%= event.Date.strftime("%m/%d/%Y") %></td>
             <td><%= event.Start.strftime("%I:%M %p") %></td>
             <td><%= event.End.strftime("%I:%M %p") %></td>
             <td>
-              <%= link_to event_path(event), :class => 'name_links' do %>
-                <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
-              <% end %>
-              &nbsp;
               <%= link_to edit_event_path(event), :class => 'name_links' do %>
                 <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
               <% end %>
@@ -69,9 +58,10 @@
               <% end %>
             </td>
           </tr>
-      <%end%>
-  </tbody>
-</table>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
 <br>
@@ -92,7 +82,7 @@
     </thead>
     <tbody>
       <% @events.each do |event| %>
-        <% if event.Date > Date.current %>
+        <% if event.Date >= Date.current %>
       
         <% else %>
           <tr>
@@ -106,10 +96,6 @@
             <td><%= event.Start.strftime("%I:%M %p") %></td>
             <td><%= event.End.strftime("%I:%M %p") %></td>
             <td>
-              <%= link_to event_path(event), :class => 'name_links' do %>
-                <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
-              <% end %>
-              &nbsp;
               <%= link_to edit_event_path(event), :class => 'name_links' do %>
                 <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
               <% end %>
@@ -124,4 +110,3 @@
     </tbody>
   </table>
 </div>
-<% end %>
