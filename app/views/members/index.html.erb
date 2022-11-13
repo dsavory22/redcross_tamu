@@ -137,6 +137,10 @@
               <td><%= member.Shirt_Size %></td>
               <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
               <td class="text-center">
+                <%= link_to member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
                 <%= link_to edit_member_path(member), :class => 'name_links' do %>
                   <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
                 <% end %>

@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag 'events' %>
 
 <!--EVENT INFO-->
-<div class="col-sm">
+<div class="container">
 <div class="row">
 <div class="col">
   <div class="container Event-Info">
@@ -34,6 +34,7 @@
           <strong>End:</strong>
           <%= @event.End.strftime("%I:%M %p") %>
         </p>
+
   </div>
 </div>
 </div>
@@ -44,7 +45,7 @@
 
 
 <!--SHIFTS-->
-<div class="col-sm">
+<div class="container">
 <div class="row">
 <div class="col">
   <div class="d-flex align-items-center gap-3 mb-2">
@@ -167,16 +168,7 @@
   </div>
 </div>
 
-
-
-
-<br>
-<br>
-
-
-
 <br>
 
 <!--PAGE PATHS-->
-<%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
