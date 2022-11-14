@@ -27,9 +27,6 @@ class ShiftsController < ApplicationController
 
     respond_to do |format|
       if @shift.save
-        puts "HEYY22"
-        puts params[:Event_id]
-        puts shift_params[:Event_id]
         @event = Event.find(shift_params[:Event_id])
         format.html { redirect_to event_url(@event), notice: "Shift was successfully created." }
         format.json { render :show, status: :created, location: @shift }
