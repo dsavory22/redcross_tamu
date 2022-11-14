@@ -1,19 +1,26 @@
-<h2> Admin Page <h2>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<%= link_to 'Reset Dues', url_for(:param => 'Reset Dues'), data: { confirm: 'Are you sure you want to set all dues to Unpaid?' } %>
-<br>
-<%= link_to 'Reset Hours', url_for(:param => 'Reset Hours'), data: { confirm: 'Are you sure you want to reset current member hours to track from now?' } %>
-<br>
-<%= link_to 'Increase Grade', url_for(:param => 'Increase Grade'), data: { confirm: 'Are you sure you want to increase the grade level of all members?' } %>
-<br>
-<br>
+<div class="d-flex flex-wrap align-items-center gap-4 mb-4">
+  <h1 class="mb-0"> Admin Controls </h1>
+
+  <%= link_to 'Reset Dues', url_for(:param => 'Reset Dues'), data: { confirm: 'Are you sure you want to set all member dues to Unpaid?' }, class: "btn btn-primary btn-new div-mobile" %>
+
+  <%= link_to 'Reset Hours', url_for(:param => 'Reset Hours'), data: { confirm: 'Are you sure you want to reset current member hours to track from now?' }, class: "btn btn-primary btn-new div-mobile" %>
+
+  <%= link_to 'Increase Grade', url_for(:param => 'Increase Grade'), data: { confirm: 'Are you sure you want to increase the grade level of all members?' }, class: "btn btn-primary btn-new div-mobile" %>
+</div>
+
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Officers</h1>
 
-  <%= link_to "New Officer", new_member_path, class: "btn btn-primary btn-new" %>
+  <%= link_to "New Officer", new_member_path(:ttype => 'Officer'), class: "btn btn-primary btn-new" %>
 </div>
 
-<div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+<div class="table-ruby table-responsive mb-4"> <%#table-responsive shows white at bottom of table %>
   <table class="table table-hover table-striped">
     <thead>
       <tr>
@@ -74,7 +81,7 @@
                 <td>Social Chair</td>
               <%elsif member.Role == 3%>
                 <td>Secretary</td>
-                <%elsif member.Role == 4 %>
+              <%elsif member.Role == 4 %>
                 <td>VP</td>
               <%elsif member.Role == 5%>
                 <td>Treasurer</td>
@@ -135,3 +142,5 @@
     </tbody>
   </table>
 </div>
+
+<h1 class="mb-2">Deployment and Support Plan</h1>

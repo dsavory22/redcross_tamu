@@ -1,108 +1,106 @@
-<p id="notice"><%= notice %></p>
 <%= stylesheet_link_tag 'events' %>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
 <!--EVENT INFO-->
-<div class="container">
-<div class="row">
-<div class="col">
-  <div class="container Event-Info">
-        <p style="font-size: 24px">
-          <strong>Name:</strong>
-          <%= @event.Name %>
-        </p>
+<div class="show-event mb-4">
+  <div class="d-flex flex-wrap">
+    <div class="flex-grow-1">
+      <p>
+        <strong>Name:</strong>
+        <%= @event.Name %>
+      </p>
 
-        <p>
-          <strong>Type:</strong>
-            <%if @event.Type == 0 %>
-              <td>Club Meeting</td>
-            <%else%>
-              <td>Volunteer Event</td>
-            <%end%>
-        </p>
+      <p>
+        <strong>Type:</strong>
+          <%if @event.Type == 0 %>
+            Club Meeting
+          <%else%>
+            Volunteer Event
+          <%end%>
+      </p>
 
-        <p>
-          <strong>Date:</strong>
-          <%= @event.Date %>
-        </p>
+      <p>
+        <strong>Date:</strong>
+        <%= @event.Date.strftime("%m/%d/%Y") %>
+      </p>
 
-        <p>
-          <strong>Start:</strong>
-          <%= @event.Start.strftime("%I:%M %p") %>
-        </p>
+      <p>
+        <strong>Start Time:</strong>
+        <%= @event.Start.strftime("%I:%M %p") %>
+      </p>
 
-        <p>
-          <strong>End:</strong>
-          <%= @event.End.strftime("%I:%M %p") %>
-        </p>
+      <p class="mb-0">
+        <strong>End Time:</strong>
+        <%= @event.End.strftime("%I:%M %p") %>
+      </p>
+    </div>
 
+    <div class="d-flex flex-column mx-4">
+      <p class="mb-0 text-center"><strong> Sign Up </strong></p>
+      <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png)}", download: "qr", :class => 'btn btn-primary btn-new' %>
+    </div>
+
+    <div class="d-flex flex-column">
+      <p class="mb-0 text-center"><strong> Sign In </strong></p>
+      <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png2)}", download: "qr", :class => 'btn btn-primary btn-new' %>
+    </div>
   </div>
 </div>
-</div>
-</div>
-
-<br>
-<br>
-
 
 <!--SHIFTS-->
-<div class="container">
-<div class="row">
-<div class="col">
-  <div class="d-flex align-items-center gap-3 mb-2">
-    <h1 style="margin: 0">Shifts</h1>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Shifts</h1>
 
     <%= link_to 'New Shift', new_shift_path(:event_id => @event.id), :class => 'btn btn-primary btn-new' %>
   </div>
 
-  <!--SHIFTS TABLE-->
-  <div class="table-ruby table-responsive"> 
-    <table class="table table-hover table-striped">
-      <thead>
+<!--SHIFTS TABLE-->
+<div class="table-ruby table-responsive mb-4"> 
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Max Volunteers</th>
+        <th>Remaining Spots</th>
+        <th style="width: 5.25rem;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @EventShifts.each do |shift| %>
         <tr>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Max Volunteers</th>
-          <th>Remaining Spots</th>
-          <th>Action</th>
+          <td><%= shift.Start.strftime("%I:%M %p") %></td>
+          <td><%= shift.End.strftime("%I:%M %p") %></td>
+          <td><%= shift.Shift_Cap %></td>
+          <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
+          <td>
+            <%= link_to edit_shift_path(shift), :class => 'name_links' do %>
+              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+            &nbsp;
+            <%= link_to shift, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% @EventShifts.each do |shift| %>
-          <tr>
-            <td><%= shift.Start.strftime("%I:%M %p") %></td>
-            <td><%= shift.End.strftime("%I:%M %p") %></td>
-            <td><%= shift.Shift_Cap %></td>
-            <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
-            <td>
-              <%= link_to edit_shift_path(shift), :class => 'name_links' do %>
-                <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
-              <% end %>
-              &nbsp;
-              <%= link_to shift, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
-                <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-</div>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 
-<br>
-<br>
-
-
-<div class="container">
-  <div class="row">
+<div class="row mb-4">
+  <!--Column 1/2-->
+  <!--SIGN UPS-->
+  <%if @event.Date > Date.parse("2021-10-01") %>
     <div class="col">
-      <!--Column 1/2-->
-      <!--SIGN UPS-->
-      <%if @event.Date > Date.parse("2021-10-01") %>
       <div class="d-flex align-items-center gap-3 mb-2">
-        <h2 style="margin: 0">Sign Ups</h2>
+        <h1 style="margin: 0">Sign Ups</h1>
       </div>
 
       <!--SIGN UPS TABLE-->
@@ -111,7 +109,6 @@
           <thead>
             <tr>
               <th>Member</th>
-              <th colspan="3"></th>
             </tr>
           </thead>
           <tbody>
@@ -126,49 +123,40 @@
           </tbody>
         </table>
       </div>
-      <%end%>
     </div>
-    <div class="col"></div>
-  </div>
-  <br>
-  <br>
-  <div class="row">
-    <div class="col">
-      <!--Column 2/2-->
-      <!--ATTENDACES-->
-      <div class="d-flex align-items-center gap-3 mb-2">
-        <h2 style="margin: 0">Attendaces</h2>
-        <%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary' %>
-      </div>
+  <%end%>
 
-      <!--ATTENDACES TABLE-->
-      <div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th>Member</th>
-              <th colspan="3"></th>
-            </tr>
-          </thead>
+  <div class="col">
+    <!--Column 2/2-->
+    <!--ATTENDACES-->
+    <div class="d-flex align-items-center gap-3 mb-2">
+      <h1 style="margin: 0">Attendaces</h1>
+      <%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary' %>
+    </div>
 
+    <!--ATTENDACES TABLE-->
+    <div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Member</th>
+          </tr>
+        </thead>
+
+        <tbody>
           <tbody>
-            <tbody>
-              <% @EventAttendances.each do |att| %>
-                <tr>
-                  <%if att.Hours > 0 %>
-                    <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-        </table>
-      </div>
+            <% @EventAttendances.each do |att| %>
+              <tr>
+                <%if att.Hours > 0 %>
+                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
     </div>
-    <div class="col"></div>
   </div>
 </div>
-
-<br>
 
 <!--PAGE PATHS-->
 <%= link_to 'Back', events_path %>

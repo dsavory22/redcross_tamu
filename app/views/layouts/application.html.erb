@@ -13,46 +13,51 @@
   <body>
     <div class="d-flex flex-column min-vh-100">
     <% unless current_page?('/users/sign_in') %>
-      <div>
-        <nav class="navbar navbar-expand-lg bg-light">
-          <div class="container-fluid">
-            <a class="navbar-brand" <%= link_to 'Red Cross', members_path %></a>
-            <% if current_user %>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid container">
+          <a class="navbar-brand" href="/">
+            <%= image_tag "logo.png", style: 'height:2.5rem;' %>
+          </a>
+          <% if current_user %>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Members', members_path %></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Events', events_path %></a>
+                </li>
+                <% if Member.where(Email: current_user.email).first.Role >= 5 %>
                   <li class="nav-item">
-                    <a class="nav-link" <%= link_to 'Members', members_path %></a>
+                    <a class="nav-link" <%= link_to 'Budget', transactions_path %></a>
                   </li>
+                <% end %>
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Files', files_path %></a>
+                </li>
+                <% if Member.where(Email: current_user.email).first.Role == 6 || Member.where(Email: current_user.email).first.Role == 4 %>
                   <li class="nav-item">
-                    <a class="nav-link" <%= link_to 'Events', events_path %></a>
+                    <a class="nav-link" <%= link_to 'Admin', admin_url %></a>
                   </li>
-                  <% if Member.where(Email: current_user.email).first.Role > 5 %>
-                    <li class="nav-item">
-                      <a class="nav-link" <%= link_to 'Budget', transactions_path %></a>
-                    </li>
-                  <% end %>
-                  <li class="nav-item">
-                    <a class="nav-link" <%= link_to 'Files', files_path %></a>
-                  </li>
-                  <li class="nav-item">
-                    <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class: "btn btn-primary" %>
-                  </li>
-                </ul>
-              </div>
-            <% end %>
-          </div>
-        </nav>
-      </div>
+                <% end %>
+                <li class="nav-item">
+                  <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class: "btn btn-primary" %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </nav>
     <% end %>
     
     <% if current_page?('/users/sign_in') %>
       <%= yield %>
     <% else %>
       <div class="d-flex flex-fill">
-        <div class="container my-3">
+        <div class="container my-4">
           <%= yield %>
         </div>
       </div>
