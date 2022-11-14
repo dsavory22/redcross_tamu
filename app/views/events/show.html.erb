@@ -51,7 +51,7 @@
   <div class="d-flex align-items-center gap-3 mb-2">
     <h1 style="margin: 0">Shifts</h1>
 
-    <%= link_to 'New Shift', new_shift_path, :class => 'btn btn-primary btn-new' %>
+    <%= link_to 'New Shift', new_shift_path(:event_id => @event.id), :class => 'btn btn-primary btn-new' %>
   </div>
 
   <!--SHIFTS TABLE-->
