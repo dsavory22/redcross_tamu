@@ -3,38 +3,66 @@ class MembersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_officer_privelege
 
+
   # GET /members or /members.json
   # used same code from show, maybe make helper method to avoid redundancy
   def index
-    #@members = Member.all
+
+    #SORT BY LAST NAME
     if params[:sort] == "Last_Name"
       @members = Member.order(:Last_Name)
+      @toggle = 0
     elsif params[:sort] == "Last_Name_Desc"
       @members = Member.order(Last_Name: :desc)
+      @toggle = 11
+
+    #SORT BY ROLE
     elsif params[:sort] == "Role"
       @members = Member.order(:Role)
+      @toggle = 2
+    elsif params[:sort] == "Role_Desc"
+      @members = Member.order(Role: :desc)
+      @toggle = 33
+
+    #SORT BY EMAIL
     elsif params[:sort] == "Email"
       @members = Member.order(:Email)
+      @toggle = 4
+    elsif params[:sort] == "Email_Desc"
+      @members = Member.order(Email: :desc)
+      @toggle = 55
+
+    #SORT BY SHIRT
     elsif params[:sort] == "Shirt"
       @members = Member.order(:Shirt_Size)
+      @toggle = 6
+    elsif params[:sort] == "Shirt_Desc"
+      @members = Member.order(Shirt_Size: :desc)
+      @toggle = 77
+
+    #SORT BY YEAR
     elsif params[:sort] == "Year"
-      puts "HEYY"
       @members = Member.order(:year)
-      puts @members
+      @toggle = 8
+    elsif params[:sort] == "Year_Desc"
+      @members = Member.order(year: :desc)
+      @toggle = 99
+      
+    #SORT BY HOURS
     elsif params[:sort] == "Hours"
-      puts "HIHIHI"
       hoursList = Attendance.group(:Member_id).sum(:Hours).sort_by{|e| -e[1]}.collect{|imd| imd[0]}
       @members = Member.find(hoursList)+ Member.where.not(id: hoursList)
-      @members.each do |single|
-        puts single.First_Name
-      end
-      puts "HIHIHIDDDD"
+      @toggle = 10
+    elsif params[:sort] == "Hours_Desc"
+      hoursList = Attendance.group(:Member_id).sum(:Hours).sort_by{|e| -e[1]}.collect{|imd| imd[0]}
+      hoursList = hoursList.reverse()
+      @members =  Member.where.not(id: hoursList) + Member.find(hoursList)
+      @toggle = 14
+
     else
-      puts "HEYY"
       @members = Member.all
-      puts @members.where(year: 4)
-      puts "HEDDD"
     end
+
   #Attendance.select(:Hours, :Member_id).group(:Member_id).sum(:Hours)
   @MemberAttendances = Attendance.where(Member_id: params[:id]) 
     @hours = 0
