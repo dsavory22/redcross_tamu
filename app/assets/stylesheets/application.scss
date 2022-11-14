@@ -89,15 +89,60 @@
     padding: .5rem;
   }
 
+  // Notification animation
   #hideMeAfter5Seconds {
-    animation: hideAnimation 0s ease-in 3s;
-    animation-fill-mode: forwards;
+    max-width: fit-content;
+    animation: movein 0.5s ease forwards, moveout 0.5s 3s ease forwards;
   }
 
-  @keyframes hideAnimation {
+  @keyframes movein {
+    from {
+      right: -200px;
+    }
     to {
-      visibility: hidden;
-      width: 0 !important;
-      height: 0 !important;
+      right: 10px;
+    }
+  }
+
+  @keyframes moveout {
+    from {
+      right: 10px;
+    }
+    to {
+      right: -100%;
+    }
+  }
+
+  // Mobile login page
+  .left-login {
+    background: #FA071E;
+  }
+
+  .right-login {
+    min-width: 50%;
+  }
+
+  .image-login {
+    height: 45vw;
+    width: 45vw;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .left-login {
+      height: 40vh;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .right-login {
+      height: 60vh;
+    }
+
+    .image-login {
+      height: 30vh;
+      width: 30vh;
+    }
+
+    .div-mobile {
+      width: 100%;
     }
   }
