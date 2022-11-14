@@ -84,6 +84,7 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
+    @admin = params[:admin]
     @member = Member.new
   end
 
@@ -93,10 +94,15 @@ class MembersController < ApplicationController
 
   # POST /members or /members.json
   def create
+    @officer_made = params[:commit]
     @member = Member.new(member_params)
     respond_to do |format|
       if @member.save
-        format.html { redirect_to new_member_path, notice: "Member was successfully created" }
+        if @officer_made == 'Create Officer'
+          format.html { redirect_to admin_path, notice: "Officer was successfully created" }
+        else
+          format.html { redirect_to new_member_path, notice: "Member was successfully created" }
+        end
         format.json { render :show, status: :created, location: @member }
       else
         format.html { render :new, status: :unprocessable_entity }
