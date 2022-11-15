@@ -1,55 +1,65 @@
-<p id="notice"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
 <!-- if the current user is nil then someone is trying to sign in, and we know that that person has to be someone that has a shift, but we also know that the will have an attendance that has a value of 0-->
 <% if current_user.nil? %>
-  <%if params.has_key?(:event) and params.has_key?(:member)%>
-    <%Attendance.where(id: params[:attendance]).each do |att| %>
-      <% Shift.where(id: att.Shift_id).each do |sht| %>
- <!--       <%if sht.Start.to_time - 1.hours <= Time.now %> -->
-          <%=button_to 'sign_in', "sign_in?at=#{att.id}", method: "put" %>
-        
-<!-- <%end%>-->
-        
-        <%end%>
-      <%end%> 
-  <%else%>
-    <%Attendance.where(Hours: 0).each do |att| %>
-      <% Shift.where(id: att.Shift_id).each do |sht| %>
-        <!--<% if Event.where(id: sht.Event_id).first.End <= Time.now%>-->
-            <%= link_to "#{Event.where(id: sht.Event_id).first.Name} #{Member.where(id: att.Member_id).first.First_Name}", url_for(:event => sht.Event_id, :member =>att.Member_id, :attendance => att.id) %>
-        <!--<%end%>-->
-      <%end%>
+  <div class="form">
+    <h1 class="form-title mb-4">Event Sign In</h1>
+
+    <!-- Person clicked on their name -->
+    <% if params.has_key?(:event) and params.has_key?(:member) %>
+      <% Attendance.where(id: params[:attendance]).each do |att| %>
+        <% Shift.where(id: att.Shift_id).each do |sht| %>
+            <%= button_to 'Sign In', "sign_in?at=#{att.id}", method: "put", class: "btn btn-primary btn-form", style: "margin: 0" %>
+        <% end %>
+      <% end %> 
+
+    <% else %>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Select Shift
+        </button>
+        <ul class="dropdown-menu w-100">
+          <%Attendance.where(Hours: 0).each do |att| %>
+            <% Shift.where(id: att.Shift_id).each do |sht| %>
+              <li><%= link_to "#{Event.where(id: sht.Event_id).first.Name} #{Member.where(id: att.Member_id).first.First_Name} #{Member.where(id: att.Member_id).first.Last_Name}: #{sht.Start.strftime("%I:%M %p")} - #{sht.End.strftime("%I:%M %p")}", url_for(:event => sht.Event_id, :member =>att.Member_id, :attendance => att.id), class: "dropdown-item" %></li>
+            <%end%>
+          <%end%>
+        </ul>
+      </div>
     <%end%>
-  <%end%>
-  
-<%else%>
-      <h1>Attendances</h1>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Event</th>
-                <th>Member</th>
-                <th>Hours</th>
-                <th>Start</th>
-                <th>End</th>
-                <th colspan="3"></th>
-              </tr>
-            </thead>
+  </div>
 
-            <tbody>
-              <% @attendances.each do |attendance| %>
-                
-                <tr>
-                  <td><%= Event.find(Shift.find(attendance.Shift_id).Event_id).Name %></td>
-                  <td><%=Member.find(attendance.Member_id).First_Name%> <%=Member.find(attendance.Member_id).Last_Name%></td>
-                  <td><%= attendance.Hours %></td>
-                  <td><%= link_to 'Show', attendance %></td>
-                  <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
-                  <td><%= link_to 'Delete', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <br>
-          <a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Attendance', new_attendance_path %></a>
+<% else %>
+  <h1>Attendances</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Member</th>
+        <th>Hours</th>
+        <th>Start</th>
+        <th>End</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @attendances.each do |attendance| %>
+        <tr>
+          <td><%= Event.find(Shift.find(attendance.Shift_id).Event_id).Name %></td>
+          <td><%=Member.find(attendance.Member_id).First_Name%> <%=Member.find(attendance.Member_id).Last_Name%></td>
+          <td><%= attendance.Hours %></td>
+          <td><%= link_to 'Show', attendance %></td>
+          <td><%= link_to 'Edit', edit_attendance_path(attendance) %></td>
+          <td><%= link_to 'Delete', attendance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Attendance', new_attendance_path %></a>
 
-<%end%>
+<% end %>
