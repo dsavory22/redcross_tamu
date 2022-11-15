@@ -17,50 +17,97 @@
 <div class="d-flex align-items-center gap-3 mb-2">
   <h1 style="margin: 0">Officers</h1>
 
-  <%= link_to "New Officer", new_member_path(:ttype => 'Officer'), class: "btn btn-primary btn-new" %>
+  <%= link_to "New Officer", new_member_path(:admin => 'Create Officer'), class: "btn btn-primary btn-new" %>
 </div>
 
 <div class="table-ruby table-responsive mb-4"> <%#table-responsive shows white at bottom of table %>
   <table class="table table-hover table-striped">
     <thead>
       <tr>
+        <!--NAME COLUMN-->
         <th style="width: 16rem">
           Name 
-          <%= link_to members_path+"?sort=Last_Name", :class => 'name_links', :sort => "Last_Name" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 1) &&  @toggle != 0%>
+            <%= link_to admin_path+"?sort=Last_Name", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 0%>
+            <%= link_to admin_path+"?sort=Last_Name_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
+
+        <!--ROLE COLUMN-->
         <th>
           Role 
-          <%= link_to members_path+"?sort=Role", :class => 'name_links', :sort => "Role" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 3) &&  @toggle != 2%>
+            <%= link_to admin_path+"?sort=Role", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 2%>
+            <%= link_to admin_path+"?sort=Role_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
+
+        <!--EMAIL COLUMN-->
         <th style="width: 18rem">
           Email 
-          <%= link_to members_path+"?sort=Email", :class => 'name_links', :sort => "Email" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 5) &&  @toggle != 4%>
+            <%= link_to admin_path+"?sort=Email", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 4%>
+            <%= link_to admin_path+"?sort=Email_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
+
+
         <th>Fall Dues</th>
         <th>Spring Dues</th>
+
+        <!--SHIRT SIZE COLUMN-->
         <th>
           Shirt Size 
-          <%= link_to members_path+"?sort=Shirt", :class => 'name_links', :sort => "Shirt" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 7) &&  @toggle != 6%>
+            <%= link_to admin_path+"?sort=Shirt", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 6%>
+            <%= link_to admin_path+"?sort=Shirt_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
+
         <th>
           Year 
-          <%= link_to members_path+"?sort=Year", :class => 'name_links', :sort => "Year" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 9) &&  @toggle != 8%>
+            <%= link_to admin_path+"?sort=Year", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 8%>
+            <%= link_to admin_path+"?sort=Year_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
+
         <th>
           Total Hours 
-          <%= link_to members_path+"?sort=Hours", :class => 'name_links', :sort => "Hours" do %>
-            <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
-          <% end %>
+          <%if (@toggle == nil || @toggle != 15) &&  @toggle != 10%>
+            <%= link_to admin_path+"?sort=Hours", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 10%>
+            <%= link_to admin_path+"?sort=Hours_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
         </th>
         <th class="actions">Action</th>
       </tr>
@@ -68,7 +115,7 @@
     
     <tbody>
     <%#delete where not statement to see seed values %>
-      <% Member.all.each do |member| %>
+      <%  @members.each do |member| %>
           <% if member.Role > 0%>
             <tr>
               <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
