@@ -1,39 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0"><%= @member.First_Name %> <%= @member.Last_Name %>'s Attendance</h1>
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @member.First_Name %>
-</p>
+<div class="table-ruby table-responsive">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Hours</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+      </tr>
+    </thead>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @member.Last_Name %>
-</p>
+    <tbody>
+      <% @MemberAttendances.each do |att|  %>
+        <tr>
+          <td><%= att.Shift.Event.Name  %></th>
+          <td><%= att.Shift.Event.Date.strftime("%m/%d/%Y")  %></th>
+          <td><%= att.Hours  %></th>
+          <td><%= att.Shift.Start.strftime("%I:%M %p")  %></th>
+          <td><%= att.Shift.End.strftime("%I:%M %p")  %></th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @member.Email %>
-</p>
+<br>
 
-<p>
-  <strong>Fall dues:</strong>
-  <%= @member.Fall_Dues %>
-</p>
-
-<p>
-  <strong>Spring dues:</strong>
-  <%= @member.Spring_Dues %>
-</p>
-
-<p>
-  <strong>Shirt size:</strong>
-  <%= @member.Shirt_Size %>
-</p>
-
-<p>
-  <strong>Year:</strong>
-  <%= @member.year %>
-</p>
-
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Back', members_path %>
+<%= link_to 'Back', :back %>

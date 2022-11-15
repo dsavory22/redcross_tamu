@@ -1,29 +1,187 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag 'events' %>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Type:</strong>
-  <%= @event.Type %>
-</p>
+<!--EVENT INFO-->
+<div class="show-event mb-4">
+  <div class="d-flex flex-wrap">
+    <div class="flex-grow-1">
+      <p>
+        <strong>Name:</strong>
+        <%= @event.Name %>
+      </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @event.Date %>
-</p>
+      <p>
+        <strong>Type:</strong>
+          <%if @event.Type == 0 %>
+            Club Meeting
+          <%else%>
+            Volunteer Event
+          <%end%>
+      </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.Name %>
-</p>
+      <p>
+        <strong>Date:</strong>
+        <%= @event.Date.strftime("%m/%d/%Y") %>
+      </p>
 
-<p>
-  <strong>Start:</strong>
-  <%= @event.Start %>
-</p>
+      <p>
+        <strong>Start Time:</strong>
+        <%= @event.Start.strftime("%I:%M %p") %>
+      </p>
 
-<p>
-  <strong>End:</strong>
-  <%= @event.End %>
-</p>
+      <p class="mb-0">
+        <strong>End Time:</strong>
+        <%= @event.End.strftime("%I:%M %p") %>
+      </p>
+    </div>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
+    <div class="d-flex flex-column show-qr">
+      <p class="mb-0 text-center"><strong> Sign Up </strong></p>
+      <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png)}", download: "qr", :class => 'btn btn-primary btn-new div-mobile' %>
+    </div>
+
+    <div class="d-flex flex-column show-qr">
+      <p class="mb-0 text-center"><strong> Sign In </strong></p>
+      <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png2)}", download: "qr", :class => 'btn btn-primary btn-new div-mobile' %>
+    </div>
+  </div>
+</div>
+
+<!--SHIFTS-->
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Shifts</h1>
+
+    <%= link_to 'New Shift', new_shift_path(:event_id => @event.id), :class => 'btn btn-primary btn-new' %>
+  </div>
+
+<!--SHIFTS TABLE-->
+<div class="table-ruby table-responsive mb-4"> 
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Max Volunteers</th>
+        <th>Remaining Spots</th>
+        <th style="width: 5.25rem;">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @EventShifts.each do |shift| %>
+        <tr>
+          <td><%= shift.Start.strftime("%I:%M %p") %></td>
+          <td><%= shift.End.strftime("%I:%M %p") %></td>
+          <td><%= shift.Shift_Cap %></td>
+          <td><%= shift.Shift_Cap - Attendance.where(Shift_id: shift.id).size %></td>
+          <td>
+            <%= link_to edit_shift_path(shift), :class => 'name_links' do %>
+              <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+            &nbsp;
+            <%= link_to shift, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+              <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <!--Column 1/2-->
+  <!--SIGN UPS-->
+  <% if @event.Date > Date.current %>
+    <div class="col mb-4">
+      <div class="d-flex align-items-center gap-3 mb-2">
+        <h1 style="margin: 0">Sign Ups</h1>
+      </div>
+
+      <!--SIGN UPS TABLE-->
+      <div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Member</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th class="actions">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @EventAttendances.each do |att| %>
+              <tr>
+                <%if att.Hours == 0 %>
+                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name %></td>
+                  <td><%=  Shift.find(att.Shift_id).Start.strftime("%I:%M %p") %></td>
+                  <td><%=  Shift.find(att.Shift_id).End.strftime("%I:%M %p") %></td>
+                  <td class="text-center">
+                    <%= link_to edit_attendance_path(att.id), :class => 'name_links' do %>
+                      <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                    &nbsp;
+                    <%= link_to attendance_path(att.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                      <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <%end%>
+
+  <div class="col mb-4">
+    <!--Column 2/2-->
+    <!--ATTENDACES-->
+    <div class="d-flex align-items-center gap-3 mb-2">
+      <h1 style="margin: 0">Attendaces</h1>
+      <%= link_to 'New Attendance', new_attendance_path(:event_id => @event.id), :class => 'btn btn-primary btn-new' %>
+    </div>
+
+    <!--ATTENDACES TABLE-->
+    <div class="table-ruby table-responsive"> <%#table-responsive shows white at bottom of table %>
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Member</th>
+            <th>Hours</th>
+            <th class="actions">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tbody>
+            <% @EventAttendances.each do |att| %>
+              <tr>
+                <%if att.Hours > 0 %>
+                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name %></td>
+                  <td><%= att.Hours %></td>
+                  <td class="text-center">
+                    <%= link_to edit_attendance_path(att.id), :class => 'name_links' do %>
+                      <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                    &nbsp;
+                    <%= link_to attendance_path(att.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                      <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--PAGE PATHS-->
 <%= link_to 'Back', events_path %>

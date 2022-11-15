@@ -1,5 +1,7 @@
 class ShiftsController < ApplicationController
   before_action :set_shift, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :check_officer_privelege
 
   # GET /shifts or /shifts.json
   def index
@@ -25,7 +27,8 @@ class ShiftsController < ApplicationController
 
     respond_to do |format|
       if @shift.save
-        format.html { redirect_to shift_url(@shift), notice: "Shift was successfully created." }
+        @event = Event.find(shift_params[:Event_id])
+        format.html { redirect_to event_url(@event), notice: "Shift was successfully created." }
         format.json { render :show, status: :created, location: @shift }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +41,7 @@ class ShiftsController < ApplicationController
   def update
     respond_to do |format|
       if @shift.update(shift_params)
-        format.html { redirect_to shift_url(@shift), notice: "Shift was successfully updated." }
+        format.html { redirect_to event_url(@shift.Event_id), notice: "Shift was successfully updated." }
         format.json { render :show, status: :ok, location: @shift }
       else
         format.html { render :edit, status: :unprocessable_entity }

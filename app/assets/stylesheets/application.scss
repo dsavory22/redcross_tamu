@@ -13,4 +13,136 @@
  */
 
  // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import "bootstrap";
+  @import "bootstrap";
+  @import "rails_bootstrap_forms";
+
+  // Change primary button color to red
+  $redcrossred: #ED1B2E;
+
+  .btn-primary {
+    background-color: #ED1B2E !important;
+    border: #ED1B2E !important;
+    color: #fff !important;
+  }
+
+  .btn-primary:hover {
+    background-color: darken($redcrossred, 15%) !important;
+    border: darken($redcrossred, 15%) !important;
+  }
+
+  .btn-primary:active, .btn-primary:focus {
+    border: darken($redcrossred, 20%);
+    box-shadow: none !important;
+  }
+
+  .btn-new {
+    padding: .25rem .5rem;
+    height: 2rem;
+    font-size: .975rem;
+  }
+
+  // Table name view
+  .table-ruby {
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    white-space: nowrap;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  .actions {
+    width: 5.25rem;
+    text-align: center;
+  }
+
+  .table-hover tbody tr:hover td {
+    background: #fbd1d5;
+  }
+
+  .name_links:hover {
+    color: #0000FF !important;
+  }
+
+  .name_links {
+    text-decoration: none;
+  }
+
+  // Form styles
+  .form {
+    padding: 3rem;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+
+  .form-title {
+    text-align: center;
+    padding-bottom: 0.5rem;
+  }
+
+  .btn-form {
+    width: fill;
+    margin-top: 2rem;
+    padding: .5rem;
+  }
+
+  // Notification animation
+  #hideMeAfter5Seconds {
+    max-width: fit-content;
+    animation: movein 0.5s ease forwards, moveout 0.5s 3s ease forwards;
+  }
+
+  @keyframes movein {
+    from {
+      right: -200px;
+    }
+    to {
+      right: 10px;
+    }
+  }
+
+  @keyframes moveout {
+    from {
+      right: 10px;
+    }
+    to {
+      right: -100%;
+    }
+  }
+
+  // Mobile login page
+  .left-login {
+    background: #FA071E;
+  }
+
+  .right-login {
+    min-width: 50%;
+  }
+
+  .image-login {
+    height: 45vw;
+    width: 45vw;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .left-login {
+      height: 40vh;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .right-login {
+      height: 60vh;
+    }
+
+    .image-login {
+      height: 30vh;
+      width: 30vh;
+    }
+
+    .div-mobile {
+      width: 100%;
+    }
+  }

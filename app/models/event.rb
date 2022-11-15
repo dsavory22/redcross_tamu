@@ -13,5 +13,12 @@ New Event
 =end
     validates :Type, presence: true
     validates :Name, presence: true
+    validates :Date, presence: true
     validates :Start, presence: true
+
+    validates_time :End, on_or_after: :Start, before_message: "End time must be on or after the start time"
+
+    def to_s
+        title
+    end
 end

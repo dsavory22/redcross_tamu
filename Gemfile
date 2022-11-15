@@ -13,6 +13,8 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Use Bootstrap for styling
 gem 'bootstrap', '~> 5.2.0'
+# Bootstrap form
+gem "bootstrap_form", "~> 5.1"
 # Bootstrap JavaScript can optionally use jQuery
 gem 'jquery-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
@@ -20,19 +22,37 @@ gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+# gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+#for images
+gem 'rails_12factor', group: :production
 
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+# Google drive API
+gem 'google-apis-drive_v3', '~> 0.1'
+# Google drive attempt 2
+#gem 'google_drive'
+#gem 'faraday'
+
+gem 'cgi'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml'
-
+gem "rqrcode"
+gem 'chunky_png'
+#for form validations
+gem 'validates_timeliness', '~> 6.0.0.beta2'
+gem 'uri'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -48,7 +68,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  gem 'brakeman'
+  
 end
 
 group :test do
@@ -62,3 +82,8 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'rubocop'
+gem 'brakeman'
+gem "chartkick", "~> 4.2"
+
+gem "groupdate", "~> 6.1"

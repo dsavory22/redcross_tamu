@@ -1,39 +1,231 @@
-<p id="notice"><%= notice %></p>
+<%= stylesheet_link_tag 'members' %>
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+<% if flash[:alert] %>
+  <div class="alert alert-danger" role="alert" id="hideMeAfter5Seconds" style="position: fixed; right: 1rem;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
 
-<h1>Members</h1>
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Members</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Fall Dues</th>
-      <th>Spring Dues</th>
-      <th>Shirt Size</th>
-      <th>Year</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <%= link_to "New Member", new_member_path, class: "btn btn-primary btn-new" %>
+</div>
 
-  <tbody>
-    <% @members.each do |member| %>
+<div class="table-ruby table-responsive mb-4"> <%#table-responsive shows white at bottom of table %>
+  <table class="table table-hover table-striped">
+    <thead>
       <tr>
-        <td><%= member.First_Name %></td>
-        <td><%= member.Last_Name %></td>
-        <td><%= member.Email %></td>
-        <td><%= member.Fall_Dues %></td>
-        <td><%= member.Spring_Dues %></td>
-        <td><%= member.Shirt_Size %></td>
-        <td><%= member.year %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!--NAME COLUMN-->
+        <th style="width: 16rem">
+          Name 
+          <%if (@toggle == nil || @toggle != 1) &&  @toggle != 0%>
+            <%= link_to members_path+"?sort=Last_Name", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 0%>
+            <%= link_to members_path+"?sort=Last_Name_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+
+        <!--ROLE COLUMN-->
+        <th>
+          Role 
+          <%if (@toggle == nil || @toggle != 3) &&  @toggle != 2%>
+            <%= link_to members_path+"?sort=Role", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 2%>
+            <%= link_to members_path+"?sort=Role_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+
+        <!--EMAIL COLUMN-->
+        <th style="width: 18rem">
+          Email 
+          <%if (@toggle == nil || @toggle != 5) &&  @toggle != 4%>
+            <%= link_to members_path+"?sort=Email", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 4%>
+            <%= link_to members_path+"?sort=Email_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+
+
+        <th>Fall Dues</th>
+        <th>Spring Dues</th>
+
+        <!--SHIRT SIZE COLUMN-->
+        <th>
+          Shirt Size 
+          <%if (@toggle == nil || @toggle != 7) &&  @toggle != 6%>
+            <%= link_to members_path+"?sort=Shirt", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 6%>
+            <%= link_to members_path+"?sort=Shirt_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+
+        <th>
+          Year 
+          <%if (@toggle == nil || @toggle != 9) &&  @toggle != 8%>
+            <%= link_to members_path+"?sort=Year", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 8%>
+            <%= link_to members_path+"?sort=Year_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+
+        <th>
+          Total Hours 
+          <%if (@toggle == nil || @toggle != 15) &&  @toggle != 10%>
+            <%= link_to members_path+"?sort=Hours", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%elsif @toggle == 10%>
+            <%= link_to members_path+"?sort=Hours_Desc", :class => 'name_links' do %>
+              <%= image_tag "sort.svg", style: 'height:1rem; width:1rem;' %>
+            <% end %>
+          <%end%>
+        </th>
+        <th class="actions">Action</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    
+    <tbody>
+    <%#delete where not statement to see seed values %>
+      <% @members.each do |member| %>
+          <% if member.year <= 5%>
+            <tr>
+              <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
+              
+              <%if member.Role == 0 %>
+                <td>Member</td>
+              <%elsif member.Role == 1 %>
+                <td>Technology Chair</td>
+              <%elsif member.Role == 2%>
+                <td>Social Chair</td>
+              <%elsif member.Role == 3%>
+                <td>Secretary</td>
+                <%elsif member.Role == 4 %>
+                <td>VP</td>
+              <%elsif member.Role == 5%>
+                <td>Treasurer</td>
+              <%elsif member.Role == 6%>
+                <td>President</td>
+              <%else%>
+                <td>Member</td>
+              <%end%>
+              
+              <td><%= member.Email %></td>
 
-<br>
+              <%if member.Fall_Dues == true %>
+                <td>Paid</td>
+              <%else%>
+                <td>Unpaid</td>
+              <%end%>
 
-<a class="btn btn-primary" role="button" data-bs-toggle="button" <%= link_to 'New Member', new_member_path %></a>
+              <%if member.Spring_Dues == true %>
+                <td>Paid</td>
+              <%else%>
+                <td>Unpaid</td>
+              <%end%>
+
+              <td><%= member.Shirt_Size %></td>
+
+              <%if member.year == 1 %>
+                <td>Freshman</td>
+              <%elsif member.year == 2%>
+                <td>Sophmore</td>
+              <%elsif member.year == 3%>
+                <td>Junior</td>
+              <%elsif member.year == 4%>
+                <td>Senior</td>
+              <%elsif member.year == 5%>
+                <td>Graduate</td>
+              <%else%>
+                <td>Alumni</td>
+              <%end%>
+
+              <td><%= Attendance.where(Member_id: member.id).where('"created_at" > ?', Budget.first.Date).sum(:Hours) %></td>
+
+              <td class="text-center">
+                <%= link_to member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to edit_member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                  <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+              </td>
+            </tr>
+          <%end%>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="d-flex align-items-center gap-3 mb-2">
+  <h1 style="margin: 0">Past Members</h1>
+</div>
+
+<div class="table-ruby table-responsive mb-4"> <%#table-responsive shows white at bottom of table %>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th style="width: 18.9375rem">Name</th>
+        <th style="width: 18.9375rem">Email</th>
+        <th style="width: 18.9375rem">Shirt Size</th>
+        <th style="width: 18.9375rem">Total Hours</th>
+        <th class="actions">Action</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @members.each do |member| %>
+          <% if member.year > 5%>
+            <tr>
+              <td><%= link_to member.First_Name + " " + member.Last_Name, member, :class => 'name_links', :style => 'color: black'; %></td>
+              <td><%= member.Email %></td>
+              <td><%= member.Shirt_Size %></td>
+              <td><%= Attendance.where(Member_id: member.id).sum(:Hours) %></td>
+              <td class="text-center">
+                <%= link_to member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "inspect3.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to edit_member_path(member), :class => 'name_links' do %>
+                  <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+                &nbsp;
+                <%= link_to member, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                  <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

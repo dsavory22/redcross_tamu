@@ -1,5 +1,8 @@
 class AttendancesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_attendance, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:show, :edit, :update, :destroy]
+  before_action :check_officer_privelege, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances or /attendances.json
   def index
@@ -12,7 +15,12 @@ class AttendancesController < ApplicationController
 
   # GET /attendances/new
   def new
+    # path = (request.fullpath)[17..-1] 
+    # uri = CGI::parse(path)
+    # @eventid = ((uri["eventid"])[0])
     @attendance = Attendance.new
+    @shift_options = Shift.where(Event_id: @eventid)
+    @event_name = params[:event_id]
   end
 
   # GET /attendances/1/edit
@@ -22,10 +30,13 @@ class AttendancesController < ApplicationController
   # POST /attendances or /attendances.json
   def create
     @attendance = Attendance.new(attendance_params)
-
     respond_to do |format|
       if @attendance.save
-        format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully created." }
+        if current_user.nil?
+          format.html { redirect_to :controller => "users/sessions", :action => "new", notice: "Sign up successful" }
+        else
+          format.html { redirect_to event_url(params[:attendance][:event_id]), notice: "Attendance was successfully created" }
+        end
         format.json { render :show, status: :created, location: @attendance }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +49,7 @@ class AttendancesController < ApplicationController
   def update
     respond_to do |format|
       if @attendance.update(attendance_params)
-        format.html { redirect_to attendance_url(@attendance), notice: "Attendance was successfully updated." }
+        format.html { redirect_to event_url(params[:attendance][:event_id]), notice: "Attendance was successfully updated" }
         format.json { render :show, status: :ok, location: @attendance }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -50,11 +61,17 @@ class AttendancesController < ApplicationController
   # DELETE /attendances/1 or /attendances/1.json
   def destroy
     @attendance.destroy
-
     respond_to do |format|
-      format.html { redirect_to attendances_url, notice: "Attendance was successfully destroyed." }
+      format.html { redirect_to request.referrer, notice: "Attendance was successfully deleted" }
       format.json { head :no_content }
     end
+  end
+
+  def sign_in
+    @att = Attendance.find(params[:at])
+    @att.changeHours
+    @att.save
+    redirect_to attendances_path, notice: "Sign in successful"
   end
 
   private

@@ -1,47 +1,79 @@
-<%= form_with(model: attendance) do |form| %>
-  <% if attendance.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(attendance.errors.count, "error") %> prohibited this attendance from being saved:</h2>
+<div class="form">
+  <%= bootstrap_form_with(model: attendance) do |form| %>
+    <!-- Add error to forms with input
+    <% if attendance.errors.any? %>
+      <%= form.alert_message "Please fix the errors below", error_summary: false %>
+    <% end %>
+    -->
 
-      <ul>
-        <% attendance.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="d-grid gap-3">
-  
-    <div class="field">
-      <%= form.label :Member_id %>
-      <%= form.select :Member_id, Member.order(:First_Name).map{|member| [member.First_Name, member.id]}, include_blank: true, id: "id of member" %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Shift_id %>
-      <%= form.select :Shift_id , Shift.order(Start: :desc).map{|shift| [shift.Start, shift.id]}, include_blank: true, id: "id of shift" %>
-    </div>
-
-
-    <div class="field">
-      <%= form.label :Hours %>
-      <%= form.number_field :Hours %>
-    </div>
-
-    <div class="field">
-      <%= form.label :Start %>
-      <%= form.time_select :Start %>
-    </div>
-
-    <div class="field">
-      <%= form.label :End %>
-      <%= form.time_select :End %>
-    </div>
-
-    <div>
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
+    <!-- Member page -->
+    <% if current_user.nil? or Member.where(Email: current_user.email).first.Role == 0 %>
       
-  </div>
-<% end %>
+      <!--param of event means that we know what event we are trying to get-->
+      <% if params.has_key?(:event) %>
+        <h1 class="form-title">Event Sign Up</h1>
+
+        <div class="row">
+          <div class="col-md-12">
+            <%= form.select :Member_id, Member.order(:Last_Name).where(["year < ?", 6]).map{|member| ["#{member.First_Name} #{member.Last_Name}", member.id]}, include_blank: true, id: "id of member" %>
+          </div>
+
+          <div class="col-md-12">
+            <%= form.select :Shift_id , Shift.where(Event_id: params[:event]).map{|shift| ["#{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
+          </div>
+
+          <div class="col-md-12" style="display:none">
+            <%= form.number_field :Hours, selected: 0 %>
+          </div>
+
+          <div>
+            <%= form.submit class: "btn btn-primary btn-form" %>
+          </div>
+        </div>
+
+      <!--Select event page-->
+      <% else %>
+        <h1 class="form-title mb-4">Event Sign Up</h1>
+
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Event
+          </button>
+          <ul class="dropdown-menu w-100">
+            <% Event.where('"Date" >= ?', Time.now.to_date).each do |event|  %>
+              <li><a class="dropdown-item" href="/attendances/new?event=<%= event.id %>"><%= event.Name %></a></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+    <!-- Officer page -->
+    <% else %>
+      <h1 class="form-title"><%= heading %></h1>
+      <% if attendance.errors.any? %>
+        <%= form.alert_message "Please fix the errors below", error_summary: false %>
+      <% end %>
+
+      <div class="row">
+        <div class="col-md-12">
+          <%= form.select :Member_id, Member.order(:Last_Name).where(["year < ?", 6]).map{|member| ["#{member.First_Name} #{member.Last_Name}", member.id]}, include_blank: true, id: "id of member" %>
+        </div>
+
+        <div class="col-md-12">
+          <%= form.select :Shift_id , Shift.where(Event_id: params[:event_id]).map{|shift| ["#{shift.Start.strftime("%I:%M %p")} - #{shift.End.strftime("%I:%M %p")}", shift.id]}, include_blank: true, id: "id of shift" %>
+        </div>
+
+        <div class="col-md-12">
+          <%= form.number_field :Hours %>
+        </div>
+
+        <%= form.hidden_field :event_id, value: @event_name %>
+
+        <div>
+          <%= form.submit class: "btn btn-primary btn-form" %>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>

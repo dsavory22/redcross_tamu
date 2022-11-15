@@ -1,49 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RedcrossTamu</title>
+    <title>Red Cross TAMU</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= favicon_link_tag '/favicon.ico' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" <%= link_to 'Red Cross', members_path %></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Members', members_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Attendance', attendances_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Shifts', shifts_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Events', events_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Transactions', transactions_path %></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" <%= link_to 'Budget', budgets_path %></a>
-            </li>
-          </ul>
+    <div class="d-flex flex-column min-vh-100">
+    <% unless current_page?('/users/sign_in') %>
+      <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid container">
+          <a class="navbar-brand" href="/">
+            <%= image_tag "logo.png", style: 'height:2.5rem;' %>
+          </a>
+          <% if current_user %>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Members', members_path %></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Events', events_path %></a>
+                </li>
+                <% if Member.where(Email: current_user.email).first.Role >= 5 %>
+                  <li class="nav-item">
+                    <a class="nav-link" <%= link_to 'Budget', transactions_path %></a>
+                  </li>
+                <% end %>
+                <li class="nav-item">
+                  <a class="nav-link" <%= link_to 'Files', files_path %></a>
+                </li>
+                <% if Member.where(Email: current_user.email).first.Role == 6 || Member.where(Email: current_user.email).first.Role == 4 %>
+                  <li class="nav-item">
+                    <a class="nav-link" <%= link_to 'Admin', admin_url %></a>
+                  </li>
+                <% end %>
+                <li class="nav-item">
+                  <%= button_to "Logout", destroy_user_session_path, data: {turbo: "false"}, method: :delete, class: "btn btn-primary" %>
+                </li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </nav>
+    <% end %>
+    
+    <% if current_page?('/users/sign_in') %>
+      <%= yield %>
+    <% else %>
+      <div class="d-flex flex-fill">
+        <div class="container my-4">
+          <%= yield %>
         </div>
       </div>
-    </nav>
-    
-    <div class="container my-3">
-      <%= yield %>
+    <% end %>
     </div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </html>
