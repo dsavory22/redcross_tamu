@@ -1,0 +1,5 @@
+<%- headers = ['First Name','Last Name', 'Email','Role',"Fall Dues", "Spring Dues","Shirt Size","Year","Hours"] -%>
+<%= CSV.generate_line headers %>
+<%- @memberscsv.zip(@memberhours).each do |user,hour| -%>
+  <%= CSV.generate_line([user.First_Name, user.Last_Name, user.Email, user.Role,user.Fall_Dues,user.Spring_Dues,user.Shirt_Size,user.year, hour]) -%>
+<%- end -%>

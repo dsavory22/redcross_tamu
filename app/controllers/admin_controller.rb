@@ -21,7 +21,7 @@ class AdminController < ApplicationController
   end
 
   private
-
+  
     def reset_dues
       Member.all.each do |member|
         member.Fall_Dues = false
