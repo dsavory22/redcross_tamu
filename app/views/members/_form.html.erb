@@ -5,7 +5,11 @@
 <% end %>
 
 <div class="form">
-  <h1 class="form-title"><%= heading %></h1>
+  <%if @admin == 'Create Officer'%>
+    <h1 class="form-title">New Officer</h1>
+  <%else%>
+    <h1 class="form-title"><%= heading %></h1>
+  <% end %>
 
   <%= bootstrap_form_with(model: member) do |form| %>
     <% if member.errors.any? %>
@@ -61,10 +65,10 @@
       </div>
 
       <div>
-        <%= form.submit class: "btn btn-primary btn-form" %>
+        <%= form.submit class: "btn btn-primary btn-form", value: @admin %>
       </div>
       
     </div>
   <% end %>
-  <%= link_to 'Back', members_path %>
+  <%= link_to 'Back', :back %>
 </div>

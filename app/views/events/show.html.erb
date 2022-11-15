@@ -39,16 +39,16 @@
       </p>
     </div>
 
-    <div class="d-flex flex-column mx-4">
+    <div class="d-flex flex-column show-qr">
       <p class="mb-0 text-center"><strong> Sign Up </strong></p>
       <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png)}" %>
-      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png)}", download: "qr", :class => 'btn btn-primary btn-new' %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png)}", download: "qr", :class => 'btn btn-primary btn-new div-mobile' %>
     </div>
 
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column show-qr">
       <p class="mb-0 text-center"><strong> Sign In </strong></p>
       <%= image_tag "data:image/png;base64,#{Base64.strict_encode64(@png2)}" %>
-      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png2)}", download: "qr", :class => 'btn btn-primary btn-new' %>
+      <%= link_to 'Download PNG', "data:image/png;base64,#{Base64.strict_encode64(@png2)}", download: "qr", :class => 'btn btn-primary btn-new div-mobile' %>
     </div>
   </div>
 </div>
@@ -94,11 +94,11 @@
   </table>
 </div>
 
-<div class="row mb-4">
+<div class="row">
   <!--Column 1/2-->
   <!--SIGN UPS-->
-  <%if @event.Date > Date.parse("2021-10-01") %>
-    <div class="col">
+  <% if @event.Date > Date.current %>
+    <div class="col mb-4">
       <div class="d-flex align-items-center gap-3 mb-2">
         <h1 style="margin: 0">Sign Ups</h1>
       </div>
@@ -109,14 +109,27 @@
           <thead>
             <tr>
               <th>Member</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th class="actions">Action</th>
             </tr>
           </thead>
           <tbody>
             <% @EventAttendances.each do |att| %>
               <tr>
                 <%if att.Hours == 0 %>
-                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
-
+                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name %></td>
+                  <td><%=  Shift.find(att.Shift_id).Start.strftime("%I:%M %p") %></td>
+                  <td><%=  Shift.find(att.Shift_id).End.strftime("%I:%M %p") %></td>
+                  <td class="text-center">
+                    <%= link_to edit_attendance_path(att.id), :class => 'name_links' do %>
+                      <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                    &nbsp;
+                    <%= link_to attendance_path(att.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                      <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                  </td>
                 <% end %>
               </tr>
             <% end %>
@@ -126,12 +139,12 @@
     </div>
   <%end%>
 
-  <div class="col">
+  <div class="col mb-4">
     <!--Column 2/2-->
     <!--ATTENDACES-->
     <div class="d-flex align-items-center gap-3 mb-2">
       <h1 style="margin: 0">Attendaces</h1>
-      <%= link_to 'New Attendance', new_attendance_path, :class => 'btn btn-primary' %>
+      <%= link_to 'New Attendance', new_attendance_path(:event_id => @event.id), :class => 'btn btn-primary btn-new' %>
     </div>
 
     <!--ATTENDACES TABLE-->
@@ -140,6 +153,8 @@
         <thead>
           <tr>
             <th>Member</th>
+            <th>Hours</th>
+            <th class="actions">Action</th>
           </tr>
         </thead>
 
@@ -148,7 +163,17 @@
             <% @EventAttendances.each do |att| %>
               <tr>
                 <%if att.Hours > 0 %>
-                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name%> </td>
+                  <td><%=  Member.find(att.Member_id).First_Name%> <%= Member.find(att.Member_id).Last_Name %></td>
+                  <td><%= att.Hours %></td>
+                  <td class="text-center">
+                    <%= link_to edit_attendance_path(att.id), :class => 'name_links' do %>
+                      <%= image_tag "pencil-square.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                    &nbsp;
+                    <%= link_to attendance_path(att.id), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'name_links' do %>
+                      <%= image_tag "trash.svg", style: 'height:1rem; width:1rem;' %>
+                    <% end %>
+                  </td>
                 <% end %>
               </tr>
             <% end %>
