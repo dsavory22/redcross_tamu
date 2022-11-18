@@ -1,0 +1,4 @@
+<%- headers = ['Last Name', 'Email'] -%>
+<%= CSV.generate_line headers %>
+<%= CSV.generate_line([@membercsv.Last_Name, @membercsv.Email]) -%>
+<%- end -%>

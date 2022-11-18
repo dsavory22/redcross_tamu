@@ -4,9 +4,16 @@ class MembersController < ApplicationController
   before_action :check_officer_privelege
 
 
+  require 'csv'
   # GET /members or /members.json
   # used same code from show, maybe make helper method to avoid redundancy
   def index
+    
+    #if member_params[:Idmember] != nil
+    #  @memberscsv = Member.find(member_params[:Idmember])
+    #else
+    #  member_params[:Idmember] = -1
+    #end
 
     #SORT BY LAST NAME
     if params[:sort] == "Last_Name"
@@ -64,17 +71,40 @@ class MembersController < ApplicationController
     end
 
   #Attendance.select(:Hours, :Member_id).group(:Member_id).sum(:Hours)
-  @MemberAttendances = Attendance.where(Member_id: params[:id]) 
+  @MemberAttendances = Attendance.where(Member_id: params[:id])
+  puts"HEREHEHREHREHR"
+  puts @MemberAttendances
     @hours = 0
     @MemberAttendances.each do |single|
+      puts single
       @hours = @hours + ((single.Shift.End - single.Shift.Start)/3600).round
     end
+
+    @memberscsv = Member.all
+    @memberhours = []
+
+    @memberscsv.each do |member|
+      @memberhours += [Attendance.where(Member_id: member.id).where('"created_at" > ?', Budget.first.Date).sum(:Hours)]
+    end
+    respond_to do |format|
+      format.html
+      format.csv do
+        filename = ['Members', Date.today].join(' ')
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}.csv"
+        render template: 'members/index'
+      end
+    end
+
   end
 
   # GET /members/1 or /members/1.json
   def show
   #todo: make sure to change params to proper sql query
     # member attendances gets all attended shifts for a member
+
+    @memberid = params[:id]
+
     @MemberAttendances = Attendance.where(Member_id: params[:id]) 
     @hours = 0
     @MemberAttendances.each do |single|
@@ -82,6 +112,7 @@ class MembersController < ApplicationController
     end
   end
 
+  
   # GET /members/new
   def new
     @admin = params[:admin]
@@ -135,6 +166,8 @@ class MembersController < ApplicationController
   end
 
   private
+
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find(params[:id])
@@ -143,5 +176,6 @@ class MembersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def member_params
       params.require(:member).permit(:First_Name, :Last_Name, :Role, :Email, :Fall_Dues, :Spring_Dues, :Shirt_Size, :year)
+      
     end
 end
