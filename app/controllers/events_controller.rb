@@ -78,7 +78,7 @@ class EventsController < ApplicationController
     end
 
     def generate_qr_attendance
-      qrcode_attendance = RQRCode::QRCode.new(request.base_url + "/attendance/new?signup=1" )
+      qrcode_attendance = RQRCode::QRCode.new(request.base_url + "/attendances/new?signup=1" )
       png = qrcode_attendance.as_png(
           bit_depth: 1,
           border_modules: 4,
