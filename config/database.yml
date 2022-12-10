@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: redcross_tamu_production
   username: redcross_tamu
   password: <%= ENV['REDCROSS_TAMU_DATABASE_PASSWORD'] %>
